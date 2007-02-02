@@ -9,6 +9,7 @@ $config_ini = parse_ini_file("config.ini", true);
 $database = $config_ini['database'];
 $puma = $config_ini['puma'];
 $search = $config_ini['search'];
+$smartyvars = $config_ini['smarty'];
 
 $USER_SELF_CREATE = $puma['allow_signups'];
 $SITENAME = $puma['sitename'];
@@ -25,7 +26,6 @@ $SPHINX['use'] = $search['usesphinx'];
 $SPHINX['path'] = $search['sphinxpath'];
 $SPHINX['prefix'] = $search['sphinxprefix'];
 
-
 assert_options(ASSERT_BAIL, 1);
 error_reporting(E_ALL);
 
@@ -37,6 +37,8 @@ require_once("degpc.inc");
 degpc();
 require_once('PEAR.php');
 $dir = dirname(__FILE__);
+set_include_path($dir.':'. get_include_path());
+
 $options = &PEAR::getStaticProperty('DB_DataObject', 'options');
 $options = array("database" => $database['location'],
                  "schema_location" => $dir.'/'.$database['schema_location'],

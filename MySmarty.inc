@@ -7,14 +7,14 @@
 class MySmarty extends Smarty {
 
     function MySmarty() {
-        global $template_dir;
+        global $template_dir, $smartyvars;
         parent::Smarty();
         $this->force_compile = true; /// XXX: Turn me off for production!
         //$this->debugging = true;
         $this->plugins_dir = array('smartyplugins','plugins');
         $this->default_resource_type = 'pfile';
-        $this->template_path = array($template_dir, "templates");
-        $this->compile_dir = "templates/compiled";
+        $this->template_path = array($template_dir, $smartyvars['smartytemplatepath']);
+        $this->compile_dir = $smartyvars['smartytemplatepath']."/compiled";
 
         $dir = dirname($_SERVER['SCRIPT_NAME']);
         

@@ -15,16 +15,16 @@ session_register('previouspage');
 
 if (!isset($_SESSION['previouspage'])) $_SESSION['previouspage'] = array();
 
-include_once("init.inc");
+require_once("init.inc");
 include_once("dispatcher.inc");
 require_once('smarty/Smarty.class.php');
 require_once('MySmarty.inc');
-foreach (glob("model/*.php") as $file) include_once $file;
+foreach (glob("$dir/model/*.php") as $file) include_once $file;
 
 $smarty = new MySmarty();
 
 $d = new Dispatcher();
-$d->autoload();
+$d->autoload($dir."/controller");
 $d->dispatch(isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "/page/view/1");
 $smarty->assign("messages",$_SESSION['messages']);
 if ($smarty->get_template_vars("template")) {
