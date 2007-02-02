@@ -1,0 +1,11 @@
+{strip}
+{assign var="fromid" value=$from.time|escape}
+{assign var="toid" value=$to.time|escape}
+{include file="header.html" title="Diff of $pagetitle from version $fromid to version $toid"}
+      <div>
+      {foreach item=value from=$diff}
+        <pre class="diff-{$value[0]|escape}">{$value[1]|escape}</pre>
+      {/foreach}
+      </div>
+{include file="footer.html"}
+{/strip}

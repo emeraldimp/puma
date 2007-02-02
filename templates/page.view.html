@@ -1,0 +1,48 @@
+{capture assign=path}
+{strip}
+{foreach item=cannon from=$page->getCannonicalPages()}
+{if $cannon->id != $page->id}
+/<a href="{$SCRIPT_NAME}/page/view/{$cannon->id}">{$cannon->title}</a>
+{else}
+/{$cannon->title}
+{/if}
+{/foreach}
+{/strip}
+{/capture}
+{include file="header.html" title=$page->title}
+<div id="pagepath">{$path}</div>
+<div id="childlist">
+    {foreach item=child from=$children}
+      {if $child->page_type == "html"}
+      <a href="{$SCRIPT_NAME}/page/view/{$child->id}">{$child->title}</a>
+      {/if}
+    {/foreach}
+</div>
+<div id="content">
+{$version->content}
+</div>
+{if $user->permission <= $page->write_perm}
+<a href="{$SCRIPT_NAME}/page/edit/{$page->id}">(edit)</a>
+{/if}
+{if isset($ebook)}
+<hr />
+<h3>eBook</h3>
+<div id="ebook">
+{$ebook}
+</div>
+{/if}
+{if isset($reservations)}
+<hr />
+<h3>Reservations</h3>
+<div id="reservations">
+{$reservations}
+</div>
+{/if}
+{if $forum}
+<hr />
+<h3>Forum</h3>
+<div id="forums">
+{$forum}
+</div>
+{/if}
+{include file="footer.html"}

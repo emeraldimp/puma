@@ -1,0 +1,13 @@
+{strip}
+      <span class="adminlinks">
+            <span class="linkheader">Administration Links:</span>
+	    <a class='link' href="{$SCRIPT_NAME}/page/list">Pages</a> 
+	    {if isset($pageview)}
+	    <a class='link' href="{$SCRIPT_NAME}/page/list#{$pageview}">This Page</a> 
+	    {/if}
+            <a class='link' href="{$SCRIPT_NAME}/resource/list">Resources</a> 
+            <a class='link' href="{$SCRIPT_NAME}/user/list">Users</a> 
+            <!-- <a href="{$SCRIPT_NAME}/page/changes">Recent Changes</a> {* Implement me! *} -->
+      </span>
+{/strip}
+

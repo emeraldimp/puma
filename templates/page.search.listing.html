@@ -1,0 +1,4 @@
+  <span class="title"><a href="{$SCRIPT_NAME}/page/view/{$entry.id|escape}">{$entry.title|escape}</a></span>&nbsp;
+  <span class="excerpt">{$entry.current_version.content|strip_tags|truncate:40|escape}</span>&nbsp;
+  <span class="time" title="Last modified {$entry.current_version.time}">{$entry.current_version.time}</span>&nbsp;
+  <span class="user" title="Last edited by {$entry.current_version.user|escape}">{$entry.current_version.user.name|escape}</span>&nbsp;

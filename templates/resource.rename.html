@@ -1,0 +1,16 @@
+{strip}
+{include file="header.html" title="Rename a Resource"}
+Rename or change the description of resource {$resource->nickname} (id {$resource->id}), a resource of page {$page->title}.<br />
+{if $resource->mime|truncate:5:"":true eq 'image'}
+Preview: <br />
+<img src="{$SCRIPT_NAME}/resource/view/{$resource->id}" alt="{$resource->nickname}" width="300" /><br />
+{else}
+<a href="{$SCRIPT_NAME}/resource/view/{$resource->id}" alt="{$resource->nickname}">Preview {$resource->nickname}</a><br />
+{/if}
+<form action="{$SCRIPT_NAME}/resource/do_rename/{$resource->id}" method="post">
+	<label>Name: <input type="input" value="{$resource->nickname}" title="Rename Resource" name="newnick" /></label><br />
+	<label>Description: <textarea title="Rename Resource" name="newdesc">{$resource->description|escape}</textarea></label><br />
+    <input type="submit" value="Rename Resource" title="Rename Resource" />
+</form>
+{include file="footer.html"}
+{/strip}

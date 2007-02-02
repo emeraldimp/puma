@@ -1,0 +1,14 @@
+{strip}
+{include file="header.html" title="Backlinks"}
+{if isset($pages)}
+<p>Page Matches:</p>
+<ul>
+{foreach item=page from=$pages}
+    <li><span class="title"><a href="{$SCRIPT_NAME}/page/view/{$page->id|escape}">{$page->title|escape}</a></span></li>
+{/foreach}
+</ul>
+{else}
+<p>No pages found that link to this page!</p>
+{/if}
+{include file="footer.html"}
+{/strip}

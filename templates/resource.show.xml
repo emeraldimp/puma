@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+{strip}
+<resources xmlns="http://puma.creolewest.com/resource" entry="{$entry.name}">
+  {foreach item=res from=$resources}
+  <resource id="{$res->id}" nickname="{$res->nickname|escape}" uri="{$res->uri()|escape}" mime="{$res->mime}">
+    {$res->description|escape}
+  </resource>
+  {/foreach}
+</resources>
+{/strip}

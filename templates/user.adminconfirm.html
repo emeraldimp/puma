@@ -1,0 +1,9 @@
+{strip}
+{include file="header.html" title="Admin - Confirm User"}
+<form action="{$SCRIPT_NAME}/user/do_confirm/{$user.id}" method="post">
+      <label>Username:<input type="input" name="username" value="{$user.name}" /></label><br />
+      <input type="submit" value="Confirm" />
+      <input type="reset" value="Clear Form" />
+    </form>
+{include file="footer.html"}
+{/strip}

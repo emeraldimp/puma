@@ -1,0 +1,31 @@
+<!-- Copyright 2002-2006 Creole West Productions
+     This file is released under the LGPL. See License for full licensing information -->
+
+<!-- $Id$ -->
+     
+<div class="pagePicker">
+  <span class="pagePickerTitle">Create a link</span>
+  <form>
+  PagePicker will
+  help you create a link to another page on this site.
+  <ol>
+    <li>First, choose a page to link to. Type keywords or a portion of the
+      page name below and PagePicker will help you find the page.<br>
+      <input dojoAttachPoint="search">
+      <span class="pagePickerSpinner"
+            dojoAttachPoint="spinner">Searching...</span><br>
+      <span class="pagePickerQueryHelp" dojoAttachPoint="help" style="display: none;">Below are some suggested pages to
+        choose from. To pick a page, click on it with the mouse.<br></span>&nbsp;
+      <div class="pagePickerResults" dojoAttachPoint="results" 
+           style="display: none;"><ul dojoAttachPoint="resultsList"></ul></div></li>
+    <li>Next, type the text you'd like to appear as the link text<br>
+      <input dojoAttachPoint="title"></li>
+    <li>Your link will appear in the document as follows:<br>
+      <span dojoAttachPoint="preview"></span>&nbsp;</li>
+    <li>Finally, when
+    you are satisfied with the destination page and the look of the
+    link, you can insert the link into your document; or you can cancel
+    and your document will not be affected.</li>
+  </ol>
+  </form>
+</div>

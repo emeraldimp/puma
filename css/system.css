@@ -1,0 +1,42 @@
+/* Copyright 2002--2006 Creole West Productions
+   This file is released under the GPL. See License for full licensing information */
+/* $Id$
+
+   System-required, basic appearance stuff. */
+
+.form_grouping          { border: 1px solid blue; }
+
+#reservations_title       { font-size: larger;
+                            font-weight: bold;
+                          }
+#EditorFrame    { border: 1px solid #908f8f; }
+.messages	{ border: 1px solid red; }
+.error          { color: red; }
+.fullwidth      { width: 100%; }
+.flushright     { float: right; }
+
+.post           { margin-left: 15px; }
+.posthead       { background-color: #ffff8f; font-size: x-small;}
+.title          { font-weight: bold; font-size: larger; }
+.posttext       { padding: 2px; margin-bottom: 3px; background-color: white; }
+.thispost       { border: 3px solid #ffff8f; margin-bottom: 3px; background-color: white; }
+.postarea       { margin-right: 3px; }
+.thispost .postarea textarea { width: 100%; }
+.posttools      { float: right; }
+/*.posthead       { height: 1.5em; }*/
+a.forumtool     { text-decoration: none; 
+                    background-color: silver;
+                    border: 1px outset black;
+                    font-family: sans-serif;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                    color: black; }
+a.forumtool:hover { border: 1px outset gray;
+                      background-color: white; }
+#page_list img { border-width: 0px; padding: 1px; }
+.preview    { background-image: url('../images/draft.png'); }
+.level2, .level3, .level4, .level5, .level6, .level7, .level8, .level9
+            { visibility: hidden; 
+	      display: none; }
+.turngrippie {text-align: center; }
+.turngrippie a {text-decoration: none; }

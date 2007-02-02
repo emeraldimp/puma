@@ -1,0 +1,18 @@
+{strip}
+{include file="header.html" title="Move a Resource"}
+Choose a new parent for resource {$resource->nickname} (id {$resource->id}).<br />
+Current page is {$page->title}.
+<form action="{$SCRIPT_NAME}/resource/do_move/{$resource->id}"
+    method="post">
+    <select name="newpage">
+	{foreach item=parent from=$page->get_list()}
+	  {if $parent.page_type == "html"}
+	    <option {if $parent.id==$resource->page}selected="true"{/if}
+	      value="{$parent.id}">{section name=foo start=0 loop=$parent.depth}&nbsp;&nbsp;{/section}{$parent.title}</option>
+	  {/if}
+        {/foreach}
+    </select>
+    <input type="submit" value="Move Resource" title="Move Resource" />
+</form>
+{include file="footer.html"}
+{/strip}

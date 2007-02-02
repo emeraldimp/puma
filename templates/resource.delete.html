@@ -1,0 +1,14 @@
+{include file="header.html" title="Delete a resource"}
+Are you sure you want to delete {$resource->nickname}?<br />
+{if $resource->mime|truncate:5:"":true eq 'image'}
+Preview: <br />
+<img src="{$SCRIPT_NAME}/resource/view/{$resource->id}" alt="{$resource->nickname}" /><br />
+{else}
+<a href="{$SCRIPT_NAME}/resource/view/{$resource->id}" alt="{$resource->nickname}">Preview {$resource->nickname}</a><br />
+{/if}
+<strong>You cannot recover resources once they have been deleted!</strong>
+<form action="{$SCRIPT_NAME}/resource/do_delete/{$resource->id}" method="post">
+    <input type="submit" name="delete" value="Delete Resource"/>
+    <input type="submit" name="cancel" value="Cancel Delete" />
+</form>
+{include file="footer.html"}

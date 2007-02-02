@@ -1,0 +1,50 @@
+{include file="header.html" title="Resource Index"}
+{strip}
+<table id="resource_list">
+    <thead>
+	<tr>
+            <th>Nickname</th>
+	    <th>Id</th>
+	    <th>Description</th>
+	    <th colspan="3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach from=$list item=resource}
+            {cycle assign=style values="1,2"}
+	    <tr class="alternate{if $resource.ispage}3{else}{$style}{/if} level{$resource.depth}" myparent="{$resource.page}" mypageid="{$resource.id}">
+                <td>
+                  <div style="margin-left: {$resource.depth}em">
+	          {if isset($resource.ispage)}
+		  <span onClick="expandlist(this,'{$resource.id}'); return true" id="expand{$resource.id}"><img src="{$base}/images/tool/leftarrow.png" alt="+" title="Expand this page's resource list" /></span>
+		  <span onClick="collapselist(this,'{$resource.id}'); return true" style="visibility: hidden; display: none;" id="collapse{$resource.id}"><img src="{$base}/images/tool/downarrow.png" alt="-" title="Collapse this page's resource list" /></span>
+		    {if isset($resource.gone)}
+		      {$resource.title}
+		    {else}
+                        <a href="{$SCRIPT_NAME}/page/view/{$resource.id}"
+				title="View {$resource.name}" name="{$resource.id}">{$resource.title}</a>
+		    {/if}
+		    {if isset($resource.numchildren)}({$resource.numchildren}){/if}
+		  </div>
+	        </td>
+	          {else}
+		      <a href="{$SCRIPT_NAME}/resource/view/{$resource.id}"
+			    title="View {$resource.nickname}" name="{$resource.id}">{$resource.nickname}</a>
+                    </div>
+	        </td>
+	        <td>{$resource.id}</td>
+	        <td>{$resource.description}</td>
+                <td> 
+                  <a href="{$SCRIPT_NAME}/resource/delete/{$resource.id}" title="Delete this resource and its children"><img src="{$base}/images/tool/delete.png" alt="(del)"/></a>
+		</td><td>
+                   <a href="{$SCRIPT_NAME}/resource/move/{$resource.id}" title="Move this resource"><img src="{$base}/images/tool/move.png" alt="(move)"/></a>
+		</td><td>
+		   <a href="{$SCRIPT_NAME}/resource/rename/{$resource.id}" title="Rename this resource"><img src="{$base}/images/tool/rename.png" alt="(rename)"/></a>
+		</td>
+		  {/if}
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+{/strip}
+{include file="footer.html"}

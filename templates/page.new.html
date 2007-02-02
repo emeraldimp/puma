@@ -1,0 +1,52 @@
+{if $parent}
+{capture assign=path}
+{strip}
+{foreach item=cannon from=$parent->getCannonicalPages()}
+/{$cannon->title}
+{/foreach}
+{/strip}
+{/capture}
+{capture assign=title}Create a subpage of {$path}{/capture}
+{else}
+{assign var=title value="Create a new page"}
+{/if}
+{include file="header.html" title=$title}
+<form
+    {if $parent}
+    action="{$SCRIPT_NAME}/page/do_new/{$parent->id}" 
+    {else}
+    action="{$SCRIPT_NAME}/page/do_new" 
+    {/if}
+    method="post">
+    {if !$parent}
+    <label>Select a parent page
+        <select name="parent">
+            {foreach item=page from=$pages}
+                <option value="{$page.id}">{section name=foo start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
+            {/foreach}
+        </select>
+    </label><br/>
+    {/if}
+    <label>{if $parent}Subp{else}P{/if}age title <input name="title" value="{$request.title}">
+    <br /><p>Page Permissions:<br />
+      Read: <select name="readperm">
+        {foreach from=$permission item=perm key=key}
+	  {if $key==$defaultread}
+	    <option value="{$key}" selected="selected">{$perm}</option>
+	  {else}
+	    <option value="{$key}">{$perm}</option>
+	  {/if}
+	{/foreach}   
+      </select>
+      Edit: <select name="editperm">
+        {foreach from=$permission item=perm key=key}
+	  {if $key==$defaultwrite}
+	    <option value="{$key}" selected="selected">{$perm}</option>
+	  {else}
+	    <option value="{$key}">{$perm}</option>
+	  {/if}
+	{/foreach}   
+      </select></p>
+    <input type="submit" value="Create a new subpage"></label>
+</form>
+{include file="footer.html"}

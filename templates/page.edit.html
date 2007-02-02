@@ -1,0 +1,26 @@
+{capture assign=title}Editing {$page.title}{/capture}
+{include file="header.html"}
+<script language="JavaScript">
+    window.pageid = {$page.id}
+</script>
+
+{if $preview}
+    <h2>Preview of {if $newtitle}{$newtitle|escape}{/if}(<a href="#editform">skip</a>)</h2>
+    <div class="preview">
+    {$preview|render_view}
+    </div>
+    <hr />
+    <h2><a name="editform">Edit</a></h2>
+{/if}
+
+<form method="post" enctype="multipart/form-data" name="editform" 
+    action="{$SCRIPT_NAME}/page/do_edit/{$page.id}">
+    <input type="hidden" name="old[current_version]" value="{$version.id}" />
+    <label>Title: <input type="text" name="title" 
+        value="{if $newtitle}{$newtitle|escape}{else}{$page.title|escape}{/if}" /></label>
+    {$editor}
+    <input type="submit" name="preview" value="Preview Changes" />
+    <input type="submit" name="save" value="Save Changes" />
+    <input type="submit" name="cancel_changes" value="Cancel Changes" />
+</form>
+{include file="footer.html"}

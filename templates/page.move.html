@@ -1,0 +1,13 @@
+{include file="header.html" title="Move a page"}
+Choose a new parent for {$page->title}.
+<form action="{$SCRIPT_NAME}/page/do_move/{$page->id}"
+    method="post">
+    <select name="parent">
+        {foreach item=parent from=$page->getPossibleParentTree()}
+        <option {if $parent.id==$page->parent}selected="true"{/if}
+        value="{$parent.id}">{section name=foo start=0 loop=$parent.depth}&nbsp;&nbsp;{/section}{$parent.title}</option>
+        {/foreach}
+    </select>
+    <input type="submit" value="Move page" title="Move the page" />
+</form>
+{include file="footer.html"}

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<pages>
+{strip}
+{foreach item=page from=$pages}
+  <page pagename="{$page.title|escape}" id="{$page.id}">{$page.current_version.content|strip_tags|truncate:30|escape}</page>
+{/foreach}
+{/strip}
+</pages>

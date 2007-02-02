@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<results>
+{strip}
+{if !$directHit}
+<li><span class="title">{$query|escape}</span>
+<span class="newpage">Link to a new page called {$query|escape}</span></li>
+{/if}
+{foreach item=page from=$pages}
+<li>
+  <span class="title">{$page.title|escape}</span>
+  <span class="revision" title="Page id {$page.id|escape}">#{$page.id}</span>
+  <span class="excerpt">{$page.current_version.content|strip_tags|truncate:40|escape}</span>
+  <span class="time" title="Last modified {$page.current_version.time}">{$page.current_version.time}</span>
+  <span class="user" title="Last edited by {$page.current_version.user|escape}">{$page.current_version.user|escape}</span>
+</li>
+{/foreach}
+{/strip}
+</results>

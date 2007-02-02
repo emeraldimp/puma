@@ -1,0 +1,52 @@
+{if $parent}
+{capture assign=path}
+{strip}
+{foreach item=cannon from=$parent->getCannonicalPages()}
+/{$cannon->title}
+{/foreach}
+{/strip}
+{/capture}
+{capture assign=title}Create multiple subpages of {$path}{/capture}
+{else}
+{assign var=title value="Create new pages"}
+{/if}
+{include file="header.html" title=$title}
+<p>Don't worry about blank lines; pages with blank lines won't be created.</p>
+<form action="{$SCRIPT_NAME}/page/do_multinew" method="post">
+      {section name=foo max=10 step=1 loop=11}
+      <label>Page title: <input name="title[{$smarty.section.foo.index}]" value="{$request.title}"></label>
+        {if $parent}
+	  <input name="parent[{$smarty.section.foo.index}]" type="hidden" value="{$parent->id}" />
+	{else}
+          <label>Select a parent page
+	    <select name="parent[{$smarty.section.foo.index}]">
+              {foreach item=page from=$pages}
+                <option value="{$page.id}">{section name=bar start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
+              {/foreach}
+            </select>
+          </label>
+	{/if}
+	Read: <select name="readperm[{$smarty.section.foo.index}]">
+          {foreach from=$permission item=perm key=key}
+            {if $key==$defaultread}
+	      <option value="{$key}" selected="selected">{$perm}</option>
+	    {else}
+	      <option value="{$key}">{$perm}</option>
+	    {/if}
+	  {/foreach}   
+        </select>
+	Edit: <select name="editperm[{$smarty.section.foo.index}]">
+          {foreach from=$permission item=perm key=key}
+	    {if $key==$defaultwrite}
+	      <option value="{$key}" selected="selected">{$perm}</option>
+	    {else}
+	      <option value="{$key}">{$perm}</option>
+	    {/if}
+	  {/foreach}   
+        </select>
+      <br/>
+      {/section}
+    <input type="submit" value="Create new subpages" />
+    
+</form>
+{include file="footer.html"}

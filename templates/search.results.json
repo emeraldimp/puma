@@ -1,0 +1,15 @@
+{ldelim}
+    directHit: {if $directHit}true{else}false{/if},
+    results: [
+        {foreach item=page from=$pages}
+            {ldelim}
+                id: "{$page.id}",
+                path: "{$page.path|escape}",
+                excerpt: "{$page.current_version.content|strip_tags|truncate:40|escape}",
+                mtime: "{$page.current_version.time|escape}",
+                muser: "{$page.current_version.user.name|escape}"
+            {rdelim} ,
+        {/foreach}
+        {ldelim} guard: true {rdelim}
+    ]
+{rdelim}

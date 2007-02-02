@@ -1,0 +1,11 @@
+Your account's password at {$website_name} has been reset, {$username}.
+
+The new password is {$password}.  Please use it to log in and then change it.
+(You can copy and paste it from this email).
+
+--
+From {$website_name} team.
+
+If you need assistance, please email webmaster@{$host}.
+From: account-requests@{$host}
+Reply-To: webmaster@{$host}

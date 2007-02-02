@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+ * FCKeditor - The text editor for internet
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
+ * 
+ * Licensed under the terms of the GNU Lesser General Public License:
+ * 		http://www.opensource.org/licenses/lgpl-license.php
+ * 
+ * For further information visit:
+ * 		http://www.fckeditor.net/
+ * 
+ * "Support Open Source software. What about a donation today?"
+ * 
+ * File Name: fck_pumaplugin.html
+ * 	PumaPlugin Plugin.
+ * 
+ * File Authors:
+ * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
+ *		Geoffrey Lehr (geoff.lehr@gmail.com)
+-->
+<html>
+	<head>
+		<title>Resource Picker Plugin</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta content="noindex, nofollow" name="robots">
+		<script language="javascript">
+
+var oEditor = window.parent.InnerDialogLoaded() ;
+var FCKLang = oEditor.FCKLang ;
+var FCKResourcePicker = oEditor.FCKResourcePicker ;
+var PageId = FCKLang.ResourceUploaderPageId;
+
+if (PageId == -1) 
+{
+	alert("Error! You must save the page before you can upload resources.");
+	parent.window.close();
+}
+
+</script>
+		<script language="JavaScript" type="text/javascript">
+			var djConfig = { isDebug: true, 
+                     	debugAtAllCosts: true,
+                       	debugContainerId: "dojoDebugContainer" };
+		</script>
+    <script src="../../js/dojoc/dojo.js" language="JavaScript"
+            type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript">
+      dojo.require("dojo.event.*");
+      dojo.require("dojo.uri.*");
+      dojo.require("dojo.io.*");
+      dojo.require("dojo.io.IframeIO");
+      dojo.hostenv.writeIncludes();
+    </script> <!-- you MUST close the script tag after
+                   writeIncludes!!! -->
+    <script language="JavaScript" type="text/javascript">
+window.onload = function ()
+{
+	// First of all, translate the dialog box texts
+	oEditor.FCKLanguageManager.TranslatePage( document ) ;
+	
+	// Show the "Ok" button.
+	//window.parent.SetOkButton( true ) ;	
+
+	var form = document.getElementById('form1');
+        form.action = "../../index.php/resource/add/"+PageId+"?format=xml";
+}
+
+function submitform()
+{
+        var form = document.getElementById('form1');
+
+	var request = dojo.io.bind({
+		handler: function (type,data) {
+			if(oEditor.FCKBrowserInfo.IsGecko) {
+				var divtag = document.getElementById("success");
+				var newp = document.getElementById('successtext');
+				var newdata = document.getElementById("dojoIoIframe");
+				var file = document.getElementById("file")
+				var filename = file.value;
+				var outertag = newdata.contentDocument.getElementsByTagName("resources")[0];
+				if(outertag == null) {
+				  var outertag = newdata.contentDocument.getElementsByTagName("error")[0];
+				  if(outertag == null) {
+				    newp.innerHTML = "Error: Unknown Error :-)";
+				  }
+				  newp.innerHTML = "Error: "+outertag.innerHTML;
+				}
+				else {
+				  var resource = outertag.getElementsByTagName("resource")[0];
+				  var resnick = resource.attributes['nickname'].value;
+				  var resid = resource.attributes['id'].value;
+				  newp.innerHTML = "Upload of "+filename+" as id "+resnick+" completed! You may upload another file, or click 'cancel' to exit.";
+				}
+			}
+			else { 
+				var newp = document.getElementById('successtext');
+				var file = document.getElementById("file")
+				var filename = file.value;
+				var newdata = document.frames("dojoIoIframe");
+				var outertag = newdata.document.getElementById("error");
+				if(outertag != null) {
+				  newp.innerHTML = "There was an error.  Chances are, you should log in.";
+				}
+				else {
+				  newp.innerHTML = "Upload of "+filename+" completed.  You may upload another file or click 'cancel' to exit.";
+				}
+			}
+		},
+		error: null,
+		formNode: form,
+		transport: "IframeTransport"
+	});
+}
+function Ok()
+{
+
+	return true;
+}
+    </script>
+  </head>
+  <body>
+    <form method="post" enctype="multipart/form-data" id="form1">
+      <label>Nickname: <input name="nickname" /></label><br />
+      <label>Description: <textarea name="description"></textarea></label><br />
+      <label>File: <input type="file" name="resource" id="file" /></label><br />
+      <button type="submit" value="Upload" onclick="submitform();">Upload</button>
+    </form>
+    <div id="success"><p id="successtext" /></div>
+  </body>
+	</head>
+</html>

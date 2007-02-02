@@ -1,0 +1,46 @@
+/* Copyright 2002--2006 Creole West Productions
+   This file is released under the GPL. See License for full licensing information */
+
+/* $Id$ */
+
+.pagePicker { border: 1px solid black;
+              -moz-border-radius: 5px;
+              padding: 5pt;
+              background-color: #cfd7e9; }
+.pagePicker input { border: 1px solid #3671e9; 
+                    width: 250px; }
+.pagePicker form { margin: 0px; }
+.pagePickerTitle { font-size: larger;
+                   font-family: sans-serif;
+                   font-weight: bold;
+                   display: block; 
+                   border-bottom: 1px solid black; }
+.pagePickerQueryResults { font-weight: bold; }
+.pagePickerResults { border: 1px solid black;
+                     max-height: 150px;
+                     width: 250px;
+                     background-color: white;
+                     position: absolute;
+                     overflow-y: auto; 
+                     -moz-border-radius: 5px; }
+.pagePickerResults ul { margin: 0px;
+                        padding: 0px; }
+.pagePickerResults li { display: block;
+                        border-bottom: 1px dashed blue;
+                        padding: 5px; 
+                        cursor: pointer; }
+.pagePickerResults li:hover { background-color: #b2c4e9; }
+.pagePickerResults .title { font-size: larger;
+                            font-family: sans-serif;
+                            font-weight: bold;
+                            float: left; }
+.pagePickerResults .excerpt, .pagePickerResults .newpage { display: block; 
+                              clear: both; }
+.pagePickerResults .hit { background-color: yellow; }
+.pagePickerResults .revision { float: right; 
+                               font-size: small; }
+.user, .revision, .time, .newpage { color: gray; 
+                                    font-size: xx-small; }
+.time { float: right; }
+.pagePickerSpinner { color: red; 
+                     display: none; }

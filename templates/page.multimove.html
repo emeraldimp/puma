@@ -1,0 +1,58 @@
+{if $parent}
+{capture assign=path}
+{strip}
+{foreach item=cannon from=$parent->getCannonicalPages()}
+/{$cannon->title}
+{/foreach}
+{/strip}
+{/capture}
+{capture assign=title}Move multiple subpages to {$path}{/capture}
+{else}
+{assign var=title value="Move multiple pages"}
+{/if}
+{include file="header.html" title=$title}
+<p><strong>Note:</strong>
+   <ol>
+     <li>Attempting to move a page underneath itself will fail!</li>
+     <li>Page moves will be processed in the order listed below.</li>
+     <li>"None" entries will be ignored.</li>
+   </ol></p>
+<form action="{$SCRIPT_NAME}/page/do_multimove" method="post">
+    {if $parent}
+      {section name=foo max=10 step=1 loop=11}
+      <label>Page: 
+        <select name="pages[{$smarty.section.foo.index}]">
+	  <option value="">None</option>
+	    {foreach item=page from=$pages}
+	      {if $page.id != $parent->id}<option value="{$page.id}">{section name=baz start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
+	      {else}
+	      <option value="" disabled="disabled">{section name=bat start=0 loop=$page.depth}&nbsp;&nbsp;{/section}({$page.title})</option>
+	      {/if}
+            {/foreach}
+        </select>
+      </label>
+        <input name="parent[{$smarty.section.foo.index}]" type="hidden" value="{$parent->id}" /><br/>
+      {/section}
+    {else}
+      {section name=bar max=10 step=1 loop=11}
+      <label>Page: 
+        <select name="pages[{$smarty.section.bar.index}]">
+	        <option value="">None</option>
+            {foreach item=page from=$pages}
+	    {if $page.id != 1}<option value="{$page.id}">{section name=foo start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>{/if}
+            {/foreach}
+        </select>
+      </label>
+      <label>Select a parent page
+        <select name="parent[{$smarty.section.bar.index}]">
+          {foreach item=page from=$pages}
+            <option value="{$page.id}">{section name=foo start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
+          {/foreach}
+        </select>
+      </label><br/>
+      {/section}
+    {/if}
+    <input type="submit" value="Move Pages" />
+    
+</form>
+{include file="footer.html"}

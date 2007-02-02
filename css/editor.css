@@ -1,0 +1,16 @@
+/* Copyright 2002--2006 Creole West Productions
+   This file is released under the GPL. See License for full licensing information */
+
+#edit_tools img { border: 1px solid gray;
+                  padding: 2px;
+                  margin-left: 2px;
+                  -moz-border-radius: 5px; }
+#edit_tools img:hover { border: 1px outset black; }
+#edit_tools img:active { border: 1px inset black; }
+#editor { border: 2px inset gray;
+          font-family: sans-serif; }
+
+.pumalink
+{
+	color: #00F;
+}

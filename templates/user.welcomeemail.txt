@@ -1,0 +1,10 @@
+Welcome to {$website_name}, {$username}!
+
+Thank you for your interest in {$website_name}, and enjoy your new online community!
+
+--
+From {$website_name} team.
+
+If you need assistance, please email webmaster@creolewest.com.
+From: account-requests@{$HOST}
+Reply-To: webmaster@creolewest.com

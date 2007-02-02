@@ -1,0 +1,37 @@
+{include file="header.html" title="User Index"}
+
+<div class="newuser">
+  <p><a href="{$SCRIPT_NAME}/user/create">Create a new user</a></p>
+</div>
+
+<table>
+    <thead>
+        <th>User Name</th>
+        <th>Email Address</th>
+        <th>Permission level</th>
+        <th>Confirmed?</th>
+        <th>Reset Password?</th>
+        <th>Confirm User?</th>
+        <th>Change Email?</th>
+        <th>Remove User?</th>
+    </thead>
+    <tbody>
+        {foreach item=user from=$users}
+        {cycle assign=style values="1,2"} {* TODO: use css styles instead *}
+            <tr class="alternate{$style}">
+                <td>{$user.name}</td>
+                <td>{$user.email}</td> {* TODO: hyperlink *}
+                <td>{$user.permission}</td> {* TODO: convert to text, allow to be changed *}
+                <td>{if $user.validated == 1}Yes{else}No{/if}</td>
+                <td><a href="{$SCRIPT_NAME}/user/do_pw_reset/{$user.id}">reset</a></td>
+                <td><a href="{$SCRIPT_NAME}/user/do_confirm/{$user.id}">confirm</a></td>
+                <td><a href="{$SCRIPT_NAME}/user/change_email/{$user.id}">change</a></td>
+                {if $user.id != 0 && $user.id != 1}
+                <td><a href="{$SCRIPT_NAME}/user/remove/{$user.id}">remove</a></td>
+                {/if}
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+{include file="footer.html"}

@@ -1,0 +1,12 @@
+Puma depends on several other packages to function.  Some of these packages may have other dependancies not listed here.
+
+Later versions than those listed may work, or may not.  Puma has been succesfully run on PHP 4 and 5 running on Apache and Lighttpd.
+
+As of 2007-01-08, Puma's dependancies are:
+
+Smarty (2.6.14)                 http://smarty.php.net
+PEAR:DB_DataObjects (1.8.4)     http://pear.php.net/package/DB_DataObject
+fckeditor (2.3)                 http://www.fckeditor.net/
+Dojo (SVN:2006-06-30)           http://dojotoolkit.org/
+
+It can, optionally, use Sphinx ( http://www.sphinxsearch.com/ ) as its search backend.

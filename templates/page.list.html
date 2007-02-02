@@ -1,0 +1,114 @@
+{include file="header.html" title="Page Index"}
+<p><a href="{$SCRIPT_NAME}/page/multinew" title="Create Multiple Subpages">Create Multiple Subpages</a></p>
+<p><a href="{$SCRIPT_NAME}/page/multimove" title="Move Multiple Subpages">Move Multiple Subpages</a></p>
+<table id="page_list">
+    <thead>
+	<tr>
+            <th>Page Name</th>
+	    <th colspan="10">Actions</th>
+	    <th>Read</th>
+	    <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach from=$pages item=page}
+            {cycle assign=style values="1,2"}
+	    <tr class="alternate{$style} level{$page.depth}" myparent="{$page.parent}" mypageid="{$page.id}">
+                <td>
+                    <div style="margin-left: {$page.depth}em">
+	          {if isset($page.numchildren)}
+		  <span onClick="expandlist(this,'{$page.id}'); return true" {if $page.id == 1}style="visibility: hidden; display: none;"{/if} id="expand{$page.id}"><img src="{$base}/images/tool/leftarrow.png" alt="+" title="Show this page's children" /></span>
+		  <span onClick="collapselist(this,'{$page.id}'); return true" {if $page.id != 1}style="visibility: hidden; display: none;"{/if} id="collapse{$page.id}"><img src="{$base}/images/tool/downarrow.png" alt="-" title="Collapse this page's list of children" /></span>
+		  {/if}
+                    {if $page.page_type == "html"}
+                        <a href="{$SCRIPT_NAME}/page/view/{$page.id}"
+				title="View {$page.title}" name="{$page.id}">{$page.title}</a>
+			{if isset($page.numchildren)}({$page.numchildren}){/if}
+                    {else}
+                        {$page.page_type}
+                    {/if}
+                    </div>
+	        </td>{strip}
+		    {if $page.parent}
+                <td> 
+                        <a href="{$SCRIPT_NAME}/page/delete/{$page.id}" title="Delete this page and its children"><img src="{$base}/images/tool/delete.png" alt="(del)"/></a>
+		</td><td>
+                        <a href="{$SCRIPT_NAME}/page/move/{$page.id}" title="Move this page and its children"><img src="{$base}/images/tool/move.png" alt="(move)"/></a>
+		</td>
+		{else}<td></td><td></td>
+                    {/if}
+                    {if $page.page_type == "html"}
+		    <td>
+                      <a href="{$SCRIPT_NAME}/page/edit/{$page.id}" title="Edit this page"><img src="{$base}/images/tool/edit.png" alt="Edit"/></a>
+	            </td>
+		    {else}
+		    <td></td>
+		    {/if}
+		    {if $page.page_type == "html" || $page.page_type == "ebook"}
+		    <td>
+                      <a href="{$SCRIPT_NAME}/page/new/{$page.id}" title="Create a new subpage of this page"><img src="{$base}/images/tool/page.new.png" alt="new subpage"/></a>
+		    {else}
+		    <td></td>
+		    {/if}
+		    <td>
+                    {if $page.page_type == "html"}
+		      {if !isset($pluginslist.forum[$page.id])}
+                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=forum" title="Add a forum on this page"><img src="{$base}/images/tool/forum.png" alt="new forum"/></a>
+                    {/if}
+                      </td><td>
+                      {if !isset($pluginslist.reservations[$page.id])}
+                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=reservation" title="Add a reservations form to this page"><img src="{$base}/images/tool/reservations.png" alt="(new reservation)" /></a>
+                      {/if}
+                      </td><td>
+                      {if !isset($pluginslist.ebook[$page.id])}
+		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=ebook" title="Create an ebook under this page"><img src="{$base}/images/tool/ebook.png" alt="(new ebook)" /></a>
+                      {/if}
+                      </td>
+		    {else}<td></td><td></td>
+                    {/if}
+                    <td>
+                    <a href="{$SCRIPT_NAME}/page/history/{$page.id}" title="Review this page's history"><img src="{$base}/images/tool/history.png" alt="History"/></a>
+	    	    </td>
+		    <td>
+		      {if $page.page_type == "html" && $page.parent && $page.position != 0}
+		        <a href="{$SCRIPT_NAME}/page/move_up/{$page.id}" title="Move Page Up"><img src="{$base}/images/tool/moveup.png" alt="Move Up"/></a>
+		      {/if}
+	    	    </td>
+                    <td>
+		      {if $page.page_type == "html" && $page.parent}
+                        <a href="{$SCRIPT_NAME}/page/move_down/{$page.id}" title="Move this page down"><img src="{$base}/images/tool/movedown.png" alt="Move Down"/></a>
+		      {/if}
+	    	    </td>
+		    <form action="{$SCRIPT_NAME}/page/do_changeperm/{$page.id}" method="POST">
+		      <td>
+		      <select name="view">
+		        {foreach from=$permission item=perm key=key}
+		 	  {if $key==$page.read_perm}
+			    <option value="{$key}" selected="selected">{$perm}</option>
+			  {else}
+			    <option value="{$key}">{$perm}</option>
+			  {/if}
+			{/foreach}   
+		      </select>
+	      	      </td>
+                      <td>
+		      <select name="edit">
+		        {foreach from=$permission item=perm key=key}
+		 	  {if $key==$page.write_perm}
+			    <option value="{$key}" selected="selected">{$perm}</option>
+			  {else}
+			    <option value="{$key}">{$perm}</option>
+			  {/if}
+			{/foreach}   
+		      </select>
+	      	      </td>
+                      <td>
+		      <input type="submit" value="Change Permissions" />
+	      	      </td>
+		    </form>
+	    {/strip}
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+{include file="footer.html"}

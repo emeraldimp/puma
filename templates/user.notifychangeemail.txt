@@ -1,0 +1,19 @@
+Greetings, {$username}!
+
+The email address associated with your username at {$SITENAME}
+has been changed to {$newemail}, and a confirmation email has
+been set to that address.  You will not be able to log in until
+you have reconfirmed your account.
+
+If you entered the wrong email address, or you feel that your
+account's email address was accidently changed, please contact
+us at webmaster@{$HOST}
+
+Thank you!
+
+--
+From {$website_name} team.
+
+If you need assistance, please email webmaster@{$HOST}.
+From: account-requests@{$HOST}
+Reply-To: webmaster@{$HOST}

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{strip}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <title>{$title|strip_tags|escape}</title>
+    <link href="{$base}/css/alternating.css" rel="stylesheet" type="text/css" />
+    <link href="{$base}/css/headers.css" rel="stylesheet" type="text/css" />
+    <link href="{$base}/css/system.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" type="text/javascript" src="../../js/expander.js"></script>
+  </head>
+  <body>
+      <div class="linkbar">
+        <p>
+          {if $user->id == 0}
+            <a class='link' href="{$SCRIPT_NAME}/user/login/">Login</a>
+          {else}
+            <span class="link">Logged in as <a href="{$SCRIPT_NAME}/user/prefs/">{$user->name}</a></span>
+          {/if}
+          {foreach item=top from=$toppages}
+              {if $top.page_type == 'html' }
+                 {if is_object($page) && $page->id == $top.id}
+                     <b class="link">{$top.title|escape}</b>&nbsp; 
+                 {else}
+                     <a class="link" href="{$SCRIPT_NAME}/page/view/{$top.id}">{$top.title|escape}</a>&nbsp; 
+                 {/if}
+              {/if}
+          {/foreach}
+      {if isset($user->permission) && $user->permission == 0}
+      {include file="admin-header.html"}
+      {/if}
+        </p>
+      </div>
+      <h1>{$title|escape}</h1>
+      {if count($messages) > 0 && $messages != null}
+      <div class="messages">
+      {foreach item=message from=$messages}
+        {if $message != null}
+        <p>{$message|escape}</p>
+        {/if}
+	{/foreach}
+      {/if}
+	
+      </div>
+{/strip}

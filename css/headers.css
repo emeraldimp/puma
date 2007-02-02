@@ -1,0 +1,9 @@
+/* Copyright 2002--2006 Creole West Productions
+   This file is released under the GPL. See License for full licensing information */
+
+.adminlinks, .linkbar { border: 1px solid black; margin: 0; padding:0; }
+.adminlinks p , .linkbar p { margin: 0; padding:0;}
+.linkbar .link { border-right: 1px solid black; margin: 0; padding-left:2em; padding-right:2em;}
+.adminlinks { float: right; position: relative; display: inline;}
+.adminlinks .link { border-left: 1px solid black; border-right: none; margin: 0; padding-left:2em; padding-right:2em;}
+.linkheader { border-left: none; border-right: none; margin: 0; padding-left:2em; padding-right:2em;}

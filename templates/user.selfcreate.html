@@ -1,0 +1,13 @@
+{strip}
+{include file="header.html" title="Create User Account"}
+Please enter your email address, and your desired username and password.
+<form action="{$SCRIPT_NAME}/user/do_create" method="post">
+      <label>Username:<input type="text" name="username" /></label><br />
+      <label>Email:<input type="text" name="email" /></label><br />
+      <label>Password:<input type="password" name="password1" /></label><br />
+      <label>Password (confirm):<input type="password" name="password2" /></label><br />
+      <input type="submit" value="Create" />
+      <input type="reset" value="Clear" />
+    </form>
+{include file="footer.html"}
+{/strip}

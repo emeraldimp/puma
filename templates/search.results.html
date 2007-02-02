@@ -1,0 +1,24 @@
+{strip}
+{include file="header.html" title="Search Results"}
+{if isset($titles)}
+<p>Title Matches:</p>
+<ul>
+{foreach item=entry from=$titles}
+<li>{include file="page.search.listing.html"}</li>
+{/foreach}
+</ul>
+{else}
+<p>No titles matched your search</p>
+{/if}
+{if isset($pages)}
+<p>Page Matches:</p>
+<ul>
+{foreach item=entry from=$pages}
+<li>{include file="page.search.listing.html"}</li>
+{/foreach}
+</ul>
+{else}
+<p>No pages matched your search</p>
+{/if}
+{include file="footer.html"}
+{/strip}

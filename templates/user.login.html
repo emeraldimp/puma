@@ -1,0 +1,15 @@
+{strip}
+{include file="header.html" title="Login"}
+Please enter your username and password to continue.
+<form action="{$SCRIPT_NAME}/user/do_login" method="post">
+      <label>Username:<input type="text" name="username" /></label><br />
+      <label>Password:<input type="password" name="password" /></label><br />
+      <input type="submit" value="Login" />
+      <input type="reset" value="Clear" />
+    </form>
+    {if $USER_CREATE}
+    <a href="{$SCRIPT_NAME}/user/create">Click here to create an account</a><br />
+    {/if}
+    <a href="{$SCRIPT_NAME}/user/resetpw">Forgot your password?</a>
+{include file="footer.html"}
+{/strip}

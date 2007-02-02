@@ -1,0 +1,25 @@
+Greetings, {$username}!
+
+Thank you for your interest in {$website_name}.
+In order to provide you with better service, we require you to have a 
+valid email account. This letter was sent to you to make sure that you
+correctly entered your email address.
+
+To confirm your new account, please visit
+<a href="{$confirm_address}">{$confirm_address}</a>.
+
+If the above address does not work, follow these simple instructions:
+ 1. Go to {$BASE}.
+ 2. Select 'I want to confirm my account.'
+ 3. For username, type {$username}.
+ 4. For confirmation, type {$confirmation}.
+ 5. Press the `confirm' button.
+
+Thank you, and enjoy your new online community!
+
+--
+From {$website_name} team.
+
+If you need assistance, please email webmaster@{$HOST}.
+From: account-requests@{$HOST}
+Reply-To: webmaster@{$HOST}
