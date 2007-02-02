@@ -1,0 +1,20 @@
+#!/sbin/runscript
+
+depend() {
+	need net
+	need mysql
+}
+
+start() {
+	ebegin "Starting Sphinx Search Daemon"
+	#start-stop-daemon --start --quiet --exec /usr/local/sphinx/bin/searchd -- --config /usr/local/sphinx/etc/sphinx.conf
+	start-stop-daemon --start --quiet --exec /home/imp/public_html/puma/src/contrib/sphinx/bin/searchd -- --config /home/imp/public_html/puma/src/contrib/sphinx/etc/sphinx.conf
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping Sphinx Search Daemon"
+	#start-stop-daemon --stop --quiet --pidfile /usr/local/sphinx/var/log/searchd.pid
+	start-stop-daemon --stop --quiet --pidfile /home/imp/public_html/puma/src/contrib/sphinx/var/log/searchd.pid
+	eend $?
+}

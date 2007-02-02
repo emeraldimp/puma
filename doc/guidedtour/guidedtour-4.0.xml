@@ -1,0 +1,292 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+        "/usr/share/sgml/docbook/xml-dtd-4.4/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>PUMA Guided Tour</title>
+    <author><firstname>Geoffrey</firstname><surname>Lehr</surname></author>
+    <copyright><year>2006</year><holder>Creole West Productions</holder></copyright>
+    <releaseinfo>For Version 4.0</releaseinfo>
+  </bookinfo>
+  <preface><title>Welcome to PUMA 4.0!</title>
+    <section><title>Introduction</title>
+      <para>PUMA 4.0 is a combination wiki and content management system. By now, you've installed the database and your site/ directory, and are ready to begin creating content. This document will take you on a guided tour through PUMA, including page creation, editing, and uploading files.</para>
+      <para>PUMA 4.0 uses a new design to make creating, editing, and revamping your site much easier than in previous versions.  It includes better user administration, as well.  So, let's begin our guided tour.</para>
+    </section>
+  </preface>
+  <chapter><title>Basic Editing</title>
+    <section><title>Starting</title>
+      <para>To begin, load up the main page.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/homepage1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>The opening screen</phrase>
+        </textobject>
+        <caption>
+          <para>PUMA's default main page</para>
+        </caption>
+      </mediaobject>
+      <para>The base site design is rather sparse, as you can see.  PUMA uses a new templating system, smarty, to divide content from presentation.  This allows you to more easily change the look and feel of your site without changing the underlying code; see the Advanced section for more information on that.</para>
+      <para>The main components to the page are the linkbar (1), the page title (2), and the page's location in the site hierarchy (3). The site hierarchy is new to PUMA 4.0; we'll discuss it in a minute.</para>
+    </section>
+    <section>
+      <title>Logging In</title>
+      <para>Right now, though, we can't do anything, not even edit the main page! This is because we haven't logged in yet. Let's do that now by clicking on 'Login' on the linkbar.</para>
+      <para>You'll notice that there is a link for users to create their own accounts.  This can be changed to only allow administrators to create accounts.  See the advanced section for more details.</para>
+      <para>The default installation has a user, admin, and the password is `password'. Go ahead and log in now.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/login1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Login Page</phrase>
+        </textobject>
+        <caption>
+          <para>The Login Page</para>
+        </caption>
+      </mediaobject>
+      <para>Once you have logged in, you'll be taken to your user preferences page. From here, we can change the password for the `admin' login.  You should do that now by clicking `Change your password' and following the directions there.</para>
+      <para>Once you've finished with that, go ahead and return to the Home page by clicking 'Main Page' at the top of the page.</para>
+      <para>You'll notice that we now have a new option on the bottom of the page - `edit'.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/homepage2.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Home page with (edit)</phrase>
+        </textobject>
+        <caption>
+          <para>The Home Page after logging in</para>
+        </caption>
+      </mediaobject>
+    </section>
+    <section><title>Editing a Page</title>
+      <para>Let's put some content on the Home Page. Click the (edit) link.</para>
+      <para>This will bring up the PUMA Editor, which acts just like a regular text editor with some PUMA-specific additions. You could also change the page's title here.  For now, type in some sample text, and click `Preview Changes', which will show how the text will look on the page. Since this is just an example, go ahead and click `Save Changes'.  You'll be returned to the page with a message telling you whether or not the changes were successful.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/editpage1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Edit page and Preview</phrase>
+        </textobject>
+        <caption>
+          <para>The Edit Page with a Preview</para>
+        </caption>
+      </mediaobject>
+      <para>If you had made some changes, but decided that you didn't like them after all, you could click `Cancel Changes' to leave the editor and return to the page you were editing.</para>
+    </section>
+    <section><title>New Pages and the Page Hierarchy</title>
+        <para>In PUMA, each page must be created and put into the site hierarchy before it can be edited or even linked to.  How, then, can we create new pages?  PUMA has a set of administrator controls to administer pages, users, and more.  Let's go to the page list now by clicking on the `Pages' link.</para>
+        <para>The page list shows every page in your site. Each page, except the Home Page, has a parent page.  To create new pages, simply click on the `new subpage' link on the page you'd like as the parent. This will take you to a page where you can name the new page, which will then be created.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/pagelist1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>The Page List</phrase>
+        </textobject>
+        <caption>
+          <para>The Page List</para>
+        </caption>
+      </mediaobject>
+        <para>Go ahead and create a new subpage of the Home Page now. I've titled mine `About Us'.</para>
+        <para>Now, we could create new subpages for `About Us', perhaps one for each member of the team, and each of those pages could have many subpages as well.  Don't get carried away, though!  After a few levels, it becomes much harder to navigate through a site.</para>
+        <para>You'll notice that there are several other options.  (del), of course, deletes the page--and all its subpages!  (move) allows you to change the page's parent, moving it around in the hierarchy.  (edit) will allow you to edit that page, as you'd expect. (history) shows you how the page looked after each revision, in case you accidentally deleted some content that you wanted to keep.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/pagelist2.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>The page list with a new subpage</phrase>
+        </textobject>
+        <caption>
+          <para>The Page List with a new Subpage</para>
+        </caption>
+      </mediaobject>
+      </section>
+      <section><title>PUMA Plugins</title>
+        <para>There are two special links as well: (new forum) and (new reservation).  These are PUMA Plugins, and they're special subpages that appear on the page that they're attached to.  Each page may have only one (or none) of each plugin.  Go ahead and click (new forum) for the home page.  You'll see it show up in the page list.  If we return to the home page, there's now a 'forum' section at the bottom.</para>
+        <para>You'll also notice that there's a link to `About Us', underneath the page's title.  This is part of PUMA's built-in navigation system; all pages have links to their immediate children (excluding Plugins) and all their ancestors (parent, parent's parent, etc).  Going to the `About Us' page shows this.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/aboutus1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>About us links to its parent, home page</phrase>
+        </textobject>
+        <caption>
+          <para>About us links to its parent, home page</para>
+        </caption>
+      </mediaobject>
+        <section><title>The Forums</title>
+          <para>Users can create posts to discuss a page that contains a forum by clicking on the `New Post' link in the forums section, and can reply to other users' posts.  Administrators can determine what permissions are required to read or post to the forum by using the `Change Permissions' form at the bottom. They can also delete all posts in a forum, or delete specific posts.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/forum1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Forums right on the home page!</phrase>
+        </textobject>
+        <caption>
+          <para>The home page with a forum on it</para>
+        </caption>
+      </mediaobject>
+        </section>
+        <section><title>Reservations</title>
+          <para>With reservations, you can make a new page describing an event, and then invite users to come.  Users can enter their contact information (which they will need to confirm via email), and administrators can view (and delete!) the list of users who have reserved and confirmed, as well as add new reservations themselves, confirm users and resend the user's reservation confirmation email.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/reservations1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Users can enter their own information with the reservations plugin.</phrase>
+        </textobject>
+        <caption>
+          <para>Users can enter their own information with the reservations plugin.</para>
+        </caption>
+      </mediaobject>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/reservations2.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Administrators can review the reservations list</phrase>
+        </textobject>
+        <caption>
+          <para>Administrators can review the reservations list</para>
+        </caption>
+      </mediaobject>
+        </section>
+    </section>
+    <section><title>The PagePicker</title>
+      <para>Now, lets take a look at some of the extra features in the editor.  Click (edit) on the home page again. In addition to having what you would expect to find--italics, bold, left justification, etc.--PUMA's editor has built-in functions to help you add resources, such as pictures, and find pages and insert links to them.</para>
+      <para>First, let's try out the PagePicker.</para>
+      <para>Click on the `PagePicker' link. <inlinemediaobject><imageobject><imagedata fileref="images/pagepickericon.png"/></imageobject></inlinemediaobject> The page picker lists all pages that currently exist - with a short excerpt from the page - and will automatically insert the correct link for you. Note that in this example, we only have two choices: the `About Us' page or the `Home Page'.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/pagepicker1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>PagePicker</phrase>
+        </textobject>
+        <caption>
+          <para>The PagePicker dialog</para>
+        </caption>
+      </mediaobject>
+      <para>Click on `About Us', which will automatically fill in the rest of the options for you. We can change what the link text will look like in the next box. Let's change it to just `About'. We can now click on `OK' to insert the link, or cancel to exit out. Click OK.</para>
+      <para>When we save the page, the link will be there, correctly pointing to the page that we want.  Of course, since `About Us' is a child of the home page, this wasn't strictly necessary, but it can be useful to place links in context on the page.</para>
+      <note>PUMA's pages are stored internally by the page id (you may have noticed this in your browser's address bar already).  This means that you can rename pages, change their position in the hierarchy, and even have pages with the same title without worrying about a name conflict or broken links!</note>
+      <para>The editor also has a built-in character map and international keyboard. <inlinemediaobject><imageobject><imagedata fileref="images/othericons1.png" /></imageobject></inlinemediaobject> They function fairly standardly, and will not be discussed further here.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/charactermap1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Character Map</phrase>
+        </textobject>
+        <caption>
+          <para>The Character Map</para>
+        </caption>
+      </mediaobject>
+    </section>
+    <section><title>Resources</title>
+      <para>Suppose that we wanted to add a picture to the home page (or any other page, for that matter). How could we do that? We use the ResourceUploader and the ResourcePicker. <inlinemediaobject><imageobject><imagedata fileref="images/resourcepickericon1.png"/></imageobject></inlinemediaobject> Click on the ResourceUploader first.</para>
+      <para>The `Nickname' is a short name to describe the resource--which can be nearly any type of file, not just an image--that you are uploading. Multiple files can have the same nickname; it is solely for your use. The `Description' is for a better description. You can click browse to pick out your file on the disk. When you're ready, click `Upload' to upload the file. If the upload is successful, you will get a message saying so.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/resourceuploader1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>ResourceUploader</phrase>
+        </textobject>
+        <caption>
+          <para>The Resource Uploader Dialog</para>
+        </caption>
+      </mediaobject>
+      <para>You can upload more files or click `Cancel' to return to the editor.</para>
+      <para>Let's insert the image we just uploaded. Click on the ResourcePicker. The Resource Picker will find all resources associated with a particular page so you can attach them to the page. Images are displayed in the page itself; others are linked.</para>
+      <para>You can select the resource you want from the dropdown.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/resourcepicker1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>ResourcePicker</phrase>
+        </textobject>
+        <caption>
+          <para>The Resource Picker Dialog</para>
+        </caption>
+      </mediaobject>
+      <para>The description will automatically change based on which resource you have chosen. Select the desired resource, and click OK. The ResourcePicker inserts the appropriate code into the editor.</para>
+      <para>Go ahead and save the changes to see the result. As you can see, the image has been inserted.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/homepage3.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Site with resource</phrase>
+        </textobject>
+        <caption>
+          <para>The page now has the chosen resource!</para>
+        </caption>
+      </mediaobject>
+<!--    <section><title>Examining Revisions</title>
+    <para>Now, we can see the difference between two versions of a page by clicking on the `Compare to last' button on the right (1). <inlinemediaobject><imageobject><imagedata fileref="images/tour16.png" /></imageobject></inlinemediaobject> This will give a detailed report of the most recent changes. (see below) We can also click on the `History' button (2) to see a list of all revisions, and go back to any previous version.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/tour17.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>Changes Example</phrase>
+        </textobject>
+        <caption>
+          <para>An example of the changes between two revisions</para>
+        </caption>
+      </mediaobject>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/tour18.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>History Example</phrase>
+        </textobject>
+        <caption>
+          <para>An example list of page revisions</para>
+        </caption>
+      </mediaobject>-->
+    
+      <para> Finally, we should log out of PUMA for security. Click on the `admin' link in the linkbar to go to the user preferences page. From there, click log out.</para>
+    </section>
+  </chapter>
+  <chapter><title>Advanced and Troubleshooting</title>
+    <section><title>Templating</title>
+      <para>PUMA now uses a templating system, <ulink url="http://smarty.php.net/">Smarty</ulink>, to handle page display. Smarty templates consist of a combination of HTML and pseudo-PHP code.</para>
+      <para>You can get a feel of how these templates are used by looking in the (puma)/contrib/smarty/templates directory.  In general, you shouldn't change any templates besides the (admin-)header.html, and (admin-)footer.html, because the other templates provide important navigation links.</para>
+      <para>The best way to change your site's look is to style it using <ulink url="http://www.w3schools.com/css/css_reference.asp">CSS</ulink>, or "cascading style sheets". Nearly every part of PUMA's default templates contains a class type that you can use to change the look of your site.</para>
+      <para>Any new templates or CSS files that you use should be put into your (puma)/site/ directory.  PUMA will search there for templates first, and then, if any are not found, check the default templates directory.</para>
+    </section>
+    <section><title>User Administration</title>
+      <para>When you're logged in to an account with administrator privileges, you'll see a toolbar at the top.  Click on `Users' to bring up the user list.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/userlist1.png" format="PNG" />
+        </imageobject>
+        <textobject>
+          <phrase>The userlist</phrase>
+        </textobject>
+        <caption>
+          <para>The userlist</para>
+        </caption>
+      </mediaobject>
+      <para>Here, you can review all the users, and perform various tasks, such as changing the user's email address and confirm their account.</para>
+      <note>Don't remove the admin or anonymous users!  They are installed by default and PUMA needs them to function properly.</note>
+      <para>You can also create a new user by clicking on "create new user".  This link gives you more control over creating a user than non-admins.  You can set their initial permissions level, password, and even whether they've confirmed their email address.  (This is useful for creating a non-admin account to use for everyday page editing).</para>
+      <section><title>Disabling User Registration</title>
+        <para>Not every site that PUMA is used on will want to have users create their own accounts.  This can be disabled by changing the variable "$USER_SELF_CREATE" to False in PUMA's configuration file</para>
+      </section>
+    </section>
+  </chapter>
+</book>

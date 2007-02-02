@@ -1,0 +1,12 @@
+Download from http://sphinxsearch.com/
+Install sphinx
+Configure /path/to/sphinx/etc/sphinx.conf
+Copy spinxapi.php to /path/to/sphinx/api/
+modify config.ini to use sphinx, using the correct /path/to/sphinx/
+Run /path/to/sphinx/bin/indexer --all
+Start /path/to/sphinx/bin/searchd while in /path/to/sphinx/etc/
+(Gentoo users see below)
+Should work from there
+
+Gentoo:
+have included possible /etc/init.d/ script (see sphinxsearchd)

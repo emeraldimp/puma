@@ -1,0 +1,2 @@
+xsltproc /usr/share/sgml/docbook/xsl-stylesheets-1.68.1/html/docbook.xsl guidedtour.xml > bob.html
+

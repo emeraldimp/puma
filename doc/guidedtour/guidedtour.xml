@@ -1,0 +1,217 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+	"/usr/share/sgml/docbook/xml-dtd-4.4/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>PUMA 3.1 Guided Tour</title>
+    <author><firstname>Geoffrey</firstname><surname>Lehr</surname></author>
+    <copyright><year>2006</year><holder>Creole West Productions</holder></copyright>
+  </bookinfo>
+  <preface><title>Welcome to PUMA 3.1!</title>
+    <section><title>Introduction</title>
+      <para>PUMA 3.1 is a combination wiki and content management system. By now, you've installed the database and your site/ directory, and are ready to begin creating content. This document will take you on a guided tour through PUMA, including page creation, editing, and uploading files.</para>
+    </section>
+  </preface>
+  <chapter><title>Basic Editing</title>
+    <section><title>Starting</title>
+      <para>To begin, load up the main index page.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour1.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>The opening screen</phrase>
+	</textobject>
+	<caption>
+	  <para>PUMA's main page</para>
+	</caption>
+      </mediaobject>
+      <para>As you can see, the base site design I'm using is for Creole West Productions, who have generously sponsored development of PUMA. Your home page will look different, of course.</para>
+    </section>
+    <section>
+      <title>Logging In</title>
+      <para>Right now, we can't do anything, not even edit the main page! This is because we haven't logged in yet. Let's do that now.</para>
+      <para>During installation, you (or whoever installed PUMA for you) should have created a linkbar with links to important pages, like the HomePage and the UserPage.  We want to log in, so click on `Login' on the linkbar. <inlinemediaobject><imageobject><imagedata fileref="images/tour1a.png"/></imageobject></inlinemediaobject> The default installation has a user, admin, and the password is `password'. Go ahead and log in now.</para>
+      <para>If you don't have anything in the linkbar, then you'll need to modify it yourself.  See the `Advanced' section below.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour2.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Login Page</phrase>
+	</textobject>
+	<caption>
+	  <para>The Login Page</para>
+	</caption>
+      </mediaobject>
+      <para>Once you have logged in, you'll be taken to your user preferences page. Go ahead and return to the HomePage.</para>
+      <para>You'll notice that we now have some new options on the right side of the page.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour3.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Right Sidebar</phrase>
+	</textobject>
+	<caption>
+	  <para>Right-hand sidebar</para>
+	</caption>
+      </mediaobject>
+      <para>First, we're told when the page was last edited (1). Below that, we have two access settings. PUMA has four different access levels: Anybody, Users, Editors and Admin. The first dropbox (2), to the right of the spectacles, determines who can view the page, while the second detemines who can edit the page (3). Note that, although you can set the page to be editable by Anyone, only users who are logged in may actually edit it. To the right of that is a wand (4), which allows us to set the permissions.</para>
+      <note>You cannot set permissions the first time you edit a page!</note>
+    </section>
+    <section><title>Editing a Page</title>
+      <para>Let's create a HomePage. The final button is the `Edit Page' button. Click it now.</para>
+      <para>This will bring up the PUMA Editor, which acts just like a regular text editor with some PUMA-specific additions. For now, type in some sample text, and click `Preview Changes', which will show how the text will look on the page. Since this is just an example, go ahead and click `Save Changes'.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour4.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Edit page and Preview</phrase>
+	</textobject>
+	<caption>
+	  <para>The Edit Page with a Preview</para>
+	</caption>
+      </mediaobject>
+      <para>If you had made some changes, but decided that you didn't like them after all, you could click `Cancel Changes' to leave the editor and return to the page you were editing.</para>
+      <para>We now have some more options on the right side of the page. We can see when the page was last edited, by whom, and which revision this is. We can also view the history of the page, by clicking on the book (1), or which pages link to the current page (2). We'll come back to these in a minute.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour5.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Right sidebar - New options</phrase>
+	</textobject>
+	<caption>
+	  <para>The right sidebar has two new options</para>
+	</caption>
+      </mediaobject>
+    </section>
+    <section><title>The PagePicker and PUMA Plugins</title>
+      <para>Now, lets take a look at some of the extra features in the editor.  In addition to having what you would expect to find--italics, bold, left justification, etc.--PUMA's editor has built-in functions to help you add resources, such as pictures; find pages and insert links to them; add links to PUMA's forums; and special links and values, such as the current date and reservations.</para>
+      <para>First, let's try out the PagePicker.</para>
+      <para>Click on the `PagePicker' link. <inlinemediaobject><imageobject><imagedata fileref="images/tour6.png"/></imageobject></inlinemediaobject> By searching the titles and content of all pages in your site, the PagePicker can locate pages that currently exist and automatically insert the correct link for you. For example, type `home' in the search window, which will bring up suggested pages. Note that in this example, we only have the HomePage, so the PagePicker offers us only two choices: we can create a link to a new page called `home' or create a link to the HomePage.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour7.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>PagePicker</phrase>
+	</textobject>
+	<caption>
+	  <para>The PagePicker dialog</para>
+	</caption>
+      </mediaobject>
+      <para>Click on `HomePage', which will automatically fill in the rest of the options for you. We can change what the link text will look like in the next box. Let's change it to just `Home'. You'll see the preview automatically update below. We can now click on `OK' to insert the link, or cancel to exit out. Click OK.</para>
+      <para>Now, press space, and then click on the `PumaPlugin' link. <inlinemediaobject><imageobject><imagedata fileref="images/tour8.png" format="PNG"/></imageobject></inlinemediaobject>  This brings up the PumaPlugin dialog, with a list of all the available Puma Plugins. Let's add a link that will allow users to login and out, so select `User Login Link' and click OK.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour9.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>PumaPlugin</phrase>
+	</textobject>
+	<caption>
+	  <para>The PumaPlugin dialog</para>
+	</caption>
+      </mediaobject>
+      <para>The editor will show a graphic where the link will go, but a quick `Preview Changes' will show how it's replaced with, in our case, `admin'. This will change depending on the user, or, if no user is logged in, it will say, `Login'.</para>
+      <para>Let's see how to create a new page. This will be the ever-important `Contact Information' page. Click on the PagePicker button again, and this time type `Contact' in the first box. You can see that the PagePicker can't find any relevant pages, so it offers to create a link to a new page. Go ahead and click on `Contact'. Everything else looks OK, so click `OK' to insert the link, and then save the page.</para>
+    </section>
+    <section><title>Creating a New Page</title>
+      <para>Creating a new page is as easy as editing it, literally. Click the `Contact' link and then edit the page. Put in some contact information.</para>
+      <note>The easiest way to create a page is to create a link for it in another page, and then follow the link and edit that page.</note>
+      <para>The editor also has a built-in character map and international keyboard. <inlinemediaobject><imageobject><imagedata fileref="images/tour11.png" /></imageobject></inlinemediaobject> They function fairly standardly, and will not be discussed further here.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour11a.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Character Map</phrase>
+	</textobject>
+	<caption>
+	  <para>The Character Map</para>
+	</caption>
+      </mediaobject>
+      <note>Some functions cannot be performed on the first edit of a page, (for example, the ResourcePicker and ResourceUploader, demonstrated below) because the page doesn't technically exist yet!</note>
+      <para>Save the contact page, and then return to the HomePage. Edit it.</para>
+    </section>
+    <section><title>Resources</title>
+      <para>Suppose that we wanted to add a picture to the home page (or any other page, for that matter). How could we do that? We use the ResourceUploader and the ResourcePicker. <inlinemediaobject><imageobject><imagedata fileref="images/tour12.png"/></imageobject></inlinemediaobject> Click on the ResourceUploader first.</para>
+      <para>The `Nickname' is a short name to describe the resource--which can be nearly any type of file, not just an image--that you are uploading. Multiple files can have the same nickname; it is solely for your use. The `Description' is for a better description. You can click browse to pick out your file on the disk. When you're ready, click `Upload' to upload the file. If the upload is successful, you will get a message saying so.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour13.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>ResourceUploader</phrase>
+	</textobject>
+	<caption>
+	  <para>The Resource Uploader Dialog</para>
+	</caption>
+      </mediaobject>
+      <para>You can upload more files or click `Cancel' to return to the editor.</para>
+      <para>Let's insert the image we just uploaded. Click on the ResourcePicker. The Resource Picker will find all resources associated with a particular page so you can attach them to the page. Images are displayed in the page itself; others are linked.</para>
+      <para>You can select the resource you want from the dropdown.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour14.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>ResourcePicker</phrase>
+	</textobject>
+	<caption>
+	  <para>The Resource Picker Dialog</para>
+	</caption>
+      </mediaobject>
+      <para>The description will automatically change based on which resource you have chosen. Select the desired resource, and click OK. The ResourcePicker inserts the appropriate code into the editor.</para>
+      <para>Go ahead and save the changes to see the result. As you can see, the image has been inserted.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour15.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Site with resource</phrase>
+	</textobject>
+	<caption>
+	  <para>The page now has the chosen resource!</para>
+	</caption>
+      </mediaobject>
+    </section>
+    <section><title>Examining Revisions}</title>
+    <para>Now, we can see the difference between two versions of a page by clicking on the `Compare to last' button on the right (1). <inlinemediaobject><imageobject><imagedata fileref="images/tour16.png" /></imageobject></inlinemediaobject> This will give a detailed report of the most recent changes. (see below) We can also click on the `History' button (2) to see a list of all revisions, and go back to any previous version.</para>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour17.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>Changes Example</phrase>
+	</textobject>
+	<caption>
+	  <para>An example of the changes between two revisions</para>
+	</caption>
+      </mediaobject>
+      <mediaobject>
+        <imageobject>
+	  <imagedata fileref="images/tour18.png" format="PNG" />
+	</imageobject>
+	<textobject>
+	  <phrase>History Example</phrase>
+	</textobject>
+	<caption>
+	  <para>An example list of page revisions</para>
+	</caption>
+      </mediaobject>
+      <para> Finally, we should log out of PUMA for security. Click on the `admin' link in the linkbar to go to the user page. From there, click log out.</para>
+    </section>
+  </chapter>
+  <chapter><title>Advanced and Troubleshooting</title>
+    <section><title>Logging in when the Linkbar is Empty</title>
+      <para>Change index.php to user.php in the browser's address bar, which will bring up the login page. PUMA, if you used the default SQL schema, comes with a default user, admin. The password is `password'.</para>
+    </section>
+    <section><title>Editing the Linkbar</title>
+      <para>Replace `index.php' (and everything that follows it) with `edit.php?page=HeaderLink'. This will bring up the edit page for the link bar. Use the PagePicker for links to user-created pages in the site, and PumaPlugins for links to the user page.</para>
+    </section>
+  </chapter>
+</book>
