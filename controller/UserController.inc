@@ -19,9 +19,38 @@ class UserController {
                               "do_pw_reset" => "do_pw_reset/?([0-9]+)?",
                               "changeemail" => "email/?",
                               "do_changeemail" => "do_email/?",
+                              "do_changeperms" => "do_perms/([0-9]+)",
                               "llist" => "list/?"
                           );
+  function do_changeperms(&$dispatcher, $userid) {
+      $user = User::ensure();
+      $errormessage = "You do not have permission to change user permissions!";
+      if (!$user->authorized(0,$errormessage)) {
+          $dispatcher->redirect('/user/login');
+	  return false;
+      }
 
+      $changeuser = User::staticGet($userid);
+      if ($user == null) { 
+          addmessage("User doesn't exist!");
+	  $dispatcher->redirect($previouspage);
+          return;
+      } elseif (!isset($_REQUEST['permission']) || $_REQUEST['permission'] > 3 || $_REQUEST['permission'] < 0) {
+          addmessage("Bad permission setting");
+	  $dispatcher->redirect($previouspage);
+          return;
+      }
+
+      $changeuser->permission = $_REQUEST['permission'];
+      if (!$changeuser->update()) {
+          addmessage("User update failed!");
+      } else { 
+          addmessage("User permissions changed!");
+      }
+      $dispatcher->redirect(getpreviouspage());
+      return;
+  }
+              
   function do_changeemail(&$dispatcher) {
       global $smarty,$SITENAME;
       $host = $_SERVER['SERVER_NAME'];
@@ -366,7 +395,7 @@ class UserController {
 
 
   function llist(&$dispatcher) {
-      global $smarty;
+      global $smarty,$permission_names;
       $activeuser = User::ensure();
       $errormessage = "You don't have permission to view the user list!";
       if (!$activeuser->authorized(1,$errormessage)) {
@@ -378,6 +407,7 @@ class UserController {
 	  }
           return false;
       }
+      setpreviouspage("/user/list");
       $user = new User();
       $user->find();
       while ($user->fetch())
