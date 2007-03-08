@@ -20,6 +20,8 @@ class UserController {
                               "changeemail" => "email/?",
                               "do_changeemail" => "do_email/?",
                               "do_changeperms" => "do_perms/([0-9]+)",
+                              "remove" => "remove/([0-9]+)",
+                              "do_remove" => "do_remove/([0-9]+)",
                               "llist" => "list/?"
                           );
   function do_changeperms(&$dispatcher, $userid) {

@@ -31,9 +31,9 @@
                 <td><a href="{$SCRIPT_NAME}/user/do_pw_reset/{$user.id}">reset</a></td>
                 <td><a href="{$SCRIPT_NAME}/user/do_confirm/{$user.id}">confirm</a></td>
                 <td><a href="{$SCRIPT_NAME}/user/change_email/{$user.id}">change</a></td>
-                <td>{if $user.id != 0 && $user.id != 1}
+                {* <td>{if $user.id != 0 && $user.id != 1}
                         <a href="{$SCRIPT_NAME}/user/remove/{$user.id}">remove</a>
-                {/if}</td>
+                        {/if}</td> *}
                 <td><button type="submit" value="perms">Change User Permissions</button></td>
                 </form>
             </tr>
