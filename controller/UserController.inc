@@ -203,7 +203,7 @@ class UserController {
     }
     if (isset($userid)) {
         $user = User::staticGet($userid);
-        $smarty->assign("user",$user->toArray());
+        $smarty->assign("confirmuser",$user->toArray());
     }
     $activeuser = User::ensure();
     if ($activeuser->permission == 0) {
