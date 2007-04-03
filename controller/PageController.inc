@@ -28,10 +28,46 @@ class PageController {
                               'do_move' => 'do_move/(\d+)',
                               'multimove' => 'multimove/?(?:(\d+))?',
                               'do_multimove' => 'do_multimove',
+                              'change_pagetype' => 'change_pagetype/(\d+)',
+                              'do_change_pagetype' => 'do_change_pagetype/(\d+)/?(.*)',
                               'do_changeperm' => 'do_changeperm/(\d+)'
                           );
   function test(&$dispatcher) {
       return;
+  }
+
+  function do_change_pagetype(&$dispatcher,$pageid,$page_type) {
+      global $PAGETYPES;
+      $user = User::ensure();
+      $errormessage = "You don't have permission to move pages!";
+      if (!$user->authorized(1,$errormessage)) {
+          if ($user->id == 0) {
+	      setpreviouspage("/page/do_change_pagetype");
+	      $dispatcher->redirect("/user/login");
+          } else {
+	      $dispatcher->redirect(getpreviouspage());
+	  }
+          return false;
+      }
+
+      // Now we need to check to see if the page_type the user has given
+      // us is valid...
+
+      if (!isset($PAGETYPES[$page_type])) {
+              addmessage("Given page type, $page_type, is not a valid page type!");
+	      $dispatcher->redirect(getpreviouspage());
+              return;
+      }
+
+      $page = Page::staticGet($pageid);
+      $page->page_type = $page_type;
+      if ($page->update()) {
+          addmessage("Page type for page '{$page->title}' changed to $page_type");
+      } else {
+          addmessage("Error! Could not change page type!");
+      }
+      $dispatcher->redirect(getpreviouspage());
+      return true;
   }
   
   function move_down(&$dispatcher, $pageid) {

@@ -22,6 +22,9 @@ $DEFAULT_FORUM_PERM['read'] = $puma['default_forum_read_perm'];
 $DEFAULT_EBOOK_FORUM_PERM['write'] = $puma['default_ebook_forum_write_perm'];
 $DEFAULT_EBOOK_FORUM_PERM['read'] = $puma['default_ebook_forum_read_perm'];
 
+$PAGETYPES = explode(',',$puma['allowed_pagetypes']);
+$PAGETYPES = array_flip($PAGETYPES); // XXX: This doesn't handle spaces well!
+
 $SPHINX['use'] = $search['usesphinx'];
 $SPHINX['path'] = $search['sphinxpath'];
 $SPHINX['prefix'] = $search['sphinxprefix'];

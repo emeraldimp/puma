@@ -5,7 +5,7 @@
     <thead>
 	<tr>
             <th>Page Name</th>
-	    <th colspan="10">Actions</th>
+	    <th colspan="11">Actions</th>
 	    <th>Read</th>
 	    <th>Edit</th>
         </tr>
@@ -78,7 +78,14 @@
 		      {if $page.page_type == "html" && $page.parent}
                         <a href="{$SCRIPT_NAME}/page/move_down/{$page.id}" title="Move this page down"><img src="{$base}/images/tool/movedown.png" alt="Move Down"/></a>
 		      {/if}
-	    	    </td>
+                    </td>
+                    <td>
+		      {if $page.page_type == "html" && $page.parent}
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/hidden" title="Hide this page"><img src="{$base}/images/tool/hidepage.png" alt="Hide page"/></a>
+                      {elseif $page.parent}
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/html" title="Unhide this page"><img src="{$base}/images/tool/unhidepage.png" alt="Unhide page"/></a>
+                      {/if}
+                    </td>
 		    <form action="{$SCRIPT_NAME}/page/do_changeperm/{$page.id}" method="POST">
 		      <td>
 		      <select name="view">

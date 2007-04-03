@@ -29,6 +29,8 @@ default_forum_write_perm = 2
 default_forum_read_perm = 3
 default_ebook_forum_write_perm = 3
 default_ebook_forum_read_perm = 3
+allowed_pagetypes = html,hidden ; This is a list of the pagetypes an admin
+                                ; is allowed to change a page to. NO SPACES!
 
 [search]
 usesphinx = false ; Use the Sphinx search backend?  If false, then uses PUMA's default search
