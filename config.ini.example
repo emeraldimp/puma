@@ -16,6 +16,7 @@ allow_signups = True ; Whether users can sign up for accounts on their own.
 sitename = "Your Sitename"
 template_dir = site/templates
 host = example.com
+multipuma = False    ; Default is False, set to true to use one installation for multiple sites
 
 ; Permissions are as follows:
 ; 3 = Anonymous/not logged in

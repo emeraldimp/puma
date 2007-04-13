@@ -16,8 +16,8 @@
                 <td>
                   <div style="margin-left: {$resource.depth}em">
 	          {if isset($resource.ispage)}
-		  <span onClick="expandlist(this,'{$resource.id}'); return true" id="expand{$resource.id}"><img src="{$base}/images/tool/leftarrow.png" alt="+" title="Expand this page's resource list" /></span>
-		  <span onClick="collapselist(this,'{$resource.id}'); return true" style="visibility: hidden; display: none;" id="collapse{$resource.id}"><img src="{$base}/images/tool/downarrow.png" alt="-" title="Collapse this page's resource list" /></span>
+		  <span onClick="expandlist(this,'{$resource.id}'); return true" id="expand{$resource.id}"><img src="{$pumabase}/images/tool/leftarrow.png" alt="+" title="Expand this page's resource list" /></span>
+		  <span onClick="collapselist(this,'{$resource.id}'); return true" style="visibility: hidden; display: none;" id="collapse{$resource.id}"><img src="{$pumabase}/images/tool/downarrow.png" alt="-" title="Collapse this page's resource list" /></span>
 		    {if isset($resource.gone)}
 		      {$resource.title}
 		    {else}
@@ -35,11 +35,11 @@
 	        <td>{$resource.id}</td>
 	        <td>{$resource.description}</td>
                 <td> 
-                  <a href="{$SCRIPT_NAME}/resource/delete/{$resource.id}" title="Delete this resource and its children"><img src="{$base}/images/tool/delete.png" alt="(del)"/></a>
+                  <a href="{$SCRIPT_NAME}/resource/delete/{$resource.id}" title="Delete this resource and its children"><img src="{$pumabase}/images/tool/delete.png" alt="(del)"/></a>
 		</td><td>
-                   <a href="{$SCRIPT_NAME}/resource/move/{$resource.id}" title="Move this resource"><img src="{$base}/images/tool/move.png" alt="(move)"/></a>
+                   <a href="{$SCRIPT_NAME}/resource/move/{$resource.id}" title="Move this resource"><img src="{$pumabase}/images/tool/move.png" alt="(move)"/></a>
 		</td><td>
-		   <a href="{$SCRIPT_NAME}/resource/rename/{$resource.id}" title="Rename this resource"><img src="{$base}/images/tool/rename.png" alt="(rename)"/></a>
+		   <a href="{$SCRIPT_NAME}/resource/rename/{$resource.id}" title="Rename this resource"><img src="{$pumabase}/images/tool/rename.png" alt="(rename)"/></a>
 		</td>
 		  {/if}
             </tr>

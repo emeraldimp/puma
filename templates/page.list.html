@@ -17,8 +17,8 @@
                 <td>
                     <div style="margin-left: {$page.depth}em">
 	          {if isset($page.numchildren)}
-		  <span onClick="expandlist(this,'{$page.id}'); return true" {if $page.id == 1}style="visibility: hidden; display: none;"{/if} id="expand{$page.id}"><img src="{$base}/images/tool/leftarrow.png" alt="+" title="Show this page's children" /></span>
-		  <span onClick="collapselist(this,'{$page.id}'); return true" {if $page.id != 1}style="visibility: hidden; display: none;"{/if} id="collapse{$page.id}"><img src="{$base}/images/tool/downarrow.png" alt="-" title="Collapse this page's list of children" /></span>
+		  <span onClick="expandlist(this,'{$page.id}'); return true" {if $page.id == 1}style="visibility: hidden; display: none;"{/if} id="expand{$page.id}"><img src="{$pumabase}/images/tool/leftarrow.png" alt="+" title="Show this page's children" /></span>
+                  <span onClick="collapselist(this,'{$page.id}'); return true" {if $page.id != 1}style="visibility: hidden; display: none;"{/if} id="collapse{$page.id}"><img src="{$pumabase}/images/tool/downarrow.png" alt="-" title="Collapse this page's list of children" /></span>
 		  {/if}
                     {if $page.page_type == "html"}
                         <a href="{$SCRIPT_NAME}/page/view/{$page.id}"
@@ -31,59 +31,59 @@
 	        </td>{strip}
 		    {if $page.parent}
                 <td> 
-                        <a href="{$SCRIPT_NAME}/page/delete/{$page.id}" title="Delete this page and its children"><img src="{$base}/images/tool/delete.png" alt="(del)"/></a>
+                        <a href="{$SCRIPT_NAME}/page/delete/{$page.id}" title="Delete this page and its children"><img src="{$pumabase}/images/tool/delete.png" alt="(del)"/></a>
 		</td><td>
-                        <a href="{$SCRIPT_NAME}/page/move/{$page.id}" title="Move this page and its children"><img src="{$base}/images/tool/move.png" alt="(move)"/></a>
+                        <a href="{$SCRIPT_NAME}/page/move/{$page.id}" title="Move this page and its children"><img src="{$pumabase}/images/tool/move.png" alt="(move)"/></a>
 		</td>
 		{else}<td></td><td></td>
                     {/if}
                     {if $page.page_type == "html"}
 		    <td>
-                      <a href="{$SCRIPT_NAME}/page/edit/{$page.id}" title="Edit this page"><img src="{$base}/images/tool/edit.png" alt="Edit"/></a>
+                      <a href="{$SCRIPT_NAME}/page/edit/{$page.id}" title="Edit this page"><img src="{$pumabase}/images/tool/edit.png" alt="Edit"/></a>
 	            </td>
 		    {else}
 		    <td></td>
 		    {/if}
 		    {if $page.page_type == "html" || $page.page_type == "ebook"}
 		    <td>
-                      <a href="{$SCRIPT_NAME}/page/new/{$page.id}" title="Create a new subpage of this page"><img src="{$base}/images/tool/page.new.png" alt="new subpage"/></a>
+                      <a href="{$SCRIPT_NAME}/page/new/{$page.id}" title="Create a new subpage of this page"><img src="{$pumabase}/images/tool/page.new.png" alt="new subpage"/></a>
 		    {else}
 		    <td></td>
 		    {/if}
 		    <td>
                     {if $page.page_type == "html"}
 		      {if !isset($pluginslist.forum[$page.id])}
-                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=forum" title="Add a forum on this page"><img src="{$base}/images/tool/forum.png" alt="new forum"/></a>
+                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=forum" title="Add a forum on this page"><img src="{$pumabase}/images/tool/forum.png" alt="new forum"/></a>
                     {/if}
                       </td><td>
                       {if !isset($pluginslist.reservations[$page.id])}
-                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=reservation" title="Add a reservations form to this page"><img src="{$base}/images/tool/reservations.png" alt="(new reservation)" /></a>
+                          <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=reservation" title="Add a reservations form to this page"><img src="{$pumabase}/images/tool/reservations.png" alt="(new reservation)" /></a>
                       {/if}
                       </td><td>
                       {if !isset($pluginslist.ebook[$page.id])}
-		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=ebook" title="Create an ebook under this page"><img src="{$base}/images/tool/ebook.png" alt="(new ebook)" /></a>
+		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=ebook" title="Create an ebook under this page"><img src="{$pumabase}/images/tool/ebook.png" alt="(new ebook)" /></a>
                       {/if}
                       </td>
 		    {else}<td></td><td></td>
                     {/if}
                     <td>
-                    <a href="{$SCRIPT_NAME}/page/history/{$page.id}" title="Review this page's history"><img src="{$base}/images/tool/history.png" alt="History"/></a>
+                    <a href="{$SCRIPT_NAME}/page/history/{$page.id}" title="Review this page's history"><img src="{$pumabase}/images/tool/history.png" alt="History"/></a>
 	    	    </td>
 		    <td>
 		      {if $page.page_type == "html" && $page.parent && $page.position != 0}
-		        <a href="{$SCRIPT_NAME}/page/move_up/{$page.id}" title="Move Page Up"><img src="{$base}/images/tool/moveup.png" alt="Move Up"/></a>
+		        <a href="{$SCRIPT_NAME}/page/move_up/{$page.id}" title="Move Page Up"><img src="{$pumabase}/images/tool/moveup.png" alt="Move Up"/></a>
 		      {/if}
 	    	    </td>
                     <td>
 		      {if $page.page_type == "html" && $page.parent}
-                        <a href="{$SCRIPT_NAME}/page/move_down/{$page.id}" title="Move this page down"><img src="{$base}/images/tool/movedown.png" alt="Move Down"/></a>
+                        <a href="{$SCRIPT_NAME}/page/move_down/{$page.id}" title="Move this page down"><img src="{$pumabase}/images/tool/movedown.png" alt="Move Down"/></a>
 		      {/if}
                     </td>
                     <td>
 		      {if $page.page_type == "html" && $page.parent}
-                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/hidden" title="Hide this page"><img src="{$base}/images/tool/hidepage.png" alt="Hide page"/></a>
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/hidden" title="Hide this page"><img src="{$pumabase}/images/tool/hidepage.png" alt="Hide page"/></a>
                       {elseif $page.parent}
-                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/html" title="Unhide this page"><img src="{$base}/images/tool/unhidepage.png" alt="Unhide page"/></a>
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/html" title="Unhide this page"><img src="{$pumabase}/images/tool/unhidepage.png" alt="Unhide page"/></a>
                       {/if}
                     </td>
 		    <form action="{$SCRIPT_NAME}/page/do_changeperm/{$page.id}" method="POST">

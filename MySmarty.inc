@@ -24,6 +24,7 @@ class MySmarty extends Smarty {
 			     3 => "Anyone");
 	
         $this->assign("base", base());
+        $this->assign("pumabase", base(true));
         $this->assign("request", $_REQUEST);
         $this->assign("toppages", Page::get_toppages());
         $this->assign("permission", $permission);

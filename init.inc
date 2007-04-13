@@ -15,6 +15,7 @@ $USER_SELF_CREATE = $puma['allow_signups'];
 $SITENAME = $puma['sitename'];
 $HOST = $puma['host'];
 $template_dir = $puma['template_dir'];
+$MULTIPUMA = $puma['multipuma'];
 $DEFAULT_PERM['write'] = $puma['default_write_perm'];
 $DEFAULT_PERM['read'] = $puma['default_read_perm'];
 $DEFAULT_FORUM_PERM['write'] = $puma['default_forum_write_perm'];
