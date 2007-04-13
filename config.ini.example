@@ -41,3 +41,4 @@ sphinxprefix =    ; Prefix for sphinx indices.  Default is null
 
 [smarty]
 smartytemplatepath = templates;
+smartycompiledtemplatepath = templates/compiled;

@@ -14,7 +14,7 @@ class MySmarty extends Smarty {
         $this->plugins_dir = array('smartyplugins','plugins');
         $this->default_resource_type = 'pfile';
         $this->template_path = array($template_dir, $smartyvars['smartytemplatepath']);
-        $this->compile_dir = $smartyvars['smartytemplatepath']."/compiled";
+        $this->compile_dir = $smartyvars['smartycompiledtemplatepath'];
 
         $dir = dirname($_SERVER['SCRIPT_NAME']);
         
