@@ -122,10 +122,10 @@ function validemail($address) { // XXX: Needs to actually check for valid struct
 function base($pumabase = false) {
     global $MULTIPUMA;
     $dir = dirname($_SERVER['SCRIPT_NAME']);
+    if ($dir == "/") $dir = "";
     if ($MULTIPUMA == true && $pumabase == true) {
         $dir .= "/puma";
     }
-    if ($dir == "/") return "";
     return $dir;
 }
 
