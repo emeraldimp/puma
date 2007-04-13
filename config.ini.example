@@ -40,5 +40,5 @@ sphinxpath = contrib/sphinx ; Where is Sphinx located? Possibly /usr/local/sphin
 sphinxprefix =    ; Prefix for sphinx indices.  Default is null
 
 [smarty]
-smartytemplatepath = templates;
-smartycompiledtemplatepath = templates/compiled;
+smartytemplatepath = templates
+smartycompiledtemplatepath = templates/compiled
