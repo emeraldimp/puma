@@ -249,6 +249,9 @@ class UserController {
         $user->update();
         addmessage("User $user->name confirmed!");
         $dispatcher->redirect('/user/login/');
+    } else if ($user->validated == 1) {
+        addmessage("Email has already been validated!");
+        $dispatcher->redirect('/user/login/');
     } else {
         addmessage("Confirmation number incorrect!");
         $dispatcher->redirect('/user/confirm/'.$userid);
