@@ -33,13 +33,14 @@ class HtmlMailer {
   function set_plain ($plain) { $this->plain = $plain; }    
 
   function add_header($header) {
-    $this->headers .= $header . "\r\n";
+    //$this->headers .= $header . "\r\n";
+    $this->headers .= $header . "\n";
   }
 
   function send() {
-    if (is_null($this->html) || is_null($this->plain)) {
+    /*if (is_null($this->html) || is_null($this->plain)) {
       error("You tried to send HTML mail without setting PLAIN or HTML!", E_USER_ERROR);
-    }
+    }*/
     $message = "This is a multi-part message in MIME format.\r\n".
       "--$this->mime\r\n".
       "Content-Type: text/plain; charset=us-ascii\r\n".
