@@ -628,7 +628,7 @@ class PageController {
 	  }
           return false;
       }
-        $base = base();
+        $base = base(true);
         require_once("contrib/fckeditor/fckeditor.php");
         $version = Version::staticGet($page->current_version);
         $editor = new FCKeditor('content');
