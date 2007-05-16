@@ -57,7 +57,7 @@
 		// Show the "Ok" button.
 		window.parent.SetOkButton( true ) ;
 
-		var url = "../../index.php/resource/list/"+FCKLang.ResourcePickerPageId+"?format=xml";
+		var url = oEditor.FCKConfig.Domain + oEditor.FCKConfig.PumaBasePath +"/index.php/resource/list/"+FCKLang.ResourcePickerPageId+"?format=xml";
                 var request = dojo.io.bind({
                             url: url,
 			    load: function (type, data) {

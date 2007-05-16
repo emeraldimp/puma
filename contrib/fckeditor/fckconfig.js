@@ -110,6 +110,8 @@ FCKConfig.ToolbarSets["Puma"] = [
 	['OrderedList','UnorderedList','-','Outdent','Indent'],
 	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
 	['Link','Unlink','PagePicker'],
+        '/',
+        ['Style','FontName','FontSize'],
 	['Table','SpecialChar','UniversalKey']
 ] ;
 

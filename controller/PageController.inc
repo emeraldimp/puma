@@ -632,8 +632,10 @@ class PageController {
         require_once("contrib/fckeditor/fckeditor.php");
         $version = Version::staticGet($page->current_version);
         $editor = new FCKeditor('content');
-        $editor->BasePath = $base.'/contrib/fckeditor/' ;
+        $editor->Config['PumaBasePath'] = base().'/';
+        $editor->BasePath = $base.'/contrib/fckeditor/';
 	$editor->Config['BaseHref'] = $dispatcher->fq_url_to('');
+	$editor->Config['Domain'] = 'http://'.$_SERVER['HTTP_HOST'];
         $newtitle = null;
 
         if (isset($_POST['content'])) {

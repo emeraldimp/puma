@@ -76,7 +76,7 @@ window.onload = function ()
 		// Show the "Ok" button.
 		window.parent.SetOkButton( true ) ;
 
-		var url = "../../index.php/page/fcklist?format=xml";
+		var url = oEditor.FCKConfig.Domain + oEditor.FCKConfig.PumaBasePath + "../../index.php/page/fcklist?format=xml";
                 var request = dojo.io.bind({
                             url: url,
 			    load: function (type, data) {

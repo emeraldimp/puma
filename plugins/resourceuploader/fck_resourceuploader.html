@@ -62,7 +62,7 @@ window.onload = function ()
 	//window.parent.SetOkButton( true ) ;	
 
 	var form = document.getElementById('form1');
-        form.action = "../../index.php/resource/add/"+PageId+"?format=xml";
+        form.action = oEditor.FCKConfig.Domain + oEditor.FCKConfig.PumaBasePath + "/index.php/resource/add/"+PageId+"?format=xml";
 }
 
 function submitform()
