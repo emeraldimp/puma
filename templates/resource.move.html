@@ -5,6 +5,8 @@ Current page is {$page->title}.
 <form action="{$SCRIPT_NAME}/resource/do_move/{$resource->id}"
     method="post">
     <select name="newpage">
+        <option {if $resource->page==0}selected="true"{/if}
+            value="0">All Pages</option>
 	{foreach item=parent from=$page->get_list()}
 	  {if $parent.page_type == "html"}
 	    <option {if $parent.id==$resource->page}selected="true"{/if}

@@ -102,11 +102,15 @@ class ResourceController {
     $resource->fetch();
     $page = new Page();
     $page->id = $resource->page;
-    if ($page->count() < 1) {
-        $page->title = "Deleted Page";
+    if ($resource->page == 0) {
+        $page->title = "All pages";
     } else {
-        $page->find();
-        $page->fetch();
+        if ($page->count() < 1) {
+            $page->title = "Deleted Page";
+        } else {
+            $page->find();
+            $page->fetch();
+        }
     }
     $smarty->assign("template","resource.move");
     $smarty->assign("resource",$resource);
@@ -135,13 +139,19 @@ class ResourceController {
     $resource = Resource::staticGet($res_id);
     $page = new Page();
     $page->id = $newpageid;
-    if ($page->count() < 1) {
+    if ($page->count() < 1 && $newpageid != 0) {
         addmessage("Page does not exist... please select another");
 	$dispatcher->redirect("/resource/move/".$res_id);
 	return false;
     }
-    $page = Page::staticGet($newpageid);
-    $resource->page = $page->id;
+    if ($newpageid == 0) {
+        $resource->page = 0;
+        $page = new Page();
+        $page->title = "All pages";
+    } else {
+        $page = Page::staticGet($newpageid);
+        $resource->page = $page->id;
+    }
     if ($resource->update()) {
 	addmessage("Resource moved to {$page->title}");
 	$dispatcher->redirect(getpreviouspage());
@@ -178,6 +188,10 @@ class ResourceController {
   }
 
   function do_delete(&$dispatcher, $res_id) {
+    if ($_POST['delete'] != 'Delete Resource') {
+        addmessage("Resource deletion cancelled");
+        $dispatcher->redirect(getpreviouspage());
+    }
     $resource = new Resource();
     $resource->id = $res_id;
     assert($resource->count() == 1);
@@ -225,17 +239,23 @@ class ResourceController {
     foreach ($resources as $resource) {
         if ($checker != $resource['page']) {
             $checker = $resource['page'];
-	    $page = new Page();
-	    $page->id = $resource['page'];
-	    if ($page->count() < 1) {
-                $page->title = "Deleted Page";
-		$page = $page->toArray();
-		$page['gone'] = true;
-	    } else {
-	        $page->find();
-	        $page->fetch();
-	        $page = $page->toArray();
-	    }
+            $page = new Page();
+            $page->id = $resource['page'];
+            if ($resource['page'] == 0) {
+                $page->title = "All pages";
+                $page = $page->toArray();
+                $page['gone'] = true;
+            } else {
+                if ($page->count() < 1) {
+                        $page->title = "Deleted Page";
+                        $page = $page->toArray();
+                        $page['gone'] = true;
+                } else {
+                        $page->find();
+                        $page->fetch();
+                        $page = $page->toArray();
+                }
+            }
 	    $page['ispage'] = true;
 	    $page['depth'] = 0;
 	    $list[] = $page;
@@ -253,11 +273,14 @@ class ResourceController {
     global $smarty;
     $user = User::ensure();
     $page = Page::staticGet($page);
+    $globalpage = new Page();
+    $globalpage->id = 0;
     if (!$user->authorized($page->read_perm,'')) {
         echo "You aren't authorized to view this list!";
         return false;
     }
     $resources = Resource::fetch_all_for(&$page);
+    $resources = array_merge(Resource::fetch_all_for(&$globalpage),$resources);
     $smarty->assign("page", $page->toArray());
     $smarty->assign_by_ref("resources", &$resources);
     $smarty->assign("template", "resource.show");
@@ -284,7 +307,11 @@ class ResourceController {
       echo "<p id='error'><error>You don't have permission!</error></p>";
       return false;
     }
-    $resource->page = $page;
+    if (isset($_POST['allpages'])) {
+        $resource->page = 0;
+    } else {
+        $resource->page = $page;
+    }
     $resource->nickname = $_POST['nickname'];
     $resource->owner = $user->id;
     $resource->mime = $fileinfo['type'];
