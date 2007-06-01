@@ -50,7 +50,7 @@ CREATE TABLE version (
   page int unsigned NOT NULL references page (id),
   user int unsigned NOT NULL comment "who edited the page" references user (id),
   time timestamp NOT NULL,
-  content text NOT NULL
+  content longtext NOT NULL
 ) ENGINE=InnoDB COMMENT='For archiving page versions';
 set foreign_key_checks = 1;
 
