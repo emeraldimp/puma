@@ -16,10 +16,39 @@
 .flushright     { float: right; }
 
 .post           { margin-left: 15px; }
-.posthead       { background-color: #ffff8f; font-size: x-small;}
+.posthead       { 
+		background-color: #ffff8f;
+		font-size: x-small;
+        	border: 1px solid black; 
+		border-bottom: none;
+		}
+.postfoot       { 
+		  height: 27px;
+		  margin-top: -26px;
+		  margin-left: 15px;
+        	  border-top: 1px solid black; 
+		  font-size: x-small;
+		  }
+.postquote       { 
+		  background-image: url('../images/quotebottom.png');
+		  background-repeat: no-repeat;
+		  font-size: x-small;
+		  height: 27px;
+		  margin-top: -2px;
+		  margin-left: -2px;
+		  }
+.postfoot .author { margin-left: 4px;
+		    vertical-align: bottom; 
+		    }
 .title          { font-weight: bold; font-size: larger; }
-.posttext       { padding: 2px; margin-bottom: 3px; background-color: white; }
-.thispost       { border: 3px solid #ffff8f; margin-bottom: 3px; background-color: white; }
+.posttext       { padding: 2px;
+		  padding-bottom: -2px;
+		  margin-bottom: -0.5px;
+        	  border-left: 1px solid black; 
+        	  border-right: 1px solid black; 
+		  background-color: white;
+		  } 
+.thispost       { margin-bottom: 3px; background-color: white; }
 .postarea       { margin-right: 3px; }
 .thispost .postarea textarea { width: 100%; }
 .posttools      { float: right; }

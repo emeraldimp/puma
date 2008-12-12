@@ -377,12 +377,19 @@ class Forum {
           "</div></div>".
           "</div></form>";
       } else {
-        $rt .=
-          "<span class='title'>".$this->comment[$node]['title']."</span> by ".
-          "<span class='author'>".$this->comment[$node]['user']."</span> on ".
-          "<span class='timestamp'>".$this->comment[$node]['timestamp']."</span>";
+        $usernameForThisPost = $this->comment[$node]['user'];
+	if ($usernameForThisPost == '')
+	{
+	    $usernameForThisPost = '<em>No name given</em>';
+	}
+        $rt .= "<span class='title'>".$this->comment[$node]['title']."</span>";
         $rt .= "</div>";
         $rt .= "<div class='posttext'>".$this->comment[$node]['text']."</div>".
+	  "<div class='postquote'></div>".
+	  "<div class='postfoot'><br />".
+          "<span class='author'>".$usernameForThisPost."</span> on ".
+          "<span class='timestamp'>".$this->comment[$node]['timestamp']."</span>".
+          "</div>".
           "</div>";
       }
     }
