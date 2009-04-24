@@ -14,18 +14,16 @@ class User extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    var $__table = 'user';                            // table name
-    var $id;                              // int(10)  not_null primary_key unsigned auto_increment
-    var $name;                            // string(765)  not_null unique_key
-    var $password;                        // string(120)  not_null
-    var $permission;                      // int(3)  not_null unsigned
-    var $preferences;                     // blob(765)  not_null blob
-    var $email;                           // string(765)  not_null
-    var $validated;                       // int(5)  not_null unsigned
-    var $confirmation;                    // int(10)  not_null unsigned
-
-    /* ZE2 compatibility trick*/
-    function __clone() { return $this;}
+    public $__table = 'user';                            // table name
+    public $id;                              // int(10)  not_null primary_key unsigned auto_increment
+    public $name;                            // string(765)  not_null unique_key
+    public $password;                        // string(120)  not_null
+    public $permission;                      // int(3)  not_null unsigned
+    public $preferences;                     // blob(765)  not_null blob
+    public $email;                           // string(765)  not_null
+    public $validated;                       // int(5)  not_null unsigned
+    public $confirmation;                    // int(10)  not_null unsigned
+    public $subscriptionEndDate;             // date(10)  binary
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('User',$k,$v); }

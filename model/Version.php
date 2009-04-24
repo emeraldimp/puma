@@ -14,15 +14,12 @@ class Version extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    var $__table = 'version';                         // table name
-    var $id;                              // int(10)  not_null primary_key unsigned auto_increment
-    var $page;                            // int(10)  not_null unsigned
-    var $user;                            // int(10)  not_null unsigned
-    var $time;                            // timestamp(19)  not_null unsigned zerofill binary timestamp
-    var $content;                         // blob(196605)  not_null blob
-
-    /* ZE2 compatibility trick*/
-    function __clone() { return $this;}
+    public $__table = 'version';                         // table name
+    public $id;                              // int(10)  not_null primary_key unsigned auto_increment
+    public $page;                            // int(10)  not_null unsigned
+    public $user;                            // int(10)  not_null unsigned
+    public $time;                            // timestamp(19)  not_null unsigned zerofill binary timestamp
+    public $content;                         // blob(-3)  not_null blob
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Version',$k,$v); }

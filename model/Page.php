@@ -14,18 +14,15 @@ class Page extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    var $__table = 'page';                            // table name
-    var $id;                              // int(10)  not_null primary_key unsigned auto_increment
-    var $parent;                          // int(10)  unsigned
-    var $position;                        // real(22)  
-    var $title;                           // string(765)  not_null
-    var $current_version;                 // int(10)  unsigned
-    var $read_perm;                       // int(4)  
-    var $write_perm;                      // int(4)  not_null
-    var $page_type;                       // string(765)  not_null
-
-    /* ZE2 compatibility trick*/
-    function __clone() { return $this;}
+    public $__table = 'page';                            // table name
+    public $id;                              // int(10)  not_null primary_key unsigned auto_increment
+    public $parent;                          // int(10)  unsigned
+    public $position;                        // real(22)  
+    public $title;                           // string(765)  not_null
+    public $current_version;                 // int(10)  unsigned
+    public $read_perm;                       // int(4)  
+    public $write_perm;                      // int(4)  not_null
+    public $page_type;                       // string(765)  not_null
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Page',$k,$v); }
