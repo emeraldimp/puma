@@ -81,4 +81,14 @@ class User extends DB_DataObject
         }
         return false;
     }
+
+    function CanViewRestrictedZone() 
+    {
+        if ($this->permission == 0)
+        {
+            return true;
+        }
+
+        return strtotime($this->subscriptionEndDate) > time();
+    }
 }

@@ -88,7 +88,7 @@ class Page extends DB_DataObject
         $page->find();
         while ($page->fetch()) {
             if ($page->id == $stopAt) continue;
-	    if ($page->page_type != "html") continue;
+	    #if ($page->page_type != "html") continue;
             $inpage = $page->toArray();
             $inpage['depth'] = $depth;
             $pages = array_merge($pages, array($inpage), $this->_getPossibleParentTree($page->id, $depth + 1, $stopAt));

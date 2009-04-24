@@ -706,37 +706,9 @@ class PageController {
           }
   }
 
-  function view(&$dispatcher, $pageid) {
+  function populatePageTemplate($page, $user)
+  {
       global $smarty;
-      $user = User::ensure();
-      $page = new Page();
-      $page->id = $pageid;
-      if ($page->count() != 1) {
-      	  header("HTTP/1.1 404 Not Found");
-	  $smarty->assign("template","page.error404");
-	  return false;
-      }
-      $page->find();
-      $page->fetch();
-      $parent = $page;
-      while ($parent->parent) {
-          $parent = Page::staticGet($parent->parent);
-	  if ($parent->page_type == 'ebook') {
-              $dispatcher->redirect('/page/view/'.$parent->parent.'?pagenum='.$page->id);
-	      return;
-	  }
-      }
-
-      $errormessage = "You aren't authorized to view $page->title!";
-      if (!$user->authorized($page->read_perm,$errormessage)) {
-	  if ($user->id == 0) {
-              setpreviouspage("/page/view/".$pageid);
-              $dispatcher->redirect('/user/login');
-	  } else {
-	      $dispatcher->redirect(getpreviouspage());
-	  }
-          return false;
-      }
       $children = $page->getChildren($user->permission);
       $pagetypes = Array();
       foreach ($children as $child) {
@@ -768,7 +740,66 @@ class PageController {
       $smarty->assign("user", $user);
       $smarty->assign("children", $children);
       return true;
+  }
 
+  function view(&$dispatcher, $pageid) {
+      $user = User::ensure();
+      $page = new Page();
+      $page->id = $pageid;
+      if ($page->count() != 1) {
+      	  header("HTTP/1.1 404 Not Found");
+	  $smarty->assign("template","page.error404");
+	  return false;
+      }
+      $page->find();
+      $page->fetch();
+      $parent = $page;
+      while ($parent->parent) {
+          $parent = Page::staticGet($parent->parent);
+          if ($parent->page_type == 'ebook') {
+              return self::handleEbook($parent, $page, $dispatcher);
+          }
+          if ($parent->page_type == 'restrictedZone') {
+              return self::handleRestrictedZone($page, $parent, $user, $dispatcher);
+          }
+      }
+
+      $errormessage = "You aren't authorized to view $page->title!";
+      if (!$user->authorized($page->read_perm,$errormessage)) {
+          return self::handleUnauthorizedUser($user, $dispatcher, $pageid);
+      }
+
+      return self::populatePageTemplate($page, $user);
+  }
+
+  function handleRestrictedZone($page, $parent, $user, $dispatcher)
+  {
+      if(!$user->CanViewRestrictedZone())
+      {
+          addmessage("You must have a subscription to view {$page->title}!");
+          $dispatcher->redirect("/page/view/".$parent->parent);
+          return false; 
+      }
+
+      return self::populatePageTemplate($page, $user);
+  } 
+
+
+  function handleUnauthorizedUser($user, $dispatcher, $pageId)
+  {
+      if ($user->id == 0) {
+          setpreviouspage("/page/view/".$pageid);
+          $dispatcher->redirect('/user/login');
+      } else {
+          $dispatcher->redirect(getpreviouspage());
+      }
+      return false;
+  }
+
+  function handleEbook($parent, $page, $dispatcher)
+  {
+      $dispatcher->redirect('/page/view/'.$parent->parent.'?pagenum='.$page->id);
+      return;
   }
 
   function diff(&$dispatcher, $pagenum, $old=null, $new=null) {

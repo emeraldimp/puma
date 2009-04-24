@@ -13,10 +13,24 @@
 <div id="pagepath">{$path}</div>
 <div id="childlist">
     {foreach item=child from=$children}
-      {if $child->page_type == "html"}
+    {if $child->page_type == "html"}
       <a href="{$SCRIPT_NAME}/page/view/{$child->id}">{$child->title}</a>
       {/if}
     {/foreach}
+    {if isset($restrictedZone)}
+      {if $user->CanViewRestrictedZone()}
+        {foreach item=child from=$restrictedZone}
+          <a href="{$SCRIPT_NAME}/page/view/{$child->id}">{$child->title}</a>
+        {/foreach}
+      {else}
+      <a href="{$SCRIPT_NAME}/subscribe/">Subscribe today</a> to gain access to:</a>
+        <ul>
+        {foreach item=child from=$restrictedZone}
+          <li>{$child->title}</li>
+        {/foreach}
+        </ul>
+      {/if}
+    {/if}
 </div>
 <div id="content">
 {$version->content}
