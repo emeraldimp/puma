@@ -10,6 +10,11 @@
 {else}
 {assign var=title value="Move multiple pages"}
 {/if}
+{capture assign=allpages}
+  {foreach item=page from=$pages}
+    <option value="{$page.id}">{section name=foo start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
+  {/foreach}
+{/capture}
 {include file="header.html" title=$title}
 <p><strong>Note:</strong>
    <ol>
@@ -45,9 +50,7 @@
       </label>
       <label>Select a parent page
         <select name="parent[{$smarty.section.bar.index}]">
-          {foreach item=page from=$pages}
-            <option value="{$page.id}">{section name=foo start=0 loop=$page.depth}&nbsp;&nbsp;{/section}{$page.title}</option>
-          {/foreach}
+	  {$allpages}
         </select>
       </label><br/>
       {/section}
