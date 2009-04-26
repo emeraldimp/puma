@@ -4,6 +4,8 @@
 
 /* $Id$ */
 
+require_once("PaypalTimeFunctions.inc");
+
 // Functions from PageController.inc
 
 if (!function_exists('file_put_contents')) {

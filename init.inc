@@ -10,10 +10,12 @@ $database = $config_ini['database'];
 $puma = $config_ini['puma'];
 $search = $config_ini['search'];
 $smartyvars = $config_ini['smarty'];
+$paypal = $config_ini['paypal'];
 
 $USER_SELF_CREATE = $puma['allow_signups'];
 $SITENAME = $puma['sitename'];
 $HOST = $puma['host'];
+$ADMIN_EMAIL = $puma['adminemail'];
 $template_dir = $puma['template_dir'];
 $MULTIPUMA = $puma['multipuma'];
 $DEFAULT_PERM['write'] = $puma['default_write_perm'];
@@ -29,6 +31,8 @@ $PAGETYPES = array_flip($PAGETYPES); // XXX: This doesn't handle spaces well!
 $SPHINX['use'] = $search['usesphinx'];
 $SPHINX['path'] = $search['sphinxpath'];
 $SPHINX['prefix'] = $search['sphinxprefix'];
+
+$PAYPAL['url'] = $paypal['url'];
 
 assert_options(ASSERT_BAIL, 1);
 error_reporting(E_ALL);

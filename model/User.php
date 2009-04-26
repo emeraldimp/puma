@@ -23,7 +23,6 @@ class User extends DB_DataObject
     public $email;                           // string(765)  not_null
     public $validated;                       // int(5)  not_null unsigned
     public $confirmation;                    // int(10)  not_null unsigned
-    public $subscriptionEndDate;             // date(10)  binary
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('User',$k,$v); }
@@ -89,6 +88,6 @@ class User extends DB_DataObject
             return true;
         }
 
-        return strtotime($this->subscriptionEndDate) > time();
+        return Subscription::ValidSubscriptionExistsForUser($this);
     }
 }

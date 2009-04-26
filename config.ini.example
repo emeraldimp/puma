@@ -17,6 +17,7 @@ sitename = "Your Sitename"
 template_dir = site/templates
 host = example.com
 multipuma = False    ; Default is False, set to true to use one installation for multiple sites
+adminemail = ; your email here!
 
 ; Permissions are as follows:
 ; 3 = Anonymous/not logged in
@@ -42,3 +43,7 @@ sphinxprefix =    ; Prefix for sphinx indices.  Default is null
 [smarty]
 smartytemplatepath = templates
 smartycompiledtemplatepath = templates/compiled
+
+[paypal]
+url = https://www.sandbox.paypal.com/cgi-bin/webscr
+;url = https://www.paypal.com/cgi-bin/webscr
