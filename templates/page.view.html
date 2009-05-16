@@ -25,13 +25,24 @@
       {else}
       <a href="{$SCRIPT_NAME}/subscribe/show/">Subscribe today</a> to gain access to:</a>
         <ul>
-        {foreach item=child from=$restrictedZone}
-          <li>{$child->title}</li>
-        {/foreach}
+          {foreach item=child from=$restrictedZone}
+            {if $child->getAbstract()}
+              <li><a href="{$SCRIPT_NAME}/page/view/{$child->id}">{$child->title} (abstract)</a></li>
+            {else}
+              <li>{$child->title}</li>
+            {/if}
+          {/foreach}
         </ul>
       {/if}
     {/if}
 </div>
+{if $abstract}
+<h2>Abstract</h2>
+<div id="abstract">
+{$abstract}
+</div>
+<hr />
+{/if}
 <div id="content">
 {$version->content}
 </div>

@@ -1,21 +1,36 @@
 {capture assign=title}Editing {$page.title}{/capture}
+{capture assign=scripts}abstract.js{/capture}
 {include file="header.html"}
 <script language="JavaScript">
     window.pageid = {$page.id}
 </script>
 
 {if $preview}
-    <h2>Preview of {if $newtitle}{$newtitle|escape}{/if}(<a href="#editform">skip</a>)</h2>
-    <div class="preview">
+<h2>Preview of {if $newtitle}{$newtitle|escape}{/if}(<a href="#editform">skip</a>)</h2>
+{if $abstractPreview}
+<h3>Abstract</h3>
+<div class="preview">
+    {$abstractPreview|render_view}
+</div>
+{/if}
+<h3>Content</h3>
+<div class="preview">
     {$preview|render_view}
-    </div>
-    <hr />
-    <h2><a name="editform">Edit</a></h2>
+</div>
+<hr />
+<h2><a name="editform">Edit</a></h2>
 {/if}
 
 <form method="post" enctype="multipart/form-data" name="editform" 
     action="{$SCRIPT_NAME}/page/do_edit/{$page.id}">
     <input type="hidden" name="old[current_version]" value="{$version.id}" />
+    <label id="abstractLabel" onClick="toggleAbstractEditor();">Abstract (click to show or hide)</label>
+    <p>To create an abstract, simply add some text to it.  To delete it, clear all text from the abstract editor.</p>
+    <div id="abstractEditor" style="{if $displayAbstractEditor}visibility:visible; display:block;{else}visibility:hidden; display:none;{/if}">
+    {$abstractEditor}
+    </div>
+    <br />
+    <br />
     <label>Title: <input type="text" name="title" 
         value="{if $newtitle}{$newtitle|escape}{else}{$page.title|escape}{/if}" /></label>
     {$editor}

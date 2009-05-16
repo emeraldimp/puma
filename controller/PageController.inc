@@ -628,38 +628,67 @@ class PageController {
 	  }
           return false;
       }
-        $base = base(true);
-        require_once("contrib/fckeditor/fckeditor.php");
-        $version = Version::staticGet($page->current_version);
-        $editor = new FCKeditor('content');
-        $editor->Config['PumaBasePath'] = base().'/';
-        $editor->BasePath = $base.'/contrib/fckeditor/';
-	$editor->Config['BaseHref'] = $dispatcher->fq_url_to('');
-	$editor->Config['Domain'] = 'http://'.$_SERVER['HTTP_HOST'];
-        $newtitle = null;
+      
+      $version = Version::staticGet($page->current_version);
 
-        if (isset($_POST['content'])) {
+      $editor = self::CreateEditor($dispatcher, 'content');
+
+      $newtitle = null;
+
+      if (isset($_POST['content'])) {
           $smarty->assign("preview", $_POST['content']);
           $editor->Value = $_POST['content'];
           $newtitle = $_POST['title'];
-        }
-        else {
+      }
+      else {
           $editor->Value = $version->content;
-        }
+      }
 
-        $page->title = html_entity_decode($page->title);
+      $abstractEditor = self::CreateEditor($dispatcher, 'abstract');
+      $displayAbstractEditor = false;
 
-        $editor->ToolbarSet = 'Puma';
-        $smarty->assign("newtitle", $newtitle);
-        $smarty->assign("basehref", $_SERVER['SCRIPT_NAME']);
-        $smarty->assign("editor", $editor->CreateHtml());
-        $smarty->assign("page", $page->toArray());
-        $smarty->assign("version", $version->toArray());
-        $smarty->assign("user", $user);
-        $smarty->assign("template", "page.edit");
-        return true;
+      if (isset($_POST['abstract'])) {
+          $smarty->assign("abstractPreview", $_POST['abstract']);
+          $abstractEditor->Value = $_POST['abstract'];
+          $displayAbstractEditor = true;
+      } else {
+          $abstractPage = $page->getAbstract();
+
+          if ($abstractPage) {
+              $abstractVersion = Version::staticGet($abstractPage->current_version);
+              $abstractEditor->Value = $abstractVersion->content;
+              $displayAbstractEditor = true;
+          }
+      }
+
+      $page->title = html_entity_decode($page->title);
+
+      $editor->ToolbarSet = 'Puma';
+      $abstractEditor->ToolbarSet = 'Puma';
+      $smarty->assign("newtitle", $newtitle);
+      $smarty->assign("basehref", $_SERVER['SCRIPT_NAME']);
+      $smarty->assign("editor", $editor->CreateHtml());
+      $smarty->assign("abstractEditor", $abstractEditor->CreateHtml());
+      $smarty->assign("displayAbstractEditor", $displayAbstractEditor);
+      $smarty->assign("page", $page->toArray());
+      $smarty->assign("version", $version->toArray());
+      $smarty->assign("user", $user);
+      $smarty->assign("template", "page.edit");
+      return true;
   }
   
+  function CreateEditor(&$dispatcher, $id)
+  {
+      require_once("contrib/fckeditor/fckeditor.php");
+      $base = base(true);
+      $editor = new FCKeditor($id);
+      $editor->Config['PumaBasePath'] = base().'/';
+      $editor->BasePath = $base.'/contrib/fckeditor/';
+      $editor->Config['BaseHref'] = $dispatcher->fq_url_to('');
+      $editor->Config['Domain'] = 'http://'.$_SERVER['HTTP_HOST'];
+      return $editor;
+  }
+
   function do_edit(&$dispatcher, $id) {
       global $smarty, $SPHINX;
       $user = User::ensure();
@@ -683,28 +712,61 @@ class PageController {
           }
           elseif (isset($_POST['save'])) {
               $page = Page::staticGet($id);
-              $version = new Version();
-              $version->page = $page->id;
-              $version->user = $_SESSION['userid'];
-              $version->content = $_REQUEST['content'];
-              if (!$version->insert()) {
+              $pageTitle = htmlentities($_REQUEST['title']);
+
+              if (!self::SavePage($page, $_REQUEST['content'], $pageTitle)) {
                   addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
                   PageController::edit(&$dispatcher, $id);
                   return;
               }
-              $page->current_version = $version->id;
-              $page->title = htmlentities($_REQUEST['title']);
-              if (!$page->update()) {
-                  addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
-                  PageController::edit(&$dispatcher, $id);
-                  return;
+
+              $abstractContent = trim($_REQUEST['abstract']);
+
+              if ($abstractContent) {
+                  $abstractPage = $page->getAbstract();
+
+                  if (!$abstractPage) 
+                  {
+                      $abstractPage = new Page();
+                      $abstractPage->page_type = 'abstract';
+                      $abstractPage->parent = $page->id;
+                      $abstractPage->insert();
+                  }
+
+                  if (!self::SavePage($abstractPage, $_REQUEST['abstract'], 'abstract')) {
+                      addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
+                      PageController::edit(&$dispatcher, $id);
+                      return;
+                  }
+              } else {
+                  $abstractPage = $page->getAbstract();
+
+                  if ($abstractPage) $abstractPage->delete();
               }
+
+
               addmessage("Changes to ".$page->title." saved!");
-              //$dispatcher->redirect('/page/view/'.$page->id);
 	      if ($SPHINX['use']) updatesearchindex();
               $dispatcher->redirect(getpreviouspage());
           }
   }
+
+  function SavePage($page, $content, $title) {
+      $version = new Version();
+      $version->page = $page->id;
+      $version->user = $_SESSION['userid'];
+      $version->content = $content;
+
+      if (!$version->insert()) return false;
+      
+      $page->current_version = $version->id;
+      $page->title = $title;
+      
+      if (!$page->update()) return false;
+
+      return true;
+  }
+
 
   function populatePageTemplate($page, $user)
   {
@@ -776,6 +838,12 @@ class PageController {
   {
       if(!$user->CanViewRestrictedZone())
       {
+          $abstract = $page->getAbstract();
+
+          if ($abstract) {
+              return self::populatePageTemplate($abstract, $user);
+          }
+
           addmessage("You must have a subscription to view {$page->title}!");
           $dispatcher->redirect("/page/view/".$parent->parent);
           return false; 

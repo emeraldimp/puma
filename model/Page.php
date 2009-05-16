@@ -80,6 +80,18 @@ class Page extends DB_DataObject
         return array_merge($pages, $page->_getPossibleParentTree($page->id, 1, $this->id));
     }
 
+    function getAbstract() {
+        $page = new Page();
+        $page->parent = $this->id;
+        $page->page_type = 'abstract';
+        $page->find();
+        if ($page->fetch()) {
+            return $page;
+        }
+
+        return null;
+    }
+
     /* private array */ function _getPossibleParentTree($parent, $depth, $stopAt) {
         $pages = array();
         $page = new Page();
