@@ -768,7 +768,7 @@ class PageController {
   }
 
 
-  function populatePageTemplate($page, $user)
+  function populatePageTemplate($page, $user, $title=null)
   {
       global $smarty;
       $children = $page->getChildren($user->permission);
@@ -787,7 +787,11 @@ class PageController {
 	  $child->title = html_entity_decode($child->title);
       }
 
-      $page->title = html_entity_decode($page->title);
+      if ($title) {
+          $page->title = html_entity_decode($title);
+      } else {
+          $page->title = html_entity_decode($page->title);
+      }
       
       $prevpage = "/page/view/".$page->id;
       if (isset($_REQUEST['pagenum'])) {
@@ -841,7 +845,7 @@ class PageController {
           $abstract = $page->getAbstract();
 
           if ($abstract) {
-              return self::populatePageTemplate($abstract, $user);
+              return self::populatePageTemplate($abstract, $user, $page->title);
           }
 
           addmessage("You must have a subscription to view {$page->title}!");
