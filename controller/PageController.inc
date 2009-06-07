@@ -768,7 +768,7 @@ class PageController {
   }
 
 
-  function populatePageTemplate($page, $user, $title=null)
+  function populatePageTemplate($page, $user, $title=null, $displaySubscriptionLink=false)
   {
       global $smarty;
       $children = $page->getChildren($user->permission);
@@ -805,6 +805,7 @@ class PageController {
       $smarty->assign("version", $version);
       $smarty->assign("user", $user);
       $smarty->assign("children", $children);
+      $smarty->assign("displaySubscriptionLink", $displaySubscriptionLink);
       return true;
   }
 
@@ -845,7 +846,7 @@ class PageController {
           $abstract = $page->getAbstract();
 
           if ($abstract) {
-              return self::populatePageTemplate($abstract, $user, $page->title);
+              return self::populatePageTemplate($abstract, $user, $page->title . " (abstract)", true);
           }
 
           addmessage("You must have a subscription to view {$page->title}!");

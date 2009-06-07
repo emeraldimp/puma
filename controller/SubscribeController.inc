@@ -100,11 +100,26 @@ class SubscribeController {
   {
       global $ADMIN_EMAIL;
       require_once("html-mailer.inc");
+      
+      $actionType = "(unknown action)";
+
+      if ($_POST['txn_type'] == 'subscr_signup')
+      {
+          $actionType = "created";
+      }
+      elseif ($_POST['txn_type'] == 'subscr_payment')
+      {
+          $actionType = "extended";
+      }
+      elseif ($_POST['txn_type'] == 'subscr_cancel')
+      {
+          $actionType = "canceled";
+      }
 
       $mail = new HtmlMailer("CWP Subscriptions <subscriptions@creolewest.com>",
           $ADMIN_EMAIL, "Subscription confirmation");
-      $mail->set_plain("Subscription created for user {$user->name}!\n\n");
-      $mail->set_html("Subscription created for user {$user->name}!\n\n");
+      $mail->set_plain("Subscription {$actionType} for user {$user->name}!\n\n");
+      $mail->set_html("Subscription {$actionType} for user {$user->name}!\n\n");
       $mail->send();
   }
 
