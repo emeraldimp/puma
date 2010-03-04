@@ -689,21 +689,28 @@ class Reservations {
     $rt = "<div id='reservations_box'>\n".
       "<p>Thank you for your reservation, ".$this->reservations[$this->current_reservation]->fullname.
       ". You have fully completed the reservation process.</p>".
-      "</div>";
+      "</div>" .
+      self::getAdditionalContentFromChild($page, "confirmed");
 
+    return $rt;
+  }
+
+  function getAdditionalContentFromChild($page, $desiredTitle)
+  {
     $children = $page->getChildren();
     foreach ($children as $child)
     {
-        if ($child->title != "confirmed")
+        if ($child->title != $desiredTitle)
         {
             continue;
         }
 
         $version = Version::staticGet($child->current_version);
 
-        $rt .= $version->content;
+        return $version->content;
     }
-    return $rt;
+
+    return "";
   }
 
   function render_confirm_new() {
@@ -1049,6 +1056,9 @@ class Reservations {
   }
 
   function send_confirmation(&$page, $reservation) {
+    $additionalEmailText = self::getAdditionalContentFromChild($page, "emailText");
+    $additionalEmailHtml = self::getAdditionalContentFromChild($page, "emailHtml");
+
     $base = "http://";
     $base .= $_SERVER['SERVER_NAME'];
     $base .= dirname($_SERVER['SCRIPT_NAME']);
@@ -1071,7 +1081,8 @@ class Reservations {
                      "email client supports it, you may be able to click the following link:\n".
                      "<".$base."index.php/page/view/{$page->parent}?res_action=confirm&res_value%5Bemail%5D=".
                                                    urlencode($reservation->email)."&res_value%5Bconfirmation%5D=".
-						   $reservation->confirmation.">\n\n".
+                                                   $reservation->confirmation.">\n\n".
+                     $additionalEmailText . "\n\n" .
                      "Your time and interest are appreciated. Please note: Your registration\n".
                      "cannot be completed until you finish this step. Do not reply to this\n".
                      "email directly. If you believe this email was sent in error, please email \n".
@@ -1094,6 +1105,7 @@ class Reservations {
                     "confirmation number given above. To reduce the risk of typing errors,\n".
                     "you may find it easier to copy and paste this number instead of typing\n".
                     "it over. <br><br>\n\n".
+                    $additionalEmailHtml .
                     "Your time and interest are appreciated. Please note: Your registration\n".
                     "cannot be completed until you finish this step. ".
                     "Do not reply to this email directly. If you believe this email\n".
