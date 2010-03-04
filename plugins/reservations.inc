@@ -685,11 +685,24 @@ class Reservations {
     return $rt;
   }
 
-  function render_confirmed() {
+  function render_confirmed($page) {
     $rt = "<div id='reservations_box'>\n".
       "<p>Thank you for your reservation, ".$this->reservations[$this->current_reservation]->fullname.
       ". You have fully completed the reservation process.</p>".
       "</div>";
+
+    $children = $page->getChildren();
+    foreach ($children as $child)
+    {
+        if ($child->title != "confirmed")
+        {
+            continue;
+        }
+
+        $version = Version::staticGet($child->current_version);
+
+        $rt .= $version->content;
+    }
     return $rt;
   }
 
@@ -781,7 +794,7 @@ class Reservations {
     case "confirm":
       return $this->render_confirm();
     case "confirmed":
-      return $this->render_confirmed();
+      return $this->render_confirmed($page);
     case "list":
       return $this->render_list($page, $user);
     default:
