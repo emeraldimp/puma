@@ -13,7 +13,7 @@
         <th>Reset Password?</th>
         <th>Confirm User?</th>
         <th>Change Email?</th>
-        {* <th>Remove User?</th> *}
+        <th>Add subscription</th>
     </thead>
     <tbody>
         {foreach item=user from=$users}
@@ -31,6 +31,7 @@
                 <td><a href="{$SCRIPT_NAME}/user/do_pw_reset/{$user.id}">reset</a></td>
                 <td><a href="{$SCRIPT_NAME}/user/do_confirm/{$user.id}">confirm</a></td>
                 <td><a href="{$SCRIPT_NAME}/user/change_email/{$user.id}">change</a></td>
+                <td><a href="{$SCRIPT_NAME}/subscription/create/{$user.id}">create</a></td>
                 {* <td>{if $user.id != 0 && $user.id != 1}
                         <a href="{$SCRIPT_NAME}/user/remove/{$user.id}">remove</a>
                         {/if}</td> *}

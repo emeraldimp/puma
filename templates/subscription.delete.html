@@ -1,9 +1,5 @@
 {include file="header.html" title="Delete a subscription"}
-Are you sure you want to delete subscription #{$subscription->id}, for user {$subscription->GetUserName()}{if $subscription->IsValid()}, <strong>even though it is still active?</strong>{/if}
-{foreach from=$children item=child}
-        {$child.title}
-{/foreach}
-?<br />
+Are you sure you want to delete subscription #{$subscription->id}, for user {$subscription->GetUserName()}{if $subscription->IsValid()}, <strong>even though it is still active</strong>{/if}?<br />
 <strong>You cannot recover a subscription once it has been deleted!</strong>
 <form action="{$SCRIPT_NAME}/subscription/do_remove/{$subscription->id}"
     method="post">
