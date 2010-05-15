@@ -23,7 +23,7 @@ class HtmlMailer {
     $this->add_header("From: $from");
     $this->add_header("User-Agent: PHP HtmlMailer");
     $this->add_header("MIME-Version: 1.0");
-    $this->add_header("Content-Type: multipart/alternative; boundary=\"$this->mime\"");
+    $this->add_header("Content-Type: multipart/alternative;\n\tboundary=\"$this->mime\"");
   }
 
   /* For HTML, this wrapper provides doctype, head, body for you, so

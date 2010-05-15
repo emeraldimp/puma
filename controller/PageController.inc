@@ -1008,7 +1008,6 @@ class PageController {
 	$searcher->SetServer ("localhost", 3312);
 	$searcher->SetWeights ( array(100, 1));
 	$searcher->SetMatchMode(SPH_MATCH_ANY);
-	$searcher->SetGroups( array() );
 	$result['titles'] = $searcher->Query($query, $SPHINX['prefix'].'titles');
 	$result['pages'] = $searcher->Query($query, $SPHINX['prefix'].'pages');
 	foreach ( $result as $resulttype => $results) {
