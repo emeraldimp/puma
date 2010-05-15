@@ -1,0 +1,36 @@
+{include file="header.html" title="Subscription List"}
+
+<div class="newsubscription">
+  <p><a href="{$SCRIPT_NAME}/subscription/create/">Create a subscription</a></p>
+</div>
+
+<table>
+    <thead>
+        <th>User Name</th>
+        <th>Paypal Subscription Id</th>
+        <th>Paypal Period</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>In Effect</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {foreach item=subscription from=$subscriptions}
+        {cycle assign=style values="1,2"} {* TODO: use css styles instead *}
+            <tr class="alternate{$style}">
+                <form action="{$SCRIPT_NAME}/user/do_perms/{$subscription->id}">
+                    <td>{$subscription->GetUserName()}</td>
+                    <td>{$subscription->paypalSubscriptionId}</td>
+                    <td>{$subscription->paypalPeriod}</td>
+                    <td>{$subscription->subscriptionStartDate}</td>
+                    <td>{$subscription->subscriptionEndDate}</td>
+                    <td>{if $subscription->IsValid()}Yes{else}No{/if}</td>
+                    <td><a href="{$SCRIPT_NAME}/subscription/edit/{$subscription->id}">Edit</a></td>
+                    <td><a href="{$SCRIPT_NAME}/subscription/remove/{$subscription->id}">Delete</a></td>
+                </form>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+{include file="footer.html"}

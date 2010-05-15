@@ -90,4 +90,20 @@ class User extends DB_DataObject
 
         return Subscription::ValidSubscriptionExistsForUser($this);
     }
+
+    function GetName()
+    {
+        return $this->name;
+    }
+
+    function GetAll()
+    {
+        $user = new User();
+        $user->find();
+        $users = array();
+        while ($user->fetch())
+            $users[] = clone($user);
+        return $users;
+    }
+
 }

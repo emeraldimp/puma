@@ -41,4 +41,10 @@ class Subscription extends DB_DataObject
 
         return false;
     }
+    
+    function GetUserName() 
+    {
+        return User::staticGet($this->userid)->name;
+    }
+
 }

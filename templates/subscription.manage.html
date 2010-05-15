@@ -1,0 +1,16 @@
+{strip}
+{capture assign=title}{if $action=="do_edit"}Editing Subscription: {$subscription->id}{else}Create New Subscription{/if}{/capture}
+{include file="header.html"}
+<form action="{$SCRIPT_NAME}/subscription/{$action}" method="post">
+      <label>User:<select name="userid">
+      {foreach item=user from=$users}
+      <option value="{$user->id}"{if $subscription->userid == $user->id} selected="selected"{/if}>{$user->name}</option>
+      {/foreach}
+      </label><br />
+      <label>Start Date:<input type="text" name="startDate" value="{$subscription->subscriptionStartDate}" /></label> (YYYY-MM-DD)<br />
+      <label>End Date:<input type="text" name="endDate" value="{$subscription->subscriptionEndDate}" /></label> (YYYY-MM-DD)<br />
+      <input type="submit" value="Submit" />
+      <input type="reset" value="Clear" />
+    </form>
+{include file="footer.html"}
+{/strip}
