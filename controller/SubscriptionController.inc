@@ -5,7 +5,7 @@
 /* $Id: UserController.inc 20 2007-04-18 16:29:50Z emeraldimp $ */
 
 class SubscriptionController {
-  var $controller_map = array("create" => "create/([0-9+])?",
+  var $controller_map = array("create" => "create/([0-9]+)?",
                               "do_create" => "do_create/?",
                               "edit" => "edit/([0-9]+)",
                               "do_edit" => "do_edit/([0-9]+)",
