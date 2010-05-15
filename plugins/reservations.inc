@@ -247,6 +247,7 @@ class Reservation {
   var $phone;
   var $zip;
   var $city, $state, $street;
+  var $quantity;
   var $comment;
   var $guests;
   var $answers;
@@ -312,6 +313,8 @@ class Reservation {
       $this->errors['street'] = "You must enter a valid street address";
     if ($this->city == "")
       $this->errors['city'] = "You must enter a valid city name";
+    if (!preg_match("/^[0-9]+$/", $this->quantity))
+      $this->errors['quantity'] = "You must enter a valid quantity";
     return !count($this->errors);
   }
 
@@ -334,6 +337,10 @@ class Reservation {
   }
 
   function get_city() { return $this->city; }
+  
+  function get_quantity() { return $this->quantity; }
+  
+  function set_quantity($value) { $this->quantity = $value; }
 
   function mk_input($field, $class = false) {
     $accessor = "get_$field";
@@ -345,7 +352,7 @@ class Reservation {
   function serialize() {
     $rt = "    <reservation fullname=\"$this->fullname\" email=\"$this->email\" ".
       "confirmation=\"$this->confirmation\" confirmed=\"$this->confirmed\" phone=\"$this->phone\" ".
-      "street=\"$this->street\" apartment=\"\" city=\"$this->city\" state=\"$this->state\" zip=\"$this->zip\">";
+      "street=\"$this->street\" apartment=\"\" city=\"$this->city\" state=\"$this->state\" zip=\"$this->zip\" quantity=\"$this->quantity\" >";
     if ($this->comment != "")
       $rt .= "      <comment>$this->comment</comment>\n";
     foreach ($this->guests as $guest)
@@ -390,6 +397,7 @@ class Reservation {
       $rt .= "<td title=\"Confirmed\"><font color=red>NO</font></td>";
     else
       $rt .= "<td title=\"Confirmed\"><font color=green>YES</font></td>";
+    $rt .= "<td title=\"Quantity\">{$this->quantity}</td>";
     $rt .= "<td title=\"Comments/Special Instructions\">".htmlspecialchars($this->comment)."</td>";
     foreach ($this->questions as $id => $question)
       $rt .= "<td title=\"$question->name\">".$question->render_view(@$this->answers[$id])."</td>";
@@ -413,6 +421,7 @@ class Reservation {
       "</select>".
       "<input name='res_value[zip]' value='Zipcode' length=5 maxlength=5></div></td>";
     $rt .= "<td>&mdash;</td>";
+    $rt .= "<td><input name='res_value[quantity]' value='Quantity' length='3' maxlength='3'></div></td>";
     $rt .= "<td><textarea name='res_value[comment]'></textarea></td>";
     foreach ($this->questions as $question)
       $rt .= "<td>".$question->render_list_edit()."</td>";
@@ -458,6 +467,12 @@ class Reservation {
       "<select name='res_value[state]'>".
       mk_states($this->state)."</select>".
       " <input name='res_value[zip]' title='zipcode' size=5 maxlength=5 value=\"$this->zip\">".
+      "</td>\n".
+      "</tr><tr>\n".
+      "<td>{$star}Number Attending</td>\n".
+      "<td>".
+      $this->get_error("quantity").
+      $this->mk_input('quantity', 'fullwidth').
       "</td>\n".
       "</tr><tr>\n".
       "<td colspan=2><b>Comment/Special instructions</b></td>\n".
@@ -596,6 +611,7 @@ class Reservations {
       $this->reservations[$this->current_reservation]->set_city(trim($attrs['city']));
       $this->reservations[$this->current_reservation]->set_state(trim($attrs['state']));
       $this->reservations[$this->current_reservation]->set_zip(trim($attrs['zip']));
+      $this->reservations[$this->current_reservation]->set_quantity(trim($attrs['quantity']));
       $this->reservations[$this->current_reservation]->set_questions($this->questions);
       break;
     case "guest":
@@ -692,6 +708,7 @@ class Reservations {
       "</div>" .
       self::getAdditionalContentFromChild($page, "confirmed");
 
+
     return $rt;
   }
 
@@ -707,7 +724,14 @@ class Reservations {
 
         $version = Version::staticGet($child->current_version);
 
-        return $version->content;
+        $content = $version->content;
+
+        $reservation = $this->reservations[$this->current_reservation];
+        $quantityInput = "<input type='hidden' name='quantity' value='{$reservation->quantity}'>";
+
+        $content = str_replace('{quantityInput}', $quantityInput, $content);
+
+        return $content;
     }
 
     return "";
@@ -829,6 +853,7 @@ class Reservations {
       "<td><b>Actions</b></td>".
       "<td><b>Contact</b></td>".
       "<td><b>Confirmed</b></td>".
+      "<td><b>Quantity</b></td>".
       "<td><b>Comment</b></td>";
     foreach ($this->questions as $question)
       $rt .= "<td><b>$question->name</b></td>";
@@ -975,6 +1000,7 @@ class Reservations {
     $this->reservations[$this->current_reservation]->set_city($value['city']);
     $this->reservations[$this->current_reservation]->set_state($value['state']);
     $this->reservations[$this->current_reservation]->set_zip($value['zip']);
+    $this->reservations[$this->current_reservation]->set_quantity($value['quantity']);
     $this->reservations[$this->current_reservation]->set_questions($this->questions);
     foreach ($this->questions as $question) {
       $this->reservations[$this->current_reservation]->answers[$question->id] = $question->make_answer($value['q'][$question->id]);
