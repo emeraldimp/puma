@@ -611,7 +611,9 @@ class Reservations {
       $this->reservations[$this->current_reservation]->set_city(trim($attrs['city']));
       $this->reservations[$this->current_reservation]->set_state(trim($attrs['state']));
       $this->reservations[$this->current_reservation]->set_zip(trim($attrs['zip']));
-      $this->reservations[$this->current_reservation]->set_quantity(trim($attrs['quantity']));
+      if (array_key_exists('quantity', $attrs)) {
+        $this->reservations[$this->current_reservation]->set_quantity(trim($attrs['quantity']));
+      }
       $this->reservations[$this->current_reservation]->set_questions($this->questions);
       break;
     case "guest":
