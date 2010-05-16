@@ -374,7 +374,7 @@ class Reservation {
       foreach ($values as $name => $value)
         $rt .= "&res_value[$name]=$value";
     else if (!is_null($values))
-      $rt .= "&res_value=$values";
+      $rt .= "&res_value=".urlencode($values);
     $rt .="' title='$title'>$link</a>";
     return $rt;
   }
