@@ -29,7 +29,7 @@ class VFile {
   }
 
   /******* Primary methods *******/
-  function open($page, $user_id) {
+  function open(&$page, $user_id) {
     $this->page = $page;
     $this->dirty = false;
     $this->content = "";

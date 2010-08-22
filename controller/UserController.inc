@@ -24,7 +24,7 @@ class UserController {
                               "do_remove" => "do_remove/([0-9]+)",
                               "llist" => "list/?"
                           );
-  function do_changeperms($dispatcher, $userid) {
+  function do_changeperms(&$dispatcher, $userid) {
       $user = User::ensure();
       $errormessage = "You do not have permission to change user permissions!";
       if (!$user->authorized(0,$errormessage)) {
@@ -53,7 +53,7 @@ class UserController {
       return;
   }
               
-  function do_changeemail($dispatcher) {
+  function do_changeemail(&$dispatcher) {
       global $smarty,$SITENAME;
       $host = $_SERVER['SERVER_NAME'];
       $user = User::ensure();
@@ -105,7 +105,7 @@ class UserController {
       return true;
   }
 			  
-  function changeemail($dispatcher) {
+  function changeemail(&$dispatcher) {
       global $smarty;
       $user = User::ensure();
       $errormessage = "You are logged in anonymously!";
@@ -121,7 +121,7 @@ class UserController {
       return true;
   }
 
-  function resetpw($dispatcher,$userid=null) {
+  function resetpw(&$dispatcher,$userid=null) {
       global $smarty;
       $activeuser = User::ensure();
       if (isset($userid) && $activeuser->permission == 0) $user = User::staticGet($userid);
@@ -134,7 +134,7 @@ class UserController {
       return true;
   }
 
-  function do_pw_reset($dispatcher,$userid=null) {
+  function do_pw_reset(&$dispatcher,$userid=null) {
       global $smarty, $SITENAME, $HOST;
       $previouspage = getpreviouspage(); 
       $emailmatch = null;
@@ -197,7 +197,7 @@ class UserController {
 
   }
 
-  function confirm($dispatcher,$userid=null,$confirm=null) {
+  function confirm(&$dispatcher,$userid=null,$confirm=null) {
     global $smarty;
     if (isset($userid) && isset($confirm)) {
         $dispatcher->redirect('/user/do_confirm/'.$userid.'/'.$confirm);
@@ -217,7 +217,7 @@ class UserController {
     return;
   }
   
-  function do_confirm($dispatcher,$userid=null,$confirm=null) {
+  function do_confirm(&$dispatcher,$userid=null,$confirm=null) {
     global $smarty;
     $activeuser = User::ensure();
     if (!isset($confirm) && $activeuser->permission != 0) {
@@ -260,7 +260,7 @@ class UserController {
   }
 
   
-  function create($dispatcher) {
+  function create(&$dispatcher) {
     global $smarty;
     global $USER_SELF_CREATE;
     $previouspage = getpreviouspage();
@@ -283,7 +283,7 @@ class UserController {
 
   }
 
-  function do_create($dispatcher) {
+  function do_create(&$dispatcher) {
     global $smarty;
     global $USER_SELF_CREATE;
     global $SITENAME;
@@ -399,7 +399,7 @@ class UserController {
   }
 
 
-  function llist($dispatcher) {
+  function llist(&$dispatcher) {
       global $smarty,$permission_names;
       $activeuser = User::ensure();
       $errormessage = "You don't have permission to view the user list!";
@@ -421,7 +421,7 @@ class UserController {
       $smarty->assign("template", "user.list");
   }
 
-  function login($dispatcher) {
+  function login(&$dispatcher) {
     global $smarty;
     global $USER_SELF_CREATE;
     if(isset($_SESSION['username'])) {
@@ -434,7 +434,7 @@ class UserController {
     $smarty->assign("template", "user.login");
   }
 
-  function prefs($dispatcher) {
+  function prefs(&$dispatcher) {
     global $smarty;
     $user = User::ensure();
     if(!isset($_SESSION['username'])) {
@@ -444,7 +444,7 @@ class UserController {
     $smarty->assign("user", $user);
   }
   
-  function do_login($dispatcher) {
+  function do_login(&$dispatcher) {
     global $smarty;
     $previouspage = getpreviouspage();
     $user = User::authenticate($_REQUEST['username'],$_REQUEST['password']);
@@ -460,7 +460,7 @@ class UserController {
     } 
   }
   
-  function do_logout($dispatcher) {
+  function do_logout(&$dispatcher) {
     global $smarty;
     $previouspage = getpreviouspage();
     session_destroy();
@@ -470,7 +470,7 @@ class UserController {
     return;
   }
   
-  function password($dispatcher) {
+  function password(&$dispatcher) {
     global $smarty;
     $user = User::ensure();
     if($user->id == 0) {
@@ -486,7 +486,7 @@ class UserController {
     $smarty->assign("user",$user);
   }
   
-  function do_password($dispatcher) {
+  function do_password(&$dispatcher) {
     global $smarty;
     if(!isset($_SESSION['username'])) {
       $dispatcher->redirect('/user/login/');

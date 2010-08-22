@@ -124,7 +124,7 @@ class Question {
 
 class Question_check extends Question {
   var $option;
-  function add_option($oid, $name, $type) {
+  function add_option($oid, &$name, $type) {
     $this->option[] = array("oid" => $oid, 
                             "name" => $name, 
                             "type" => $type);
@@ -283,7 +283,7 @@ class Reservation {
   function add_guest($name) {
     $this->guests[] = $name;
   }
-  function add_answer($id, $answer) {
+  function add_answer($id, &$answer) {
     $this->answers[$id] = $answer;
     $this->current_answer = $id;
   }
@@ -293,7 +293,7 @@ class Reservation {
   function add_question($question) {
     array_unshift($this->questions, $question);
   }
-  function set_questions($questions) { $this->questions = $questions; }
+  function set_questions(&$questions) { $this->questions = $questions; }
 
   // Return TRUE if the Reservation is loaded with good values. Return
   // false if there are errors.
@@ -366,7 +366,7 @@ class Reservation {
     return $rt;
   }
 
-  function _tool($page, $link, $title, $action, $values) {
+  function _tool(&$page, $link, $title, $action, $values) {
     global $puma;
     $rt = "<a href='$page->parent";
     $rt .= "?res_action=$action";
@@ -379,7 +379,7 @@ class Reservation {
     return $rt;
   }
 
-  function render_view($page) {
+  function render_view(&$page) {
     $rt = "<tr>".
       "<td>".
       $this->_tool($page, "delete", "Delete this reservation", "delete", $this->email)." ".
@@ -404,7 +404,7 @@ class Reservation {
     return "</tr>".$rt;
   }
 
-  function render_list_edit($page) {
+  function render_list_edit(&$page) {
     $rt = "<form action='$page->parent' method='post'>".
       "<tr>".
       "<td><input type='submit' value='add'></td>".
@@ -523,7 +523,7 @@ class Reservations {
   var $user;
   var $page;
 
-  function Reservations($container) {
+  function Reservations(&$container) {
     $this->container = $container;
 
     /* Default settings */
@@ -569,7 +569,7 @@ class Reservations {
   function set_confirmation($val) { $this->confirmation = $val; }
   function add_confirmation($val) { $this->confirmation .= $val." "; }
 
-  function _xml_start_element($p, $name, $attrs) {
+  function _xml_start_element(&$p, &$name, &$attrs) {
     array_unshift($this->xml_tag_stack, $name);
 
     switch ($name) {
@@ -642,12 +642,12 @@ class Reservations {
     }
   }
 
-  function _xml_end_element($p, $name) {
+  function _xml_end_element(&$p, &$name) {
     $lastname = array_shift($this->xml_tag_stack);
     assert($lastname == $name);
   }
 
-  function _xml_cdata($p, $data) {
+  function _xml_cdata(&$p, $data) {
     $data = preg_replace('/(  +|\n)/m', ' ', $data);
     $data = trim($data);
     $tag = $this->xml_tag_stack[0];
@@ -666,16 +666,16 @@ class Reservations {
     }
   }
 
-  function deserialize($xml) {
+  function deserialize(&$xml) {
     $parser = xml_parser_create();
     xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-    xml_set_element_handler($parser, array($this, "_xml_start_element"),
-                            array($this, "_xml_end_element"));
-    xml_set_character_data_handler($parser, array($this, "_xml_cdata"));
+    xml_set_element_handler($parser, array(&$this, "_xml_start_element"),
+                            array(&$this, "_xml_end_element"));
+    xml_set_character_data_handler($parser, array(&$this, "_xml_cdata"));
     xml_parse($parser, $xml);
   }
 
-  function render_default($page, $user) {
+  function render_default(&$page, $user) {
     $rt = "<div id='reservations_box'>\n".
       "<p>Thank you for your interest in our event. For your convenience use our private ".
       "registration service to enter your information. To protect your privacy, information provided ".
@@ -816,7 +816,7 @@ class Reservations {
     return $rt;
   }
 
-  function render($page, $user) {
+  function render(&$page, &$user) {
     switch ($this->view) {
     case "new_reservation":
       return $this->render_new_reservation($page, $user);
@@ -835,11 +835,11 @@ class Reservations {
     }
   }
 
-  function set_view($view, $page = null) {
+  function set_view($view, &$page = null) {
     $this->view = $view;
   }
 
-  function render_list($page, $user) {
+  function render_list(&$page, &$user) {
     global $puma;
     if (!$this->user->authorized(1, "")) {
       $rt = "<h3>You do not have permission to view this listing.</h3>";
@@ -876,7 +876,7 @@ class Reservations {
     return $rt;
   }
   
-  function render_edit($page, $user) {
+  function render_edit(&$page, &$user) {
     $rt = "";
     $rt .= "<form action='$page->parent' method='post'>\n".
       "<div id='reservations_box'>\n".
@@ -900,7 +900,7 @@ class Reservations {
       return $rt;
   }
 
-  function render_new_reservation($page, $user) {
+  function render_new_reservation(&$page, &$user) {
     $reservation = new Reservation();
     $reservation->set_questions($this->questions);
     $rt = "";
@@ -952,7 +952,7 @@ class Reservations {
     $this->set_view("default");
   }
 
-  function remail($email, $page) {
+  function remail($email, &$page) {
     if (!$this->user->authorized(0, "")) {
       $this->error["remail"] = "Insufficient rights";
       $this->set_view("default");
@@ -975,7 +975,7 @@ class Reservations {
     $this->unsaved_changes = true;
   }
 
-  function process_signal($signal, $value, $permission, $page) {
+  function process_signal($signal, $value, $permission, &$page) {
     $handlers = array('confirm' => 'confirm',
                       'set_view' => "set_view",
                       'new_reservation' => "new_reservation",
@@ -988,7 +988,7 @@ class Reservations {
     $this->$handler($value, $page);
   }
 
-  function new_reservation($value, $page) {
+  function new_reservation($value, &$page) {
     $this->current_reservation = $value['email']." transit";
     assert(!isset($this->reservations[$this->current_reservation]));
     $this->reservations[$this->current_reservation] = new Reservation();
@@ -1083,7 +1083,7 @@ class Reservations {
     $this->set_view("confirm_new");
   }
 
-  function send_confirmation($page, $reservation) {
+  function send_confirmation(&$page, $reservation) {
     $additionalEmailText = self::getAdditionalContentFromChild($page, "emailText");
     $additionalEmailHtml = self::getAdditionalContentFromChild($page, "emailHtml");
 
@@ -1146,7 +1146,7 @@ class Reservations {
 
 $reservations_instances = 0;
 
-function plugin_Reservations($args, $page, $user) {
+function plugin_Reservations($args, &$page, &$user) {
   global $reservations_instances;
   $reservations_instances++;
   if ($reservations_instances > 1)
@@ -1180,7 +1180,7 @@ function plugin_Reservations($args, $page, $user) {
 
 $magic_pages['/^Reservations:(.*)$/'] = "magic_pages_Reservations";
 
-function magic_pages_Reservations($page, $args) {
+function magic_pages_Reservations(&$page, &$args) {
   global $puma;
   $container = new VFile();
   $container->open($args[0], $puma->user->get_id());

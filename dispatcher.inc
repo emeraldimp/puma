@@ -94,7 +94,7 @@ class Dispatcher {
       $matches = array();
       $quoted_regex = "/^".addcslashes($regex, '/')."$/"; 
       if (preg_match($quoted_regex,
-                     $pathinfo, $matches)) {
+                     $pathinfo, &$matches)) {
         array_shift($matches);
         array_unshift($matches, $this);
         call_user_func_array($handler, $matches);

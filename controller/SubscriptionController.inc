@@ -14,7 +14,7 @@ class SubscriptionController {
                               "llist" => "list/?"
                           );
   
-  function create($dispatcher, $userid=null) {
+  function create(&$dispatcher, $userid=null) {
     global $smarty;
     $activeuser = User::ensure();
     $errormessage = "You don't have permission to create a subscription!";
@@ -45,7 +45,7 @@ class SubscriptionController {
     $smarty->assign("subscription", $subscription);
   }
 
-  function do_create($dispatcher) {
+  function do_create(&$dispatcher) {
     global $smarty;
     $activeuser = User::ensure();
     $previouspage = getpreviouspage();
@@ -102,7 +102,7 @@ class SubscriptionController {
     $dispatcher->redirect($previouspage);
   }
   
-  function edit($dispatcher, $subscriptionid=null) {
+  function edit(&$dispatcher, $subscriptionid=null) {
     global $smarty;
     $activeuser = User::ensure();
     $errormessage = "You don't have permission to edit a subscription!";
@@ -122,7 +122,7 @@ class SubscriptionController {
     $smarty->assign("subscription", Subscription::staticGet($subscriptionid));
   }
 
-  function do_edit($dispatcher, $subscriptionid = null) {
+  function do_edit(&$dispatcher, $subscriptionid = null) {
     global $smarty;
     $activeuser = User::ensure();
     $previouspage = getpreviouspage();
@@ -183,7 +183,7 @@ class SubscriptionController {
     $dispatcher->redirect($previouspage);
   }
   
-  function delete($dispatcher, $subscriptionid) {
+  function delete(&$dispatcher, $subscriptionid) {
       global $smarty;
       $activeuser = User::ensure();
       $previouspage = getpreviouspage();
@@ -202,7 +202,7 @@ class SubscriptionController {
       $smarty->assign("subscription", Subscription::staticGet($subscriptionid));
   }
 
-  function do_delete($dispatcher, $subscriptionid) {
+  function do_delete(&$dispatcher, $subscriptionid) {
       $activeuser = User::ensure();
       $previouspage = getpreviouspage();
       $errormessage = "You don't have permission to remove a subscription!";
@@ -236,7 +236,7 @@ class SubscriptionController {
       return true;
   }
 
-  function llist($dispatcher) {
+  function llist(&$dispatcher) {
       global $smarty,$permission_names;
       $activeuser = User::ensure();
       $errormessage = "You don't have permission to view the user list!";
