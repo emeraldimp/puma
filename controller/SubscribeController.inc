@@ -9,7 +9,7 @@ class SubscribeController {
                                 'do_confirm' => 'confirm/(\d+)'
                           );
 
-  function show_subscribe(&$dispatcher) {
+  function show_subscribe($dispatcher) {
       global $smarty, $PAYPAL;
       if(!isset($_SESSION['userid'])) {
         addmessage("You must be logged in to subscribe!");
@@ -28,7 +28,7 @@ class SubscribeController {
       $smarty->assign("template", "subscribe");
   }
 
-  function do_confirm(&$dispatcher, $userid)
+  function do_confirm($dispatcher, $userid)
   {
       $user = User::staticGet($userid);
       

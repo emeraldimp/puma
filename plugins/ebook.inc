@@ -89,7 +89,7 @@ function make_grippies($tree, $leaf, $newchildren) {
     return $turngrippies;
 }
 	
-function plugin_ebook($args, &$page, &$user) {
+function plugin_ebook($args, $page, $user) {
     global $DEFAULT_EBOOK_FORUM_PERM;
     $content = '';
     $pageversion = Version::staticGet($page->current_version);
@@ -188,7 +188,7 @@ function make_tableofContents($leaf) {
     return $content;
 }
 
-function render_comments(&$page, $leaf) {
+function render_comments($page, $leaf) {
     if ($page->current_version->content == "") {
         $comments = array(new Comment($leaf));
     } else {

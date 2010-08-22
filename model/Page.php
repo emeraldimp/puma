@@ -49,7 +49,7 @@ class Page extends DB_DataObject
     }
 
 
-    function resort(&$pages, $thisid, &$newpages) {
+    function resort($pages, $thisid, $newpages) {
         $newpages[] = $pages[$thisid];
 	if (!isset($pages[$thisid]['children'])) return;
 	foreach ($pages[$thisid]['children'] as $child) {
@@ -58,7 +58,7 @@ class Page extends DB_DataObject
         return;
     }
     
-    function set_depth(&$pages, $thispage, $depth) {
+    function set_depth($pages, $thispage, $depth) {
         $pages[$thispage]['depth'] = $depth;
 	if (!isset($pages[$thispage]['children'])) return;
 	foreach($pages[$thispage]['children'] as $child) {

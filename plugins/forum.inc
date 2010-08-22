@@ -116,7 +116,7 @@ class Forum {
     return $this->ready_to_save;
   }
   /* Callback function for XML parser */
-  function _xml_start_element(&$p, &$name, &$attrs) {
+  function _xml_start_element($p, $name, $attrs) {
     if ($name == "forum") {
       $this->id = array("none");
       $this->children = array();
@@ -137,29 +137,29 @@ class Forum {
     }
   }
   /* Callback function for XML parser */
-  function _xml_end_element(&$p, &$name) {
+  function _xml_end_element($p, $name) {
     if ($name == "comment")
       array_shift($this->id);
   }
   /* Callback function for XML parser */
-  function _xml_cdata(&$p, $data) {
+  function _xml_cdata($p, $data) {
     $data = preg_replace('/(  +|\n)/m', ' ', $data);
     $data = trim($data);
     if ($data != '')
       $this->comment[$this->id[0]]['text'] .= $data;
   }
-  function deserialize(&$xml) {
+  function deserialize($xml) {
     $parser = xml_parser_create();
     xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-    xml_set_element_handler($parser, array(&$this, "_xml_start_element"), 
-                            array(&$this, "_xml_end_element"));
-    xml_set_character_data_handler($parser, array(&$this, "_xml_cdata"));
+    xml_set_element_handler($parser, array($this, "_xml_start_element"), 
+                            array($this, "_xml_end_element"));
+    xml_set_character_data_handler($parser, array($this, "_xml_cdata"));
     xml_parse($parser, $xml);
     //print xml_error_string(xml_get_error_code($parser));
     //print xml_get_current_line_number($parser);
   }
   /* Convenience function for creating "tool" buttons */
-  function _tool(&$page, $signal, $name, $signal_value = NULL, $target = NULL) {
+  function _tool($page, $signal, $name, $signal_value = NULL, $target = NULL) {
     $url = $page->parent;
     if ($signal)
       $url .= "?forum_action=$signal";
@@ -306,7 +306,7 @@ class Forum {
      because we need access to his name and security clearance. We
      need the $request in order to form proper links with script_link.
      */
-  function render(&$page, &$user, $node = 'none') {
+  function render($page, $user, $node = 'none') {
     $rt = "";
     if (!$user->authorized($this->perm_read, ""))
       return $rt . "You do not have rights to read this forum.";
@@ -405,7 +405,7 @@ class Forum {
   }
 }
 
-function plugin_Forum($args, &$page, &$user) {
+function plugin_Forum($args, $page, $user) {
   global $puma;
   global $forum_instances;
   $forum_instances++;
@@ -434,7 +434,7 @@ function plugin_Forum($args, &$page, &$user) {
 
 $magic_pages['/^Forum:(.*)$/'] = "magic_pages_Forum";
 
-function magic_pages_Forum(&$page, &$args) {
+function magic_pages_Forum($page, $args) {
   global $puma;
   $page->push_path(array("Forums", $args[1]));
   $forum_container = new VFile();
@@ -462,7 +462,7 @@ function magic_pages_Forum(&$page, &$args) {
 
 $magic_pages['/^Forums$/'] = "magic_pages_Forums";
 
-function magic_pages_Forums(&$page, &$args) {
+function magic_pages_Forums($page, $args) {
   global $puma;
   /* We want a list of all pages beginning with Forum: and then some
      statistics. */

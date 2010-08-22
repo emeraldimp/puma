@@ -16,7 +16,7 @@ class ResourceController {
                               "ddelete" => "delete/(\d+)",
                               "do_delete" => "do_delete/(\d+)");
 			      
-  function rename(&$dispatcher, $res_id) {
+  function rename($dispatcher, $res_id) {
     global $smarty;
     $user = User::ensure();
     $errormessage = "You aren't authorized to edit resources!";
@@ -48,7 +48,7 @@ class ResourceController {
     $smarty->assign("user",$user);
   }
   
-  function do_rename(&$dispatcher, $res_id) {
+  function do_rename($dispatcher, $res_id) {
     $user = User::ensure();
     $errormessage = "You aren't authorized to move resources!";
     if (!$user->authorized(1,$errormessage)) {
@@ -82,7 +82,7 @@ class ResourceController {
     return false;
   }
 
-  function move(&$dispatcher, $res_id) {
+  function move($dispatcher, $res_id) {
     global $smarty;
     $user = User::ensure();
     $errormessage = "You aren't authorized to move resources!";
@@ -118,7 +118,7 @@ class ResourceController {
     $smarty->assign("user",$user);
   }
   
-  function do_move(&$dispatcher, $res_id) {
+  function do_move($dispatcher, $res_id) {
     $user = User::ensure();
     $errormessage = "You aren't authorized to move resources!";
     if (!$user->authorized(1,$errormessage)) {
@@ -164,7 +164,7 @@ class ResourceController {
     return false;
   }
 
-  function ddelete(&$dispatcher, $res_id) {
+  function ddelete($dispatcher, $res_id) {
     global $smarty;
     $resource = new Resource();
     $resource->id = $res_id;
@@ -187,7 +187,7 @@ class ResourceController {
     $smarty->assign("user",$user);
   }
 
-  function do_delete(&$dispatcher, $res_id) {
+  function do_delete($dispatcher, $res_id) {
     if ($_POST['delete'] != 'Delete Resource') {
         addmessage("Resource deletion cancelled");
         $dispatcher->redirect(getpreviouspage());
@@ -220,7 +220,7 @@ class ResourceController {
     
   }
   
-  function llistall(&$dispatcher) {
+  function llistall($dispatcher) {
     global $smarty;
     $user = User::ensure();
     $errormessage = "You aren't authorized to view the resource list!";
@@ -269,7 +269,7 @@ class ResourceController {
     return true;
   }
   
-  function llist(&$dispatcher, $page) {
+  function llist($dispatcher, $page) {
     global $smarty;
     $user = User::ensure();
     $page = Page::staticGet($page);
@@ -279,15 +279,15 @@ class ResourceController {
         echo "You aren't authorized to view this list!";
         return false;
     }
-    $resources = Resource::fetch_all_for(&$page);
-    $resources = array_merge(Resource::fetch_all_for(&$globalpage),$resources);
+    $resources = Resource::fetch_all_for($page);
+    $resources = array_merge(Resource::fetch_all_for($globalpage),$resources);
     $smarty->assign("page", $page->toArray());
-    $smarty->assign_by_ref("resources", &$resources);
+    $smarty->assign_by_ref("resources", $resources);
     $smarty->assign("template", "resource.show");
     return true;
   }
 
-  function add(&$dispatcher, $page) {
+  function add($dispatcher, $page) {
     $upload_errors = array(UPLOAD_ERR_OK => "There is no error, the file uploaded with success.",
                            UPLOAD_ERR_INI_SIZE => "The uploaded file exceeds the upload_max_filesize directive in php.ini.",
                            UPLOAD_ERR_FORM_SIZE => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.",
@@ -328,7 +328,7 @@ class ResourceController {
     return true;
   }
 
-  function view(&$dispatcher, $res_id) {
+  function view($dispatcher, $res_id) {
     $user = User::ensure();
     $resource = new Resource();
     $resource->id = $res_id;

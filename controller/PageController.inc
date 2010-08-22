@@ -32,11 +32,11 @@ class PageController {
                               'do_change_pagetype' => 'do_change_pagetype/(\d+)/?(.*)',
                               'do_changeperm' => 'do_changeperm/(\d+)'
                           );
-  function test(&$dispatcher) {
+  function test($dispatcher) {
       return;
   }
 
-  function do_change_pagetype(&$dispatcher,$pageid,$page_type) {
+  function do_change_pagetype($dispatcher,$pageid,$page_type) {
       global $PAGETYPES;
       $user = User::ensure();
       $errormessage = "You don't have permission to move pages!";
@@ -70,7 +70,7 @@ class PageController {
       return true;
   }
   
-  function move_down(&$dispatcher, $pageid) {
+  function move_down($dispatcher, $pageid) {
       $user = User::ensure();
       $errormessage = "You don't have permission to move pages!";
       if (!$user->authorized(1,$errormessage)) {
@@ -134,7 +134,7 @@ class PageController {
       return true;
   }
 
-  function move_up(&$dispatcher, $pageid) {
+  function move_up($dispatcher, $pageid) {
       $user = User::ensure();
       $errormessage = "You don't have permission to move pages!";
       if (!$user->authorized(1,$errormessage)) {
@@ -198,7 +198,7 @@ class PageController {
       return true;
   }
 
-  function backlinks(&$dispatcher, $pageid = null) {
+  function backlinks($dispatcher, $pageid = null) {
       global $smarty;
       $version = new Version();
       $basehref = $_SERVER['HTTP_HOST'].base().'/';
@@ -216,7 +216,7 @@ class PageController {
       return;
   }
 			 
-  function multimove(&$dispatcher, $parentid = null) {
+  function multimove($dispatcher, $parentid = null) {
       global $smarty;
       $user = User::ensure();
       $errormessage = "You don't have permission to move pages!";
@@ -243,7 +243,7 @@ class PageController {
       $smarty->assign("template", "page.multimove");
   }
 
-  function do_multimove(&$dispatcher) {
+  function do_multimove($dispatcher) {
       $user = User::ensure();
       $errormessage = "You don't have permission to create subpages!";
       if (!$user->authorized(1,$errormessage)) {
@@ -272,7 +272,7 @@ class PageController {
       return true;
   }
   
-  function do_multinew(&$dispatcher) {
+  function do_multinew($dispatcher) {
       $user = User::ensure();
       $errormessage = "You don't have permission to create subpages!";
       if (!$user->authorized(1,$errormessage)) {
@@ -299,7 +299,7 @@ class PageController {
       return true;
   }
 
-  function multinew(&$dispatcher, $parentid = null) {
+  function multinew($dispatcher, $parentid = null) {
       global $smarty, $DEFAULT_PERM;
       $user = User::ensure();
       $errormessage = "You don't have permission to create subpages!";
@@ -332,7 +332,7 @@ class PageController {
   }
       
   
-  function do_changeperm(&$dispatcher, $pageid) {
+  function do_changeperm($dispatcher, $pageid) {
       $user = User::ensure();
       $page = Page::staticGet($pageid);
       $errormessage = "You don't have permission to change the permissions of $page->title!";
@@ -356,12 +356,12 @@ class PageController {
       return true;
   }
 			  
-  function go_home(&$dispatcher) {
+  function go_home($dispatcher) {
       $dispatcher->redirect('/page/view/1');
       return;
   }
   
-  function do_move(&$dispatcher, $pageid) {
+  function do_move($dispatcher, $pageid) {
       global $smarty;
       if(!isset($_SESSION['userid'])) {
         addmessage("You must be logged in to edit pages!");
@@ -388,7 +388,7 @@ class PageController {
       return false;
   }
 
-  function move(&$dispatcher, $pageid) {
+  function move($dispatcher, $pageid) {
       global $smarty;
       if(!isset($_SESSION['userid'])) {
         addmessage("You must be logged in to edit pages!");
@@ -408,7 +408,7 @@ class PageController {
       }
   }
   
-  function delete(&$dispatcher, $pageid) {
+  function delete($dispatcher, $pageid) {
       global $smarty;
       if(!isset($_SESSION['userid'])) {
           addmessage("You must be logged in to delete pages!");
@@ -433,7 +433,7 @@ class PageController {
       }
   }
 
-  function do_delete(&$dispatcher, $pageid, $recursion=false) {
+  function do_delete($dispatcher, $pageid, $recursion=false) {
       $page = Page::staticGet($pageid);
       $user = User::ensure();
       $errormessage = "You don't have permission to delete $page->title; please contact an administrator";
@@ -467,7 +467,7 @@ class PageController {
       }
   }
 
-  function do_new(&$dispatcher, $parent = false) {
+  function do_new($dispatcher, $parent = false) {
       $user = User::ensure();
       $errormessage = "You aren't authorized to create pages!";
       if (!$user->authorized(1,$errormessage)) {
@@ -518,7 +518,7 @@ class PageController {
       $dispatcher->redirect("/page/list");
   }
 
-  function nnew(&$dispatcher, $parent = NULL) {
+  function nnew($dispatcher, $parent = NULL) {
       global $smarty;
       global $DEFAULT_PERM;
       $user = User::ensure();
@@ -552,7 +552,7 @@ class PageController {
       $smarty->assign("template", "page.new");
   }
 
-  function llist(&$dispatcher) {
+  function llist($dispatcher) {
       global $smarty;
       $pages = Page::get_list();
       $user = User::ensure();
@@ -594,7 +594,7 @@ class PageController {
       $smarty->assign("template", "page.list");
   }
   
-  function fcklist(&$dispatcher) {
+  function fcklist($dispatcher) {
       global $smarty;
       $pages = array();
       $user = User::ensure();
@@ -612,7 +612,7 @@ class PageController {
       $smarty->assign("pages", $pages);
   }
 
-  function edit(&$dispatcher, $pageid) {
+  function edit($dispatcher, $pageid) {
       global $smarty;
       require_once("contrib/fckeditor/fckeditor.php");
       $user = User::ensure();
@@ -677,7 +677,7 @@ class PageController {
       return true;
   }
   
-  function CreateEditor(&$dispatcher, $id)
+  function CreateEditor($dispatcher, $id)
   {
       require_once("contrib/fckeditor/fckeditor.php");
       $base = base(true);
@@ -689,7 +689,7 @@ class PageController {
       return $editor;
   }
 
-  function do_edit(&$dispatcher, $id) {
+  function do_edit($dispatcher, $id) {
       global $smarty, $SPHINX;
       $user = User::ensure();
       $page = Page::staticGet($id);
@@ -705,7 +705,7 @@ class PageController {
           return false;
       }
           if (isset($_POST['preview'])) {
-              PageController::edit(&$dispatcher, $id);
+              PageController::edit($dispatcher, $id);
           }
           elseif (isset($_POST['cancel_changes'])) {
               $dispatcher->redirect('/page/view/'.$page->id);
@@ -716,7 +716,7 @@ class PageController {
 
               if (!self::SavePage($page, $_REQUEST['content'], $pageTitle)) {
                   addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
-                  PageController::edit(&$dispatcher, $id);
+                  PageController::edit($dispatcher, $id);
                   return;
               }
 
@@ -735,7 +735,7 @@ class PageController {
 
                   if (!self::SavePage($abstractPage, $_REQUEST['abstract'], 'abstract')) {
                       addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
-                      PageController::edit(&$dispatcher, $id);
+                      PageController::edit($dispatcher, $id);
                       return;
                   }
               } else {
@@ -809,7 +809,7 @@ class PageController {
       return true;
   }
 
-  function view(&$dispatcher, $pageid) {
+  function view($dispatcher, $pageid) {
       $user = User::ensure();
       $page = new Page();
       $page->id = $pageid;
@@ -875,7 +875,7 @@ class PageController {
       return;
   }
 
-  function diff(&$dispatcher, $pagenum, $old=null, $new=null) {
+  function diff($dispatcher, $pagenum, $old=null, $new=null) {
     global $smarty;
 
     $page = Page::staticGet($pagenum);
@@ -940,7 +940,7 @@ class PageController {
 
   }
 
-  function history(&$dispatcher, $pagenum) {
+  function history($dispatcher, $pagenum) {
     global $smarty;
     
     $page = Page::staticGet($pagenum);
@@ -979,7 +979,7 @@ class PageController {
   }
 
 
-  function search(&$dispatcher, $query = null) {
+  function search($dispatcher, $query = null) {
     global $smarty, $SPHINX;
 
     $user = User::ensure();

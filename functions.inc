@@ -9,7 +9,7 @@ require_once("PaypalTimeFunctions.inc");
 // Functions from PageController.inc
 
 if (!function_exists('file_put_contents')) {
-  function file_put_contents($filename, &$contents) {
+  function file_put_contents($filename, $contents) {
     $file = fopen($filename, "w");
     fwrite($file, $contents);
     fclose($file);
@@ -29,7 +29,7 @@ function relinify($exp) {
     return $from2;
 }
 
-function diff(&$from, &$to) {
+function diff($from, $to) {
     $from2 = wordwrap(relinify($from->content), 60, "\n", 1);
     $to2 = wordwrap(relinify($to->content), 60, "\n", 1);
     file_put_contents("/tmp/puma-fromdiff".$from->id, $from2);
