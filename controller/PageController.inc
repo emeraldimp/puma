@@ -705,7 +705,7 @@ class PageController {
           return false;
       }
           if (isset($_POST['preview'])) {
-              PageController::edit(&$dispatcher, $id);
+              PageController::edit($dispatcher, $id);
           }
           elseif (isset($_POST['cancel_changes'])) {
               $dispatcher->redirect('/page/view/'.$page->id);
@@ -716,7 +716,7 @@ class PageController {
 
               if (!self::SavePage($page, $_REQUEST['content'], $pageTitle)) {
                   addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
-                  PageController::edit(&$dispatcher, $id);
+                  PageController::edit($dispatcher, $id);
                   return;
               }
 
@@ -735,7 +735,7 @@ class PageController {
 
                   if (!self::SavePage($abstractPage, $_REQUEST['abstract'], 'abstract')) {
                       addmessage("Changes to ".$page->title." were <strong>NOT</strong> saved!  Please try again!");
-                      PageController::edit(&$dispatcher, $id);
+                      PageController::edit($dispatcher, $id);
                       return;
                   }
               } else {

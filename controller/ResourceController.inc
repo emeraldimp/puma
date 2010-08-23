@@ -279,10 +279,10 @@ class ResourceController {
         echo "You aren't authorized to view this list!";
         return false;
     }
-    $resources = Resource::fetch_all_for(&$page);
-    $resources = array_merge(Resource::fetch_all_for(&$globalpage),$resources);
+    $resources = Resource::fetch_all_for($page);
+    $resources = array_merge(Resource::fetch_all_for($globalpage),$resources);
     $smarty->assign("page", $page->toArray());
-    $smarty->assign_by_ref("resources", &$resources);
+    $smarty->assign_by_ref("resources", $resources);
     $smarty->assign("template", "resource.show");
     return true;
   }

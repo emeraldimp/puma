@@ -669,9 +669,9 @@ class Reservations {
   function deserialize(&$xml) {
     $parser = xml_parser_create();
     xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-    xml_set_element_handler($parser, array(&$this, "_xml_start_element"),
-                            array(&$this, "_xml_end_element"));
-    xml_set_character_data_handler($parser, array(&$this, "_xml_cdata"));
+    xml_set_element_handler($parser, array($this, "_xml_start_element"),
+                            array($this, "_xml_end_element"));
+    xml_set_character_data_handler($parser, array($this, "_xml_cdata"));
     xml_parse($parser, $xml);
   }
 
