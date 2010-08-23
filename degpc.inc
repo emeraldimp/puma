@@ -1,6 +1,5 @@
 <?
 function degpc() {
-  set_magic_quotes_runtime(FALSE);
   
   if (get_magic_quotes_gpc()) {
     /*
