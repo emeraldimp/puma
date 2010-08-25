@@ -104,7 +104,7 @@ class Dispatcher {
     
     if (preg_match("/^\/?$/",$pathinfo)) {
     	$handler = array('Pagecontroller', 'view');
-	$matches = array($this, '1');
+	$matches = array(&$this, '1');
         call_user_func_array($handler, $matches);
 	return;
     } else {
