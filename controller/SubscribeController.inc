@@ -115,6 +115,19 @@ class SubscribeController {
       {
           $actionType = "canceled";
       }
+      elseif ($_POST['txn_type'] == 'subscr_eot')
+      {
+          $actionType = "expired";
+      }
+      else
+      {
+	  $mail = new HtmlMailer("CWP Subscriptions <subscriptions@creolewest.com>",
+              $ADMIN_EMAIL, "Subscription - unknown transaction type");
+          $mail->set_plain("Received unknown transaction type {$_POST['txn_type']} for user {$user->name}!\n\n");
+          $mail->set_html("Received unknown transaction type {$_POST['txn_type']} for user {$user->name}!\n\n");
+	  $mail->send();
+          return; 
+      }
 
       $mail = new HtmlMailer("CWP Subscriptions <subscriptions@creolewest.com>",
           $ADMIN_EMAIL, "Subscription confirmation");

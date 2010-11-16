@@ -16,6 +16,7 @@ $USER_SELF_CREATE = $puma['allow_signups'];
 $SITENAME = $puma['sitename'];
 $HOST = $puma['host'];
 $ADMIN_EMAIL = $puma['adminemail'];
+$TECH_EMAIL = !empty($puma['techemail']) ? $puma['techemail'] : $ADMIN_EMAIL;
 $template_dir = $puma['template_dir'];
 $MULTIPUMA = $puma['multipuma'];
 $DEFAULT_PERM['write'] = $puma['default_write_perm'];
