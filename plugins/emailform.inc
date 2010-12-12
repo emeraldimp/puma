@@ -76,6 +76,10 @@ class EmailForm
 			"Name: {$name}\n".
 			"Email: {$email}\n".
 			"Comment: {$comment}\n");
+	$mail->set_html("Received the following from a form submission on {$HOST} {$page->title}:<br>".
+			"Name: {$name}<br>".
+			"Email: {$email}<br>".
+			"Comment: {$comment}<br>");
 
 	global $html_mailer_debug;
 	$mail->send();
@@ -85,7 +89,5 @@ class EmailForm
 
 	return '';
     }
-
-    
 }
 ?>
