@@ -1,11 +1,11 @@
 {include file="header.html" title="Page Index"}
-<p><a href="{$SCRIPT_NAME}/page/multinew" title="Create Multiple Subpages">Create Multiple Subpages</a></p>
-<p><a href="{$SCRIPT_NAME}/page/multimove" title="Move Multiple Subpages">Move Multiple Subpages</a></p>
+<p><a href="{$SCRIPT_NAME}/page/multinew" title="Create Multiple Subpages">Create Multiple Subpages</a> | <a href="{$SCRIPT_NAME}/page/multimove" title="Move Multiple Subpages">Move Multiple Subpages</a></p>
 <table id="page_list">
     <thead>
 	<tr>
             <th>Page Name</th>
-	    <th colspan="11">Actions</th>
+	    <th colspan="8">Actions</th>
+	    <th colspan="4">Plugins</th>
 	    <th>Read</th>
 	    <th>Edit</th>
         </tr>
@@ -24,6 +24,8 @@
                         <a href="{$SCRIPT_NAME}/page/view/{$page.id}"
 				title="View {$page.title}" name="{$page.id}">{$page.title}</a>
 			{if isset($page.numchildren)}({$page.numchildren}){/if}
+                    {elseif $page.page_type == "hidden"}
+			<img src='{$pumabase}/images/tool/hide.png' /> {$page.title}
                     {else}
                         {$page.page_type}
                     {/if}
@@ -50,22 +52,6 @@
 		    {else}
 		    <td></td>
 		    {/if}
-		    <td>
-                    {if $page.page_type == "html"}
-		      {if !isset($pluginslist.forum[$page.id])}
-                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=forum" title="Add a forum on this page"><img src="{$pumabase}/images/tool/forum.png" alt="new forum"/></a>
-                    {/if}
-                      </td><td>
-                      {if !isset($pluginslist.reservations[$page.id])}
-                          <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=reservation" title="Add a reservations form to this page"><img src="{$pumabase}/images/tool/reservations.png" alt="(new reservation)" /></a>
-                      {/if}
-                      </td><td>
-                      {if !isset($pluginslist.ebook[$page.id])}
-		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=ebook" title="Create an ebook under this page"><img src="{$pumabase}/images/tool/ebook.png" alt="(new ebook)" /></a>
-                      {/if}
-                      </td>
-		    {else}<td></td><td></td>
-                    {/if}
                     <td>
                     <a href="{$SCRIPT_NAME}/page/history/{$page.id}" title="Review this page's history"><img src="{$pumabase}/images/tool/history.png" alt="History"/></a>
 	    	    </td>
@@ -81,11 +67,31 @@
                     </td>
                     <td>
 		      {if $page.page_type == "html" && $page.parent}
-                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/hidden" title="Hide this page"><img src="{$pumabase}/images/tool/hidepage.png" alt="Hide page"/></a>
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/hidden" title="Hide this page"><img src="{$pumabase}/images/tool/hide.png" alt="Hide page"/></a>
                       {elseif $page.parent}
-                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/html" title="Unhide this page"><img src="{$pumabase}/images/tool/unhidepage.png" alt="Unhide page"/></a>
+                          <a href="{$SCRIPT_NAME}/page/do_change_pagetype/{$page.id}/html" title="Unhide this page"><img src="{$pumabase}/images/tool/unhide.png" alt="Unhide page"/></a>
                       {/if}
                     </td>
+		    <td>
+                    {if $page.page_type == "html"}
+		      {if !isset($pluginslist.forum[$page.id])}
+                        <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=forum" title="Add a forum on this page"><img src="{$pumabase}/images/tool/forum.png" alt="new forum"/></a>
+                    {/if}
+                      </td><td>
+                      {if !isset($pluginslist.reservations[$page.id])}
+                          <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=reservation" title="Add a reservations form to this page"><img src="{$pumabase}/images/tool/reservations.png" alt="(new reservation)" /></a>
+                      {/if}
+                      </td><td>
+                      {if !isset($pluginslist.ebook[$page.id])}
+		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=ebook" title="Create an ebook under this page"><img src="{$pumabase}/images/tool/ebook.png" alt="(new ebook)" /></a>
+                      {/if}
+                      </td><td>
+                      {if !isset($pluginslist.emailform[$page.id])}
+		      <a href="{$SCRIPT_NAME}/page/new/{$page.id}?type=emailform" title="Create an email form under this page"><img src="{$pumabase}/images/tool/emailform.png" alt="(new emailform)" /></a>
+                      {/if}
+                      </td>
+		    {else}<td></td><td></td><td></td>
+                    {/if}
 		    <form action="{$SCRIPT_NAME}/page/do_changeperm/{$page.id}" method="POST">
 		      <td>
 		      <select name="view">

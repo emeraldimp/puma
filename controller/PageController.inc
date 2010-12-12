@@ -505,6 +505,11 @@ class PageController {
 	      makenewpage('ebook',$parent, $user, $DEFAULT_PERM['read'], $DEFAULT_PERM['write'], 'ebook');
               $dispatcher->redirect('/page/list');
               return;
+          } else if ($_REQUEST['type'] == 'emailform') {
+              global $DEFAULT_PERM;
+	      makenewpage('emailform',$parent, $user, $DEFAULT_PERM['read'], $DEFAULT_PERM['write'], 'emailform');
+              $dispatcher->redirect('/page/list');
+              return;
 	  }
       }
       if (!isset($_REQUEST['title']) || $_REQUEST['title'] == "") {
@@ -569,7 +574,7 @@ class PageController {
       }
 
       $pluginslist = array();
-      $pagetypes = array("forum","reservations","ebook");
+      $pagetypes = array("forum","reservations","ebook","emailform");
       foreach ( $pagetypes as $type ) {
           $plugins = new Page();
           $plugins->page_type = $type;

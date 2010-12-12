@@ -64,8 +64,9 @@ class HtmlMailer {
       "</body>\n".
       "</html>\n\n".
       "--$this->mime--\r\n";
-    if (!mail($this->to, $this->subject, $message, $this->headers))
-      user_error(E_WARNING, "Mail sending failed");
+    if (!mail($this->to, $this->subject, $message, $this->headers)) {
+      user_error("Mail sending failed", E_USER_WARNING);
+    }
     global $html_mailer_debug;
     if ($html_mailer_debug) {
       echo "<pre>HTML Mail";
