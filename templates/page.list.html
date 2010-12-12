@@ -25,7 +25,7 @@
 				title="View {$page.title}" name="{$page.id}">{$page.title}</a>
 			{if isset($page.numchildren)}({$page.numchildren}){/if}
                     {elseif $page.page_type == "hidden"}
-			<img src='{$pumabase}/images/tool/hide.png' /> {$page.title}
+			<img src='{$pumabase}/images/tool/hide.png' title="Page is hidden" /> {$page.title}
                     {else}
                         {$page.page_type}
                     {/if}
