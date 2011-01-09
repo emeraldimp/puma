@@ -10,16 +10,35 @@ function plugin_emailform($args, &$page, &$user) {
 
     if (isset($email_token) && $email_token == $_SESSION['email_form_token'])
     {
-	return EmailForm::SendEmail($page);
+        return EmailForm::SendEmail($page);
     }
     else
     {
-	if (isset($email_token))
-	{
-	    addmessage("Sorry, there was an error. Please try again.");
-	}
+        if (isset($email_token))
+        {
+            addmessage("Sorry, there was an error. Please try again.");
+        }
 
         return EmailForm::RenderForm();
+    }
+}
+
+function plugin_emailform_admin($args, &$page, &$user) {
+
+    $admin_token = $_REQUEST['admin_token'];
+
+    if (isset($admin_token) && $admin_token == $_SESSION['admin_form_token'])
+    {
+        return EmailForm::UpdateAdmin($page);
+    }
+    else
+    {
+        if (isset($admin_token))
+        {
+            addmessage("Sorry, there was an error. Please try again.");
+        }
+
+        return EmailForm::RenderAdminForm();
     }
 }
 
@@ -27,9 +46,9 @@ class EmailForm
 {
     public static function RenderForm()
     {
-	$emailtoken = uniqid();
+        $emailtoken = uniqid();
 
-	$_SESSION['email_form_token'] = $emailtoken;
+        $_SESSION['email_form_token'] = $emailtoken;
 
         $content = '';
 
@@ -46,48 +65,50 @@ class EmailForm
 
     public static function SendEmail($page)
     {
-	global $HOST;
+        global $HOST;
 
-	$email = $_REQUEST['email'];
-	$name = $_REQUEST['name'];
-	$comment = $_REQUEST['comment'];
+        $email = $_REQUEST['email'];
+        $name = $_REQUEST['name'];
+        $comment = $_REQUEST['comment'];
 
-	if (!validemail($email))
-	{
-	    addmessage("Your email address does not appear to be valid");
-	    return self::RenderForm();
-	}
-	
-	$hostPage = Page::staticGet($page->parent);
+        if (!validemail($email))
+        {
+            addmessage("Your email address does not appear to be valid");
+            return self::RenderForm();
+        }
+
+        $hostPage = Page::staticGet($page->parent);
 
         $version = Version::staticGet($page->current_version);
         $sendTo = $version->content;
-	
-	$pageEmailAddress = strtolower(preg_replace('/\s/','', $hostPage->title)) . '@' .$HOST;
 
-	$base = "http://";
-	$base .= $_SERVER['SERVER_NAME'];
-	$base .= dirname($_SERVER['SCRIPT_NAME']);
-	$base .= "/";
-	$mail = new HtmlMailer("{$hostPage->title} <{$pageEmailAddress}>",
-			"{$sendTo}",
-			"{$hostPage->title} email form submission");
-	$mail->set_plain("Received the following from a form submission on {$HOST} {$page->title}:\n\n".
-			"Name: {$name}\n".
-			"Email: {$email}\n".
-			"Comment: {$comment}\n");
-	$mail->set_html("Received the following from a form submission on {$HOST} {$page->title}:<br>".
-			"Name: {$name}<br>".
-			"Email: {$email}<br>".
-			"Comment: {$comment}<br>");
+        $pageEmailAddress = strtolower(preg_replace('/\s/','', $hostPage->title)) . '@' .$HOST;
 
-	global $html_mailer_debug;
-	$mail->send();
+        $base = "http://";
+        $base .= $_SERVER['SERVER_NAME'];
+        $base .= dirname($_SERVER['SCRIPT_NAME']);
+        $base .= "/";
+        $mail = new HtmlMailer("{$hostPage->title} <{$pageEmailAddress}>",
+                "{$sendTo}",
+                "{$hostPage->title} email form submission");
+        $mail->set_plain("Received the following from a form submission on {$HOST} {$page->title}:\n\n".
+                "Name: {$name}\n".
+                "Email: {$email}\n".
+                "Comment: {$comment}\n");
+        $mail->set_html("Received the following from a form submission on {$HOST} {$page->title}:<br>".
+                "Name: {$name}<br>".
+                "Email: {$email}<br>".
+                "Comment: {$comment}<br>");
 
-	unset($_SESSION['email_form_token']);
-	addmessage("Message was sent!");
+        global $html_mailer_debug;
+        $mail->send();
 
-	return '';
+        unset($_SESSION['email_form_token']);
+        addmessage("Message was sent!");
+
+        return '';
     }
+
+
 }
 ?>
