@@ -46,7 +46,7 @@
 		    {else}
 		    <td></td>
 		    {/if}
-		    {if $page.page_type == "html" || $page.page_type == "ebook"}
+		    {if $page.page_type == "html" || $page.page_type == "ebook" || $page.page_type == "hidden"}
 		    <td>
                       <a href="{$SCRIPT_NAME}/page/new/{$page.id}" title="Create a new subpage of this page"><img src="{$pumabase}/images/tool/page.new.png" alt="new subpage"/></a>
 		    {else}

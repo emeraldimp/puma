@@ -49,6 +49,11 @@
 {if $user->permission <= $page->write_perm}
 <a href="{$SCRIPT_NAME}/page/edit/{$page->id}">(edit)</a>
 {/if}
+{if isset($emaillist)}
+<div id="emaillist">
+{$emaillist}
+</div>
+{/if}
 {if isset($ebook)}
 <hr />
 <h3>eBook</h3>
