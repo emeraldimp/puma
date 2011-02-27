@@ -11,6 +11,7 @@ $puma = $config_ini['puma'];
 $search = $config_ini['search'];
 $smartyvars = $config_ini['smarty'];
 $paypal = $config_ini['paypal'];
+$akismet = $config_ini['akismet'];
 
 $USER_SELF_CREATE = $puma['allow_signups'];
 $SITENAME = $puma['sitename'];
@@ -34,6 +35,9 @@ $SPHINX['path'] = $search['sphinxpath'];
 $SPHINX['prefix'] = $search['sphinxprefix'];
 
 $PAYPAL['url'] = $paypal['url'];
+
+$AKISMET['apikey'] = $akismet['apikey'];
+$AKISMET['server'] = $akismet['server'];
 
 assert_options(ASSERT_BAIL, 1);
 error_reporting(E_ALL);

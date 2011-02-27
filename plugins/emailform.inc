@@ -59,6 +59,7 @@ class EmailForm
         $content .= "<p>Comment:</p>";
         $content .= "<p><textarea name='comment' cols='80' rows='10'></textarea></p>";
         $content .= "<input type='submit' value='Submit'>";
+        $content .= "</form>";
 
         return $content;
     }
@@ -74,6 +75,11 @@ class EmailForm
         if (!validemail($email))
         {
             addmessage("Your email address does not appear to be valid");
+            return self::RenderForm();
+        }
+
+        if (self::IsSpam($name, $email, $comment))
+        {
             return self::RenderForm();
         }
 
@@ -109,6 +115,36 @@ class EmailForm
         return '';
     }
 
+    function IsSpam($name, $email, $message)
+    {
+        global $AKISMET, $HOST;
 
+        require_once 'Services/Akismet2.php';
+        require_once 'Services/Akismet2/Comment.php';
+
+        $comment = new Services_Akismet2_Comment(array(
+                    'comment_author'       => $name,
+                    'comment_author_email' => $email,
+                    'comment_content'      => $message
+                    ));
+
+        try {
+            $akismet = new Services_Akismet2($HOST, $AKISMET['apikey'], array(
+                        'apiServer' => $AKISMET['server']));
+            if ($akismet->isSpam($comment)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Services_Akismet2_InvalidApiKeyException $keyException) {
+            echo 'Invalid API key!';
+        } catch (Services_Akismet2_HttpException $httpException) {
+            echo 'Error communicating with Akismet API server: ' .
+                $httpException->getMessage();
+        } catch (Services_Akismet2_InvalidCommentException $commentException) {
+            echo 'Specified comment is missing one or more required fields.' .
+                $commentException->getMessage();
+        }
+    }
 }
 ?>
