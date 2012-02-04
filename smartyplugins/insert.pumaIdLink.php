@@ -18,7 +18,7 @@ function smarty_insert_pumaIdLink($params, &$smarty) {
     $title = empty($params['title']) ? $page->title : $params['title'];
  
     if ($smarty->get_template_vars('page')->id == $page->id) {
-        return $title;
+        return "<span class='currentpage'>{$title}</span>";
     } 
 
     return "<a href='{$_SERVER['SCRIPT_NAME']}/page/view/{$page->id}'>{$title}</a>";
