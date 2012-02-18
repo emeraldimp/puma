@@ -54,6 +54,10 @@ class Dispatcher {
         continue;
       }
       $this->register(strtolower("/$name/$method"), array($class, $method));
+      // Map the default path, if the function exists
+      if ($method == 'default_action') {
+        $this->register(strtolower("/$name"), array($class, $method));
+      }
     }
   }
   
@@ -104,14 +108,14 @@ class Dispatcher {
     
     if (preg_match("/^\/?$/",$pathinfo)) {
     	$handler = array('Pagecontroller', 'view');
-	$matches = array(&$this, '1');
+        $matches = array(&$this, '1');
         call_user_func_array($handler, $matches);
-	return;
+        return;
     } else {
-	global $smarty;
-      	header("HTTP/1.1 404 Not Found");
-	$smarty->assign("template","page.error404");
-	return;
+        global $smarty;
+        header("HTTP/1.1 404 Not Found");
+        $smarty->assign("template","page.error404");
+        return;
     }
     //$this->error("No dispatcher matches $pathinfo");
   }
