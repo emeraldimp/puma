@@ -18,6 +18,8 @@ template_dir = site/templates
 host = example.com
 multipuma = False    ; Default is False, set to true to use one installation for multiple sites
 adminemail = ; your email here!
+techemail = ; your email here!
+surveyemail = ; your email here!
 
 ; Permissions are as follows:
 ; 3 = Anonymous/not logged in

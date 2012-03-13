@@ -23,7 +23,7 @@ class SurveyController {
   }
 
   function submit_survey(&$dispatcher) {
-      global $smarty, $HOST, $ADMIN_EMAIL;
+      global $smarty, $HOST, $SURVEY_EMAIL;
       include_once("html-mailer.inc");
 
       $user = User::ensure();
@@ -37,7 +37,7 @@ class SurveyController {
       $plaintext = $smarty->fetch('survey.email.txt');
       $html = $smarty->fetch('survey.email.html');
 
-      $mail = new HtmlMailer("Survey for {$HOST} <survey@{$HOST}>", "{$ADMIN_EMAIL}", "Survey submission from {$HOST}");
+      $mail = new HtmlMailer("Survey for {$HOST} <survey@{$HOST}>", "{$SURVEY_EMAIL}", "Survey submission from {$HOST}");
       $mail->set_plain($plaintext);
       $mail->set_html($html);
 
