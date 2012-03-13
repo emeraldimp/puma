@@ -1,0 +1,5 @@
+Got the following from {$user->name|default:'Anonymous User'|escape}<br/>
+<br/>
+{foreach item=response_item key=response_key from=$request}
+{$response_key|strip_tags|escape} : {$response_item|strip_tags|escape} <br />
+{/foreach}

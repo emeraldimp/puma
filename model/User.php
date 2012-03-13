@@ -14,15 +14,16 @@ class User extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    public $__table = 'user';                            // table name
+    public $__table = 'user';                // table name
     public $id;                              // int(10)  not_null primary_key unsigned auto_increment
-    public $name;                            // string(765)  not_null unique_key
-    public $password;                        // string(120)  not_null
+    public $name;                            // string(255)  not_null unique_key
+    public $password;                        // string(40)  not_null
     public $permission;                      // int(3)  not_null unsigned
-    public $preferences;                     // blob(765)  not_null blob
-    public $email;                           // string(765)  not_null
+    public $preferences;                     // blob(255)  not_null blob
+    public $email;                           // string(255)  not_null
     public $validated;                       // int(5)  not_null unsigned
     public $confirmation;                    // int(10)  not_null unsigned
+    public $subscriptionEndDate;             // date(10)  binary
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('User',$k,$v); }

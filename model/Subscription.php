@@ -9,11 +9,11 @@ class Subscription extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    public $__table = 'subscription';                    // table name
+    public $__table = 'subscription';        // table name
     public $id;                              // int(10)  not_null primary_key unsigned auto_increment
     public $userid;                          // int(10)  not_null unsigned
-    public $paypalSubscriptionId;            // string(150)  not_null
-    public $paypalPeriod;                    // string(45)  not_null
+    public $paypalSubscriptionId;            // string(50)  not_null
+    public $paypalPeriod;                    // string(15)  not_null
     public $subscriptionStartDate;           // date(10)  binary
     public $subscriptionEndDate;             // date(10)  binary
 

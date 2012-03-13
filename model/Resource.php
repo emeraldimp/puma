@@ -14,16 +14,16 @@ class Resource extends DB_DataObject
     ###START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    public $__table = 'resource';                        // table name
+    public $__table = 'resource';            // table name
     public $id;                              // int(10)  not_null primary_key unsigned auto_increment
-    public $nickname;                        // string(96)  not_null
-    public $filename;                        // string(765)  not_null
+    public $nickname;                        // string(32)  not_null
+    public $filename;                        // string(255)  not_null
     public $page;                            // int(10)  not_null unsigned
     public $date;                            // timestamp(19)  not_null unsigned zerofill binary timestamp
-    public $description;                     // blob(765)  not_null blob
-    public $data;                            // blob(-1)  not_null blob binary
+    public $description;                     // blob(255)  not_null blob
+    public $data;                            // blob(4294967295)  not_null blob binary
     public $owner;                           // int(10)  not_null unsigned
-    public $mime;                            // string(96)  not_null
+    public $mime;                            // string(32)  not_null
 
     /* Static get */
     function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Resource',$k,$v); }
