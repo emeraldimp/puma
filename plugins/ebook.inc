@@ -150,7 +150,7 @@ function plugin_ebook($args, &$page, &$user) {
 	}
     }
 
-    $content .= "<hr />";
+    $content .= "<hr style='clear:both;'/>";
 
     if ($forumpage) {
         include_once("forum.inc");
