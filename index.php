@@ -15,6 +15,9 @@ session_register('previouspage');
 
 if (!isset($_SESSION['previouspage'])) $_SESSION['previouspage'] = array();
 
+if(function_exists('date_default_timezone_set'))
+   date_default_timezone_set('America/Chicago');
+
 require_once("init.inc");
 include_once("dispatcher.inc");
 require_once('smarty/Smarty.class.php');
