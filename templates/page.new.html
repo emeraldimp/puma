@@ -10,7 +10,7 @@
 {else}
 {assign var=title value="Create a new page"}
 {/if}
-{include file="header.html" title=$title}
+{include file="file:header.html" title=$title}
 <form
     {if $parent}
     action="{$SCRIPT_NAME}/page/do_new/{$parent->id}" 
@@ -49,4 +49,4 @@
       </select></p>
     <input type="submit" value="Create a new subpage"></label>
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}

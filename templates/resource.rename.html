@@ -1,5 +1,5 @@
 {strip}
-{include file="header.html" title="Rename a Resource"}
+{include file="file:header.html" title="Rename a Resource"}
 Rename or change the description of resource {$resource->nickname} (id {$resource->id}), a resource of page {$page->title}.<br />
 {if $resource->mime|truncate:5:"":true eq 'image'}
 Preview: <br />
@@ -12,5 +12,5 @@ Preview: <br />
 	<label>Description: <textarea title="Rename Resource" name="newdesc">{$resource->description|escape}</textarea></label><br />
     <input type="submit" value="Rename Resource" title="Rename Resource" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

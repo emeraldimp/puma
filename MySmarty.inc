@@ -1,4 +1,4 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
 
@@ -6,17 +6,17 @@
 
 class MySmarty extends Smarty {
 
-    function MySmarty() {
+    function __construct() {
         global $template_dir, $smartyvars;
-        parent::Smarty();
+        parent::__construct();
+        $dir = dirname(__FILE__);
         $this->force_compile = true; /// XXX: Turn me off for production!
         //$this->debugging = true;
-        $this->plugins_dir = array('smartyplugins','plugins');
-        $this->default_resource_type = 'pfile';
-        $this->template_path = array($template_dir, $smartyvars['smartytemplatepath']);
+        $this->addPluginsDir($dir . '/plugins');
+        $this->addPluginsDir($dir . '/smartyplugins');
+        $this->default_resource_type = 'file';
+        $this->template_dir = array($template_dir, $smartyvars['smartytemplatepath']);
         $this->compile_dir = $smartyvars['smartycompiledtemplatepath'];
-
-        $dir = dirname($_SERVER['SCRIPT_NAME']);
         
 	$permission = array( 0 => "Admin",
 			     1 => "Editor",

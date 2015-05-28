@@ -1,8 +1,9 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
 
 /* $Id$ */
+global $dir;
 
 $config_ini = parse_ini_file("config.ini", true);
 
@@ -74,4 +75,3 @@ function handle_pear_error($error) {
     $message .= "</pre>";
     USER_ERROR($message, E_USER_ERROR);
 }
-?>

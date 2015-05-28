@@ -1,5 +1,5 @@
 {strip}
-{include file="header.html" title="Login"}
+{include file="file:header.html" title="Login"}
 Please enter your username and password to continue.
 <form action="{$SCRIPT_NAME}/user/do_login" method="post">
       <label>Username:<input type="text" name="username" /></label><br />
@@ -12,5 +12,5 @@ Please enter your username and password to continue.
     {/if}
     <a href="{$SCRIPT_NAME}/user/confirm">I want to confirm my account</a><br />
     <a href="{$SCRIPT_NAME}/user/resetpw">Forgot your password?</a>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

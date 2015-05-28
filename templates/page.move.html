@@ -1,4 +1,4 @@
-{include file="header.html" title="Move a page"}
+{include file="file:header.html" title="Move a page"}
 Choose a new parent for {$page->title}.
 <form action="{$SCRIPT_NAME}/page/do_move/{$page->id}"
     method="post">
@@ -10,4 +10,4 @@ Choose a new parent for {$page->title}.
     </select>
     <input type="submit" value="Move page" title="Move the page" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}

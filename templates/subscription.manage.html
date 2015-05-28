@@ -1,6 +1,6 @@
 {strip}
 {capture assign=title}{if $action=="do_edit"}Editing Subscription: {$subscription->id}{else}Create New Subscription{/if}{/capture}
-{include file="header.html"}
+{include file="file:header.html"}
 <form action="{$SCRIPT_NAME}/subscription/{$action}" method="post">
       <label>User:<select name="userid">
       {foreach item=user from=$users}
@@ -12,5 +12,5 @@
       <input type="submit" value="Submit" />
       <input type="reset" value="Clear" />
     </form>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

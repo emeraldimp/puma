@@ -9,9 +9,11 @@
 	return;
       }*/
 session_start();
-session_register('messages');
+//session_register('messages');
 // XXX: Also, buffer all output until a Smarty template is used, so errors can be caught!
-session_register('previouspage');
+//session_register('previouspage');
+
+global $dir;
 
 if (!isset($_SESSION['previouspage'])) $_SESSION['previouspage'] = array();
 
@@ -20,22 +22,25 @@ if(function_exists('date_default_timezone_set'))
 
 require_once("init.inc");
 include_once("dispatcher.inc");
-require_once('smarty/Smarty.class.php');
+require_once('smarty3/Smarty.class.php');
 require_once('MySmarty.inc');
 foreach (glob("$dir/model/*.php") as $file) include_once $file;
 
 $smarty = new MySmarty();
 
+// set the default handler
+$smarty->default_template_handler_func = 'make_template';
+
 $d = new Dispatcher();
 $d->autoload($dir."/controller");
 $d->dispatch(isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "/page/view/1");
 $smarty->assign("messages",$_SESSION['messages']);
-if ($smarty->get_template_vars("template")) {
+if ($smarty->getTemplateVars("template")) {
     if (@$_REQUEST["format"] == "xml") {
         header("Content-Type: text/xml");
-        $smarty->display($smarty->get_template_vars("template").".xml");
+        $smarty->display('file:' . $smarty->getTemplateVars("template").".xml");
     } else {
-        $smarty->display($smarty->get_template_vars("template"). (isset($_REQUEST['format']) ?
+        $smarty->display('file:' . $smarty->getTemplateVars("template"). (isset($_REQUEST['format']) ?
                                                                         "." . $_REQUEST['format'] : ".html"));
         $_SESSION['messages'] = array();
     }

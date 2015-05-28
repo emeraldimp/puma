@@ -1,5 +1,5 @@
 {strip}
-{include file="header.html" title="Move a Resource"}
+{include file="file:header.html" title="Move a Resource"}
 Choose a new parent for resource {$resource->nickname} (id {$resource->id}).<br />
 Current page is {$page->title}.
 <form action="{$SCRIPT_NAME}/resource/do_move/{$resource->id}"
@@ -16,5 +16,5 @@ Current page is {$page->title}.
     </select>
     <input type="submit" value="Move Resource" title="Move Resource" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

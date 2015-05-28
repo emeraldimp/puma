@@ -1,10 +1,10 @@
 {strip}
-{include file="header.html" title="Reset Password"}
+{include file="file:header.html" title="Reset Password"}
 <form action="{$SCRIPT_NAME}/user/do_pw_reset/" method="post">
       <label>Username:<input type="input" name="username" value="{$resetuser->name}" /></label><br />
       <label>Email address:<input type="input" name="emailaddress" /></label><br />
       <input type="submit" value="Reset Password" />
       <input type="reset" value="Clear Form" />
     </form>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

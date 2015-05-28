@@ -8,11 +8,11 @@ class SurveyController {
                             'survey_complete' => 'complete.*',
                             'Survey' => 'survey.*');
 
-  function default_action(&$dispatcher) {
+  function default_action($dispatcher) {
       self::Survey($dispatcher);
   }
 
-  function Survey(&$dispatcher) {
+  function Survey($dispatcher) {
       global $smarty;
 
       $user = User::ensure();
@@ -22,7 +22,7 @@ class SurveyController {
       $smarty->assign("template", "survey");
   }
 
-  function submit_survey(&$dispatcher) {
+  function submit_survey($dispatcher) {
       global $smarty, $HOST, $SURVEY_EMAIL;
       include_once("html-mailer.inc");
 
@@ -48,7 +48,7 @@ class SurveyController {
       return;
   }
 
-  function survey_complete(&$dispatcher) {
+  function survey_complete($dispatcher) {
       global $smarty;
  
       $user = User::ensure();

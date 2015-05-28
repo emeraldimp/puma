@@ -1,4 +1,4 @@
-{include file="header.html" title="Delete a resource"}
+{include file="file:header.html" title="Delete a resource"}
 Are you sure you want to delete {$resource->nickname}?<br />
 {if $resource->mime|truncate:5:"":true eq 'image'}
 Preview: <br />
@@ -11,4 +11,4 @@ Preview: <br />
     <input type="submit" name="delete" value="Delete Resource"/>
     <input type="submit" name="cancel" value="Cancel Delete" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}

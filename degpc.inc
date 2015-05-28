@@ -1,4 +1,4 @@
-<?
+<?php
 function degpc() {
   
   if (get_magic_quotes_gpc()) {

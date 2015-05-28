@@ -1,5 +1,5 @@
 {strip}
-{include file="header.html" title="Change Email Address"}
+{include file="file:header.html" title="Change Email Address"}
 <form action="{$SCRIPT_NAME}/user/do_email/" method="post">
 	<label>Old Email Address:<input type="text" name="email" value="{$user->email}"/></label><br />
       <label>New Email:<input type="text" name="newemail1" /></label><br />
@@ -7,5 +7,5 @@
       <input type="submit" value="Change" />
       <input type="reset" value="Clear Form" />
     </form>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

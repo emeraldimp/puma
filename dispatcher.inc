@@ -1,4 +1,4 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
 # Design inspired by the work of Scotty Allen 
@@ -100,7 +100,7 @@ class Dispatcher {
       if (preg_match($quoted_regex,
                      $pathinfo, $matches)) {
         array_shift($matches);
-        array_unshift($matches, &$this);
+        array_unshift($matches, $this);
         call_user_func_array($handler, $matches);
         return;
       }
@@ -120,3 +120,4 @@ class Dispatcher {
     //$this->error("No dispatcher matches $pathinfo");
   }
 }
+?>

@@ -1,10 +1,10 @@
 {strip}
-{include file="header.html" title="History for $pagetitle"}
+{include file="file:header.html" title="History for $pagetitle"}
       <div>
       {foreach item=version from=$versions}
         <p>Version: {$version.time|escape} by {$version.user}</p>
 	<p class="historycontent">{$version.content}</p>
       {/foreach}
       </div>
-{include file="footer.html"}
+{include file="file:footer.html"}
 {/strip}

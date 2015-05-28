@@ -1,6 +1,6 @@
 {capture assign=title}Editing {$page.title}{/capture}
 {capture assign=scripts}abstract.js{/capture}
-{include file="header.html"}
+{include file="file:header.html"}
 <script language="JavaScript">
     window.pageid = {$page.id}
 </script>
@@ -38,4 +38,4 @@
     <input type="submit" name="save" value="Save Changes" />
     <input type="submit" name="cancel_changes" value="Cancel Changes" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}

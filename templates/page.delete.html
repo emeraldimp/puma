@@ -1,4 +1,4 @@
-{include file="header.html" title="Delete a page"}
+{include file="file:header.html" title="Delete a page"}
 Are you sure you want to delete {$page.title}, with contents starting, "{$page.current_version.content|strip_tags|truncate:40|escape}...", <strong>and all its children:</strong>
 {foreach from=$children item=child}
         {$child.title}
@@ -10,4 +10,4 @@ Are you sure you want to delete {$page.title}, with contents starting, "{$page.c
     <input type="submit" name="delete" value="Delete Page"/>
     <input type="submit" name="cancel" value="Cancel Delete" />
 </form>
-{include file="footer.html"}
+{include file="file:footer.html"}

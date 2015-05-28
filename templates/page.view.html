@@ -9,8 +9,9 @@
 {/foreach}
 {/strip}
 {/capture}
-{include file="header.html" title=$page->title}
+{include file="file:header.html" title=$page->title}
 <div id="pagepath">{$path}</div>
+{if $children}
 <div id="childlist">
     {foreach item=child from=$children}
     {if $child->page_type == "html"}
@@ -36,6 +37,7 @@
       {/if}
     {/if}
 </div>
+{/if}
 {if $abstract}
 <h2>Abstract</h2>
 <div id="abstract">
@@ -77,4 +79,4 @@ Disclaimer: Comments are the copyright of the individual author(s) and are not a
 {$forum}
 </div>
 {/if}
-{include file="footer.html"}
+{include file="file:footer.html"}
