@@ -1,8 +1,6 @@
-<?
-# Copyright 2002--2006 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the LGPL. See License for full licensing information a
-
-/* $Id: UserController.inc 20 2007-04-18 16:29:50Z emeraldimp $ */
 
 class SubscriptionController {
   var $controller_map = array("create" => "create/([0-9]+)?",

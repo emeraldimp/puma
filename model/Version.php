@@ -22,7 +22,7 @@ class Version extends DB_DataObject
     public $content;                         // blob(4294967295)  not_null blob
 
     /* Static get */
-    function staticGet($k,$v=NULL) { return parent::staticGet('Version',$k,$v); }
+    static function staticGet($k,$v=NULL) { return parent::staticGet('Version',$k,$v); }
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

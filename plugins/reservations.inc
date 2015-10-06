@@ -1,10 +1,8 @@
-<?
-# Copyright 2002--2006 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the GPL. See License for full licensing information
 
-/* $Id$
-
-Online reservation system. Modeled after forum.inc */
+/* Online reservation system. Modeled after forum.inc */
 
 include_once("vfile.inc");
 include_once("html-mailer.inc");

@@ -1,8 +1,6 @@
-<?
-# Copyright 2002--2009 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
-
-/* $Id: PageController.inc 34 2009-04-24 05:07:20Z emeraldimp $ */
 
 class SubscribeController {
     var $controller_map = array('show_subscribe' => 'show.*',

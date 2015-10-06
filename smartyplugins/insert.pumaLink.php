@@ -1,4 +1,4 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the LGPL. See License for full licensing information 
 

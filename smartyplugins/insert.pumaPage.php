@@ -1,4 +1,4 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the LGPL. See License for full licensing information 
 
@@ -19,5 +19,3 @@ function smarty_insert_pumaPage($params, &$smarty) {
     $version = Version::staticGet($page->current_version);
     return $version->content; /// XXX: Do storage->display transformation here
 }
-
-?>

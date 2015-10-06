@@ -16,7 +16,7 @@ class Survey extends DB_DataObject
     public $surveyResult;                    // blob(65535)  blob
 
     /* Static get */
-    function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Survey',$k,$v); }
+    static function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Survey',$k,$v); }
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

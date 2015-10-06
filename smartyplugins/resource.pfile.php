@@ -1,4 +1,4 @@
-<?
+<?php
 
 function smarty_resource_pfile_source($filename, &$content, &$smarty) {
     foreach ($smarty->template_path as $path) {

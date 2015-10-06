@@ -1,8 +1,6 @@
-<?
-# Copyright 2002--2006 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the LGPL. See License for full licensing information a
-
-/* $Id$ */
 
 class UserController {
   var $controller_map = array("prefs" => "prefs/?",

@@ -2,8 +2,6 @@
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information
 
-/* $Id$ */
-
 /**
  * Table Definition for user
  */
@@ -26,7 +24,7 @@ class User extends DB_DataObject
     public $subscriptionEndDate;             // date(10)  binary
 
     /* Static get */
-    function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('User',$k,$v); }
+    static function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('User',$k,$v); }
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

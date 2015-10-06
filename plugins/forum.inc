@@ -1,7 +1,6 @@
-<?
+<?php
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information
-/* $Id$ */
 include_once("vfile.inc");
 
 /* Here's the forum DTD:

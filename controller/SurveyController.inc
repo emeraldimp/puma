@@ -1,5 +1,5 @@
-<?
-# Copyright 2002--2012 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
 
 class SurveyController {

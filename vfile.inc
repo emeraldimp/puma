@@ -1,8 +1,6 @@
-<?
-# Copyright 2002--2006 Creole West Productions
+<?php
+# Copyright 2002--2015 Creole West Productions
 # This file is released under the GPL. See License for full licensing information 
-
-/* $Id$ */
 
 /* A virtual file interface to entries and versions. Uses delayed
    loading to avoid too much database overhead. Currently doesn't
