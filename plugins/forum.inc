@@ -2,6 +2,7 @@
 # Copyright 2002--2006 Creole West Productions
 # This file is released under the GPL. See License for full licensing information
 include_once("vfile.inc");
+include_once("permission.inc");
 
 /* Here's the forum DTD:
   <!ELEMENT forum (comment*)>
@@ -287,10 +288,13 @@ class Forum {
       $this->signal_messages = "Unknown signal '$signal'";
       return;
     }
+    if (!isset($permission)) {
+       $permission = 3;
+    }
     if (!($permission <= $signals[$signal]['required'])) {
-      $this->signal_messages = $perm_to_string($signals[$signal]['required']).
+      $this->signal_messages = perm_to_string($signals[$signal]['required']).
         " permissions are required to ".$signals[$signal]['description'].
-        ". Your access level is ".$perm_to_string($permission).".";
+        ". Your access level is ".perm_to_string($permission).".";
       return;
     }
     $method = $signals[$signal]['callback'];
@@ -418,7 +422,7 @@ function plugin_Forum($args, &$page, &$user) {
   if (isset($_REQUEST['forum_action'])) {
     $forum->process_signal($_REQUEST['forum_action'], 
                            isset($_REQUEST['signal_value']) ? $_REQUEST['signal_value'] : "",
-                           $user->get_permission());
+                           $user->permission);
     if ($forum->is_ready_to_save()) {
       //$forum_container->set_content(addslashes($forum->serialize()));
       $forum_container->set_content($forum->serialize());

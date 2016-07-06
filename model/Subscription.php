@@ -18,7 +18,7 @@ class Subscription extends DB_DataObject
     public $subscriptionEndDate;             // date(10)  binary
 
     /* Static get */
-    static function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Subscription',$k,$v); }
+    function staticGet($k,$v=NULL) { return parent::staticGet('Subscription',$k,$v); }
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

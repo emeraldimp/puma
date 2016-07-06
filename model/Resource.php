@@ -26,7 +26,7 @@ class Resource extends DB_DataObject
     public $mime;                            // string(32)  not_null
 
     /* Static get */
-    static function staticGet($k,$v=NULL) { return DB_DataObject::staticGet('Resource',$k,$v); }
+    function staticGet($k,$v=NULL) { return parent::staticGet('Resource',$k,$v); }
 
     /* the code above is auto generated do not remove the tag below */
     ###END_AUTOCODE

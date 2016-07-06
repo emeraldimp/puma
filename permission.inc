@@ -41,5 +41,3 @@ function perm_to_string($perm) {
   global $permission_names;
   return $permission_names[$perm];
 }
-
-?>
